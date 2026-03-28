@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مبادرة أحفظ وأكتب</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+
+        :root {
+            --main-blue: #00728c; /* اللون الأزرق من الصورة */
+            --gold-color: #f2c12e; /* اللون الذهبي من الصورة */
+            --dark-blue: #004d5e;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg-gradient);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 480px;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        /* تصميم الهيدر والشعار */
+        .header {
+            background: var(--main-blue);
+            padding: 50px 20px 40px;
+            text-align: center;
+            position: relative;
+            border-radius: 0 0 60px 60px;
+        }
+
+        .logo-circle {
+            width: 130px;
+            height: 130px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 6px solid var(--gold-accent, #f2c12e);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* أيقونة الكتاب والقلم (محاكاة الشعار) */
+        .logo-icon {
+            font-size: 55px;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .initiative-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .main-content { padding: 30px; }
+
+        /* تنسيق المدخلات */
+        select {
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 18px;
+            border: 2px solid #e1e8ed;
+            border-radius: 18px;
+            font-family: 'Tajawal';
+            font-size: 1.05rem;
+            color: var(--dark-blue);
+            background: #f8fafc;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        select:focus { border-color: var(--gold-color); outline: none; background: white; }
+
+        .btn-enter {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(to left, var(--main-blue), var(--dark-blue));
+            color: white;
+            border: none;
+            border-radius: 18px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 114, 140, 0.3);
+        }
+
+        /* صفحة المعلومات */
+        #aboutView { display: none; padding: 25px; animation: slideUp 0.5s ease; }
+
+        .info-section {
+            margin-bottom: 25px;
+            background: #fcfdfe;
+            border-radius: 20px;
+            padding: 15px;
+            border: 1px solid #f0f4f8;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gold-color);
+            color: var(--main-blue);
+            padding: 8px 18px;
+            border-radius: 15px;
+            font-weight: 800;
+            width: fit-content;
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #34495e;
+            padding-right: 5px;
+        }
+
+        .info-icon { font-size: 1.2rem; min-width: 25px; }
+
+        .time-box {
+            background: #fff9e6;
+            border: 2px solid var(--gold-color);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .teacher-badge {
+            background: var(--main-blue);
+            color: white;
+            padding: 10px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .back-btn {
+            text-align: center;
+            margin-top: 20px;
+            color: #e74c3c;
+            font-weight: 800;
+            cursor: pointer;
+            display: block;
+        }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="loginView">
+        <div class="header">
+            <div class="logo-circle">
+                <div class="logo-icon">📖</div>
+                <div style="font-size: 12px; font-weight: bold; color: #00728c;">أحفظ وأكتب</div>
+            </div>
+            <h1 class="initiative-title">مبادرة أحفظ وأكتب</h1>
+        </div>
+
+        <div class="main-content">
+            <select id="classSelect" onchange="loadStudents()">
+                <option value="" disabled selected>اختر الصف...</option>
+                <option value="7-1">الصف السابع 1</option>
+                <option value="7-2">الصف السابع 2</option>
+                <option value="7-3">الصف السابع 3</option>
+            </select>
+
+            <select id="studentSelect">
+                <option value="" disabled selected>اسم الطالب...</option>
+            </select>
+
+            <button class="btn-enter" onclick="alert('مرحباً بك في المبادرة!')">دخول</button>
+            <div style="text-align: center; margin-top: 20px;">
+                <span style="cursor: pointer; color: #666; border-bottom: 1px solid;" onclick="toggleView('about')">ℹ️ تفاصيل المبادرة</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="aboutView">
+        <h2 style="text-align: center; color: var(--main-blue); margin-bottom: 25px;">دليل المبادرة</h2>
+
+        <div class="info-section">
+            <div class="section-header">🎯 أهداف المبادرة</div>
+            <div class="info-item">
+                <span class="info-icon">📚</span>
+                <span>خدمة المخرجات التعليمية (حفظ النصوص الأدبية المقررة).</span>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <div class="section-header">⚙️ آلية التنفيذ</div>
+            <div class="info-item"><span class="info-icon">📋</span><span>يختار الطالب النص المقرر حفظه.</span></div>
+            <div class="info-item"><span class="info-icon">🎤</span><span>يختار الطالب طريقة التسميع (شفوي أو كتابي).</span></div>
+            <div class="info-item"><span class="info-icon">📹</span><span>في التسميع الشفوي يتم إرسال فيديو مصور للحفظ.</span></div>
+        </div>
+
+        <div class="info-section">
+            <div class="section-header">📜 شروط المبادرة</div>
+            <div class="info-item"><span class="info-icon">✅</span><span>التمكن من الحفظ والترتيب الصحيح.</span></div>
+            <div class="info-item"><span class="info-icon">🗣️</span><span>مراعاة النطق الصحيح للألفاظ.</span></div>
+            <div class="info-item"><span class="info-icon">🚫</span><span>الفيديو أصلي (بدون مونتاج أو تغيير).</span></div>
+            <div class="info-item"><span class="info-icon">👔</span><span>الالتزام بالزي المدرسي الكامل.</span></div>
+        </div>
+
+        <div class="time-box">
+            <div style="font-size: 1.1rem; color: var(--dark-blue);">⏳ <b>فترة التنفيذ:</b></div>
+            <div style="margin-top: 10px;">من 1 مارس 2026 إلى 15 مايو 2026 م</div>
+        </div>
+
+        <div class="teacher-badge">
+            <b>فكرة وتنفيذ:</b> أ/ علي محمد علي <br>
+            <b>مدير المدرسة:</b> الأستاذ / هشام الكحالي
+        </div>
+
+        <span class="back-btn" onclick="toggleView('login')">⬅️ العودة للرئيسية</span>
+    </div>
+</div>
+
+<script>
+    const students = {
+        "7-1": ["أحمد علي", "عمر محمد", "سيف سالم"],
+        "7-2": ["خالد وليد", "يوسف أحمد", "فيصل حسن"],
+        "7-3": ["سالم ناصر", "فهد عبدالله", "مبارك علي"]
+    };
+
+    function loadStudents() {
+        const cVal = document.getElementById('classSelect').value;
+        const sSel = document.getElementById('studentSelect');
+        sSel.innerHTML = '<option value="" disabled selected>اسم الطالب...</option>';
+        if(students[cVal]) {
+            students[cVal].forEach(name => {
+                let opt = document.createElement('option');
+                opt.value = name; opt.text = name;
+                sSel.add(opt);
+            });
+        }
+    }
+
+    function toggleView(view) {
+        if(view === 'about') {
+            document.getElementById('loginView').style.display = 'none';
+            document.getElementById('aboutView').style.display = 'block';
+        } else {
+            document.getElementById('aboutView').style.display = 'none';
+            document.getElementById('loginView').style.display = 'block';
+        }
+    }
+</script>
+
+</body>
+</html>
