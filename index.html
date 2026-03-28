@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مبادرة أحفظ وأكتب</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+
+        :root {
+            --main-blue: #00728c;
+            --gold-color: #f2c12e;
+            --dark-blue: #004d5e;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg-gradient);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 480px;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+
+        .header {
+            background: var(--main-blue);
+            padding: 40px 20px 30px;
+            text-align: center;
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 20px;
+        }
+
+        .logo-circle {
+            width: 110px;
+            height: 110px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            border: 5px solid var(--gold-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .initiative-title { color: white; font-size: 1.6rem; font-weight: 900; margin: 0; }
+
+        .view-section { display: none; padding: 25px; animation: fadeIn 0.5s ease; }
+        #loginView { display: block; }
+
+        .student-name-badge { 
+            background: #f0f7f9; 
+            padding: 20px; 
+            border-radius: 20px; 
+            border-right: 6px solid var(--main-blue);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .action-card {
+            background: #fff;
+            border: 2px dashed #cbd5e0;
+            border-radius: 25px;
+            padding: 25px;
+            margin-bottom: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .action-card:hover { border-color: var(--main-blue); background: #f8fafc; }
+
+        .info-section {
+            margin-bottom: 20px;
+            background: #fcfdfe;
+            border-radius: 20px;
+            padding: 15px;
+            border: 1px solid #f0f4f8;
+        }
+        .section-header {
+            display: flex; align-items: center; gap: 10px;
+            background: var(--gold-color); color: var(--main-blue);
+            padding: 8px 18px; border-radius: 15px;
+            font-weight: 800; width: fit-content; margin-bottom: 15px;
+        }
+        .info-item { display: flex; gap: 12px; margin-bottom: 10px; font-size: 0.95rem; line-height: 1.6; color: #34495e; }
+        .info-icon { font-size: 1.2rem; min-width: 25px; }
+
+        .time-box {
+            background: #fff9e6; border: 2px solid var(--gold-color);
+            border-radius: 20px; padding: 15px; text-align: center; margin: 20px 0;
+        }
+        .teacher-badge {
+            background: var(--main-blue); color: white;
+            padding: 15px; border-radius: 20px; text-align: center; font-size: 0.9rem;
+        }
+
+        select {
+            width: 100%; padding: 16px; margin-bottom: 15px;
+            border: 2px solid #e1e8ed; border-radius: 18px;
+            font-family: 'Tajawal'; background: #f8fafc;
+        }
+        .btn-primary {
+            width: 100%; padding: 16px; background: var(--main-blue);
+            color: white; border: none; border-radius: 18px;
+            font-size: 1.1rem; font-weight: 700; cursor: pointer;
+        }
+        .back-link { color: #e74c3c; cursor: pointer; display: block; text-align: center; margin-top: 20px; font-weight: 700; }
+
+        /* تنسيق شريط التحميل */
+        #uploadStatus { margin-top: 10px; font-weight: bold; color: var(--main-blue); display: none; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div id="loginView" class="view-section">
+        <div class="header" style="margin: -25px -25px 25px -25px;">
+            <div class="logo-circle">
+                <span style="font-size: 45px;">📖</span>
+                <div style="font-size: 10px; font-weight: bold; color: var(--main-blue);">أحفظ وأكتب</div>
+            </div>
+            <h1 class="initiative-title">مبادرة أحفظ وأكتب</h1>
+        </div>
+        <select id="classSelect" onchange="loadStudents()">
+            <option value="" disabled selected>اختر الصف...</option>
+            <option value="7-1">الصف السابع 1</option>
+            <option value="7-2">الصف السابع 2</option>
+            <option value="7-3">الصف السابع 3</option>
+        </select>
+        <select id="studentSelect">
+            <option value="" disabled selected>اسم الطالب...</option>
+        </select>
+        <button class="btn-primary" onclick="goToStudentPage()">دخول</button>
+        <div style="text-align: center; margin-top: 20px;">
+            <span style="cursor: pointer; color: #666; border-bottom: 1px dashed;" onclick="showView('aboutView')">ℹ️ تفاصيل المبادرة</span>
+        </div>
+    </div>
+
+    <div id="studentView" class="view-section">
+        <h2 style="text-align: center; color: var(--main-blue);">منصة الطالب</h2>
+        <div class="student-name-badge">
+            <div style="color: var(--main-blue); font-size: 0.9rem; margin-bottom: 5px;">مرحباً بك</div>
+            <div id="displayStudentName" style="font-size: 1.2rem;"></div>
+            <small id="displayClassName" style="color: #666;"></small>
+        </div>
+
+        <div class="action-card" onclick="document.getElementById('fileUpload').click()">
+            <span style="font-size: 40px; display: block; margin-bottom: 10px;">📤</span>
+            <strong>رفع مقطع فيديو</strong>
+            <p id="uploadStatus">جاري الرفع... 0%</p>
+            <input type="file" id="fileUpload" hidden accept="video/*" onchange="handleFileUpload(this)">
+        </div>
+
+        <div class="action-card" onclick="alert('خاصية التسجيل المباشر تتطلب بيئة HTTPS آمنة وتصريح كاميرا')">
+            <span style="font-size: 40px; display: block; margin-bottom: 10px;">🎥</span>
+            <strong>تسجيل فيديو مباشر</strong>
+        </div>
+
+        <span class="back-link" onclick="showView('loginView')">تسجيل الخروج</span>
+    </div>
+
+    <div id="aboutView" class="view-section">
+        <h2 style="text-align: center; color: var(--main-blue); margin-bottom: 25px;">دليل المبادرة</h2>
+        <div class="info-section">
+            <div class="section-header">🎯 أهداف المبادرة</div>
+            <div class="info-item"><span class="info-icon">📚</span><span>خدمة المخرجات التعليمية (حفظ النصوص الأدبية المقررة).</span></div>
+        </div>
+        <div class="info-section">
+            <div class="section-header">⚙️ آلية التنفيذ</div>
+            <div class="info-item"><span class="info-icon">📋</span><span>يختار الطالب النص المقرر حفظه.</span></div>
+            <div class="info-item"><span class="info-icon">🎤</span><span>يختار الطالب طريقة التسميع (شفوي أو كتابي).</span></div>
+            <div class="info-item"><span class="info-icon">📹</span><span>في التسميع الشفوي يتم إرسال فيديو مصور للحفظ.</span></div>
+        </div>
+        <div class="info-section">
+            <div class="section-header">📜 شروط المبادرة</div>
+            <div class="info-item"><span class="info-icon">✅</span><span>التمكن من الحفظ والترتيب الصحيح.</span></div>
+            <div class="info-item"><span class="info-icon">🚫</span><span>الفيديو على وضعه الأصلي (غير مونتج).</span></div>
+            <div class="info-item"><span class="info-icon">👔</span><span>الالتزام بالزي المدرسي الكامل.</span></div>
+        </div>
+        <div class="teacher-badge">
+            <b>فكرة وتنفيذ:</b> أ / علي محمد علي<br>
+            <b>مدير المدرسة:</b> الأستاذ / هشام الكحالي
+        </div>
+        <span class="back-link" onclick="showView('loginView')">⬅️ العودة للرئيسية</span>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage-compat.js"></script>
+
+<script>
+    // إعدادات Firebase - ضع بياناتك هنا
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+    // تهيئة Firebase
+    firebase.initializeApp(firebaseConfig);
+    const storage = firebase.storage();
+
+    const studentsData = {
+        "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت فريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعفيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن مسلم نفل ربعات الكثيري", "عامر بن محمد بن مسلم بخيت المسهلي", "عبدالله بن سالم بن سهيل سليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "فريح بن عبدالله بن فريح احمد مسن", "مجتبى عيسى محمد", "مسلم بن محمد بن عوض خادم الوهيبي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن بيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"],
+        "7-2": ["ابراهيم محمد سالم السطري", "العباس بن مبخوت بن سالم مسن بيت كثير", "المنذر بن فواز بن سليمان عبدالله الهاشمي", "امير بن ناصر بن عبدالرحمن عبدالله البلوشي", "حسين سلامه حسين علي شليل", "خالد بن سالم بن علي عبدالله العلوي", "خالد بن محمد بن سهيل مطر جداد", "خالد بن مسلم بن أحمد جداد", "رويزم بن مسلم بن بخيت رويزم صندل المحرمي", "سالم بن مبارك بن سهيل محمد الراشدي", "سعد بن محمد بن سعد حفيظ خوار", "سعود بن عبدالله بن بخيت زايد مسن", "سعيد بن عبدالله بن سالم احمد جداد", "سعيد بن مسلم بن عبدالله سعيد جداد", "سلطان بن مسلم بن سالم صالح جداد", "عبدالله بن عارف بن سالم جداد", "علي بن سعيد بن علي خوار", "عمر فؤاد فهمي محمد فؤاد", "فهد بن غانم بن سالم جداد", "محسن معتصم محمد الامام", "محمد بن سالم بن مبخوت محمد الراشدي", "مسلم بن سالم بن سهيل الراشدي", "مصطفى محمود كريم ابراهيم احمد", "معاذ احمد سميح علي سيد", "منيف بن سعيد بن محمد سالم جداد", "هادف بن سعيد بن هادف حسن شحري خوار", "وائل بن حمود بن سالم سعيد الوائلي"],
+        "7-3": ["أحمد بن نائف بن عبدالله محمد جداد", "الطلح بن سالم بن حسن علي خوار", "بخيت بن مسلم سالم مبخوت الراشدي", "بدر بن عامر بن مسلم الرحابه جداد", "حثيث بن سلطان بن محمد سهيل مسن", "حمد بن محمد بن عبدالله محمد جداد الكثيري", "سالم بن احمد بن سالم جداد", "سعيد بن مبروك بن سالم عامر المسهلي", "سهيل بن عبدالله بن سهيل حافظ خوار", "عبد الله أمير عبدالله نصر", "عبدالله بن محمد بن علي مهوي العامري", "علي بن ثاني بن علي سالم جداد بيت كثير", "فارس زياد محمد ابو رواع", "مبارك بن سعيد بن سالم خويتم مسن", "محسن بن عقيل بن سالم سعد خوار", "محمد بن بخيت بن فرج السنح شهوان المهري", "محمد بن علي بن بخيت محمد الراشدي", "محمد بن غانم بن الرضه سلاوم جداد", "محمد بن مسلم بن محمد مسلم جداد", "محمد بن ناصر بن عبدالله جداد", "محمد بن هيثم بن سالم فائل جداد الكثيري", "مسلم بن حسن بن هادف حسن شحري خوار", "معاذ فؤاد الحنيش الاحمد", "ناصر بن علي بن ناصر سهيل جداد", "نور الدين محسن العلي", "هيثم بن محمد بن سالم فائل جداد"]
+    };
+
+    function loadStudents() {
+        const cVal = document.getElementById('classSelect').value;
+        const sSel = document.getElementById('studentSelect');
+        sSel.innerHTML = '<option value="" disabled selected>اسم الطالب...</option>';
+        if(studentsData[cVal]) {
+            studentsData[cVal].forEach(name => {
+                let opt = document.createElement('option');
+                opt.value = name; opt.text = name;
+                sSel.add(opt);
+            });
+        }
+    }
+
+    function showView(viewId) {
+        document.querySelectorAll('.view-section').forEach(v => v.style.display = 'none');
+        document.getElementById(viewId).style.display = 'block';
+    }
+
+    function goToStudentPage() {
+        const name = document.getElementById('studentSelect').value;
+        const className = document.getElementById('classSelect').value;
+        if(name && className) {
+            document.getElementById('displayStudentName').innerText = name;
+            document.getElementById('displayClassName').innerText = "الصف: " + className;
+            showView('studentView');
+        } else {
+            alert("يرجى اختيار الصف والاسم أولاً");
+        }
+    }
+
+    // دالة التعامل مع الرفع لفايربيس
+    function handleFileUpload(input) {
+        const file = input.files[0];
+        if (!file) return;
+
+        const studentName = document.getElementById('displayStudentName').innerText;
+        const statusText = document.getElementById('uploadStatus');
+        
+        statusText.style.display = 'block';
+        
+        // مسار الحفظ في فايربيس: videos/اسم الطالب/اسم الملف
+        const storageRef = storage.ref(`videos/${studentName}/${file.name}`);
+        const uploadTask = storageRef.put(file);
+
+        uploadTask.on('state_changed', 
+            (snapshot) => {
+                const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                statusText.innerText = `جاري الرفع... ${progress}%`;
+            }, 
+            (error) => {
+                console.error(error);
+                alert("حدث خطأ أثناء الرفع، تأكد من إعدادات الحماية في Firebase");
+            }, 
+            () => {
+                statusText.innerText = "✅ تم الرفع بنجاح!";
+                setTimeout(() => statusText.style.display = 'none', 3000);
+            }
+        );
+    }
+</script>
+
+</body>
+</html>
