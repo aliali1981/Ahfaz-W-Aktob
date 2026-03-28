@@ -1,304 +1,45 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مبادرة أحفظ وأكتب - مدرسة يزيد بن الحارث</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+<div class="content" id="infoSection">
         
-        :root {
-            --primary: #004d61; 
-            --secondary: #00838f; 
-            --accent: #c5a021; 
-            --gold-light: #f9f1d7;
-            --text-dark: #263238;
-        }
-
-        body {
-            font-family: 'Tajawal', sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px 10px;
-            background: linear-gradient(-45deg, #e0f2f1, #b2dfdb, #80cbc4, #4db6ac);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            background-attachment: fixed;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .app-container {
-            width: 100%;
-            max-width: 550px;
-            background: rgba(255, 255, 255, 0.96);
-            border-radius: 35px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255,255,255,0.5);
-        }
-
-        /* تنسيق الهيدر والشعار */
-        .header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 40px 20px 30px;
-            text-align: center;
-            color: white;
-            border-bottom: 6px solid var(--accent);
-        }
-
-        .logo-circle {
-            width: 120px;
-            height: 120px;
-            background: white;
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 4px solid var(--accent);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            overflow: hidden;
-        }
-
-        .logo-circle img {
-            width: 90%;
-            height: 90%;
-            object-fit: contain;
-        }
-
-        .header h1 { margin: 0; font-size: 1.7rem; font-weight: 800; }
-        .header p { margin: 8px 0 0; font-size: 0.95rem; opacity: 0.9; }
-
-        .nav-tabs { display: flex; background: rgba(0,0,0,0.05); }
-        .tab { flex: 1; padding: 18px; text-align: center; font-weight: 700; cursor: pointer; color: #555; transition: 0.3s; }
-        .tab.active { background: white; color: var(--primary); border-bottom: 4px solid var(--accent); }
-
-        .content { padding: 25px; }
-
-        /* صفحة الرفع المحسنة */
-        .upload-card {
-            background: #f8f9fa;
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid #e9ecef;
-            text-align: center;
-        }
-
-        .student-welcome {
-            background: var(--primary);
-            color: white;
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .file-input-wrapper {
-            margin: 20px 0;
-            padding: 20px;
-            border: 2px dashed var(--secondary);
-            border-radius: 15px;
-            background: white;
-        }
-
-        /* الأزرار */
-        .btn-main { 
-            width: 100%; padding: 16px; border-radius: 18px; border: none;
-            font-family: 'Tajawal'; font-weight: 700; font-size: 1.1rem;
-            cursor: pointer; transition: 0.4s; display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
-        .btn-primary { background: var(--primary); color: white; margin-top: 15px; }
-        .btn-secondary { background: #e9ecef; color: #455a64; margin-top: 10px; }
-
-        .progress-bar { height: 12px; background: #eee; border-radius: 10px; overflow: hidden; display: none; margin: 15px 0; }
-        .progress-fill { height: 100%; background: #2ecc71; width: 0%; transition: 0.3s; }
-
-        /* التذييل المثبت */
-        .footer { 
-            text-align: center; 
-            padding: 20px; 
-            background: #fff; 
-            border-top: 2px solid var(--gold-light);
-        }
-        .footer-box {
-            border: 1px solid var(--accent);
-            padding: 12px;
-            border-radius: 15px;
-            display: inline-block;
-            width: 85%;
-            font-size: 0.95rem;
-        }
-        .footer-box strong { color: var(--primary); }
-
-        #status { margin-top: 15px; font-weight: 800; display: none; }
-    </style>
-</head>
-<body>
-
-<div class="app-container">
-    <div class="header">
-        <div class="logo-circle">
-            <img src="https://raw.githubusercontent.com/aliali1981/Ahfaz-W-Aktob/main/logo.png" alt="شعار المدرسة">
-        </div>
-        <h1>مبادرة أحفظ وأكتب</h1>
-        <p>مدرسة يزيد بن الحارث للتعليم الأساسي (5-8) مسائي</p>
-    </div>
-
-    <div class="nav-tabs" id="mainTabs">
-        <div class="tab active" id="tabInfo" onclick="showSection('info')">دليل المبادرة</div>
-        <div class="tab" id="tabUpload" onclick="showSection('upload')">رفع المشاركة</div>
-    </div>
-
-    <div class="content" id="infoSection">
-        <div style="background: var(--gold-light); padding: 15px; border-radius: 15px; margin-bottom: 20px; border-right: 5px solid var(--accent);">
-            <h3 style="margin:0; color:var(--primary); font-size:1.1rem;"><i class="fas fa-bullseye"></i> أهداف المبادرة</h3>
-            <p style="margin:10px 0 0; font-size:0.95rem;">خدمة المخرجات التعليمية وحفظ النصوص الأدبية المقررة.</p>
-        </div>
-
-        <div style="margin-bottom: 20px;">
-            <h3 style="color:var(--primary); font-size:1.1rem;"><i class="fas fa-tasks"></i> آلية التنفيذ</h3>
-            <ul style="list-style:none; padding:0; font-size:0.95rem; line-height:1.7;">
-                <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> يختار الطالب النص المقرر حفظه.</li>
-                <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> اختيار التسميع الشفوي (فيديو) أو الكتابي (صورة).</li>
+        <div class="info-card">
+            <h3><i class="fas fa-bullseye"></i> أهداف المبادرة</h3>
+            <ul class="info-list">
+                <li><i class="fas fa-book-reader"></i> خدمة المخرجات التعليمية (حفظ النصوص الأدبية المقررة).</li>
             </ul>
         </div>
 
-        <div class="upload-card" style="background: var(--primary); color: white;">
-            <i class="fas fa-calendar-alt"></i> فترة التنفيذ: 1 مارس - 15 مايو 2026 م
+        <div class="info-card">
+            <h3><i class="fas fa-users"></i> الفئة المستهدفة</h3>
+            <ul class="info-list">
+                <li><i class="fas fa-user-graduate"></i> طلاب مدرسة يزيد بن الحارث للتعليم الأساسي (5-8).</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h3><i class="fas fa-cogs"></i> آلية تنفيذ المبادرة</h3>
+            <ul class="info-list">
+                <li><i class="fas fa-list-ol"></i> يختار الطالب النص المقرر حفظه.</li>
+                <li><i class="fas fa-hand-pointer"></i> يختار الطالب طريقة التسميع إما (التسميع الشفوي) أو (التسميع الكتابي).</li>
+                <li><i class="fas fa-video"></i> في حال اختيار التسميع الشفوي، يقوم بإرسال فيديو مصور يعرض فيه حفظه.</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h3><i class="fas fa-clipboard-check"></i> شروط المبادرة</h3>
+            <ul class="info-list">
+                <li><i class="fas fa-check-double"></i> يتم تنفيذ المبادرة من خلال اختيار الطالب إما (التسميع الشفوي) أو (التسميع الكتابي).</li>
+                <li><i class="fas fa-brain"></i> التمكن من حفظ النصوص.</li>
+                <li><i class="fas fa-sort-amount-down-alt"></i> الترتيب الصحيح لمقرر الحفظ.</li>
+                <li><i class="fas fa-comment-dots"></i> مراعاة النطق الصحيح للألفاظ.</li>
+                <li><i class="fas fa-film"></i> يكون الفيديو على وضعه الأصلي (غير ممنتج) أي، لا يتم التغيير فيه بأي برنامج من برامج المونتاج.</li>
+                <li><i class="fas fa-user-tie"></i> الالتزام بالزي المدرسي الكامل أثناء تسجيل الفيديو.</li>
+                <li><i class="fas fa-paper-plane"></i> يتم إرسال الفيديو لمعلم الصف (حسب ما يطلب المعلم).</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <i class="fas fa-calendar-check"></i> <strong>فترة تنفيذ المبادرة:</strong><br>
+            <span style="font-size: 0.9rem;">يتم التنفيذ خلال الفصل الدراسي الثاني في الفترة من 1 مارس 2026 إلى 15 مايو 2026 م</span>
         </div>
         
-        <button class="btn-main btn-primary" onclick="showSection('upload')">البدء الآن <i class="fas fa-arrow-left"></i></button>
+        <button class="btn-main btn-primary" onclick="showSection('upload')">الانتقال لرفع المشاركة <i class="fas fa-arrow-left"></i></button>
     </div>
-
-    <div class="content" id="uploadSection" style="display:none;">
-        <div id="loginStep">
-            <div style="margin-bottom: 15px;">
-                <label style="font-weight:700; color:var(--primary);">1. اختر الشعبة:</label>
-                <select id="classSelect" onchange="loadStudents()" style="width:100%; padding:12px; margin-top:8px; border-radius:10px;">
-                    <option value="">-- اختر --</option>
-                    <option value="7-1">سابع / 1</option>
-                    <option value="7-2">سابع / 2</option>
-                    <option value="7-3">سابع / 3</option>
-                </select>
-            </div>
-            <div style="margin-bottom: 20px;">
-                <label style="font-weight:700; color:var(--primary);">2. اسم الطالب:</label>
-                <select id="studentSelect" style="width:100%; padding:12px; margin-top:8px; border-radius:10px;">
-                    <option value="">اختر الشعبة أولاً</option>
-                </select>
-            </div>
-            <button class="btn-main btn-primary" onclick="startUpload()">تأكيد الهوية <i class="fas fa-user-check"></i></button>
-        </div>
-
-        <div id="fileStep" style="display:none;">
-            <div class="student-welcome">
-                <i class="fas fa-user-graduate"></i> مرحباً بك: <span id="studentLabel"></span>
-            </div>
-            
-            <div class="file-input-wrapper">
-                <p style="margin-top:0; font-weight:700; color:var(--secondary);">اختر ملف (فيديو أو صورة)</p>
-                <input type="file" id="videoFile" accept="video/*,image/*">
-            </div>
-
-            <div class="progress-bar" id="pBar"><div class="progress-fill" id="pFill"></div></div>
-            
-            <button class="btn-main btn-primary" id="upBtn" onclick="uploadToCloudinary()">إرسال المشاركة <i class="fas fa-cloud-upload-alt"></i></button>
-            <div id="status"></div>
-            <button class="btn-main btn-secondary" onclick="location.reload()">تغيير الاسم <i class="fas fa-undo"></i></button>
-        </div>
-    </div>
-
-    <div class="footer">
-        <div class="footer-box">
-            فكرة وتنفيذ: <strong>أ. علي محمد علي</strong><br>
-            مدير المدرسة: <strong>أ. هشام الكحالي</strong>
-        </div>
-    </div>
-</div>
-
-<script>
-    const CLOUD_NAME = "duhzhaxxc"; 
-    const UPLOAD_PRESET = "Ahfaz-W-Aktob"; 
-
-    const students = {
-        "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت فريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعفيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن مسلم نفل ربعات الكثيري", "عامر بن محمد بن مسلم بخيت المسهلي", "عبدالله بن سالم بن سهيل سليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "فريح بن عبدالله بن fريح احمد مسن", "مجتبى عيسى محمد", "مسلم بن محمد بن عوض خادم الوهيبي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن بيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"],
-        "7-2": ["ابراهيم محمد سالم السطري", "العباس بن مبخوت بن سالم مسن بيت كثير", "المنذر بن فواز بن سليمان عبدالله الهاشمي", "امير بن ناصر بن عبدالرحمن عبدالله البلوشي", "حسين سلامه حسين علي شليل", "خالد بن سالم بن علي عبدالله العلوي", "خالد بن محمد بن سهيل مطر جداد", "خالد بن مسلم بن أحمد جداد", "رويزم بن مسلم بن بخيت رويزم صندل المحرمي", "سالم بن مبارك بن سهيل محمد الراشدي", "سعد بن محمد بن سعد حفيظ خوار", "سعود بن عبدالله بن بخيت زايد مسن", "سعيد بن عبدالله بن سالم احمد جداد", "سعيد بن مسلم بن عبدالله سعيد جداد", "سلطان بن muslim بن سالم صالح جداد", "عبدالله بن عارف بن سالم جداد", "علي بن سعيد بن علي خوار", "عمر فؤاد فهمي محمد فؤاد", "فهد بن غانم بن سالم جداد", "محسن معتصم محمد الامام", "محمد بن سالم بن مبخوت محمد الراشدي", "مسلم بن سالم بن سهيل الراشدي", "مصطفى محمود كريم ابراهيم احمد", "معاذ احمد سميح علي سيد", "منيف بن سعيد بن محمد سالم جداد", "هادف بن سعيد بن هادف حسن شحري خوار", "وائل بن حمود بن سالم سعيد الوائلي"],
-        "7-3": ["أحمد بن نائف بن عبدالله محمد جداد", "الطلح بن سالم بن حسن علي خوار", "بخيت بن muslim سالم مبخوت الراشدي", "بدر بن عامر بن muslim الرحابه جداد", "حثيث بن سلطان بن محمد سهيل مسن", "حمد بن محمد بن عبدالله محمد جداد الكثيري", "سالم بن احمد بن سالم جداد", "سعيد بن مبروك بن سالم عامر المسهلي", "سهيل بن عبدالله بن سهيل حافظ خوار", "عبد الله أمير عبدالله نصر", "عبدالله بن محمد بن علي مهوي العامري", "علي بن ثاني بن علي سالم جداد بيت كثير", "فارس زياد محمد ابو رواع", "مبارك بن سعيد بن سالم خويتم مسن", "محسن بن عقيل بن سالم سعد خوار", "محمد بن بخيت بن فرج السنح شهوان المهري", "محمد بن علي بن بخيت محمد الراشدي", "محمد بن غانم بن الرضه سلاوم جداد", "محمد بن muslim بن محمد muslim جداد", "محمد بن ناصر بن عبدالله جداد", "محمد بن هيثم بن سالم فائل جداد الكثيري", "مسلم بن حسن بن هادف حسن شحري خوار", "معاذ فؤاد الحنيش الاحمد", "ناصر بن علي بن ناصر سهيل جداد", "نور الدين محسن العلي", "هيثم بن محمد بن سالم فائل جداد"]
-    };
-
-    function showSection(type) {
-        document.getElementById('infoSection').style.display = type === 'info' ? 'block' : 'none';
-        document.getElementById('uploadSection').style.display = type === 'upload' ? 'block' : 'none';
-        document.getElementById('tabInfo').className = type === 'info' ? 'tab active' : 'tab';
-        document.getElementById('tabUpload').className = type === 'upload' ? 'tab active' : 'tab';
-    }
-
-    function loadStudents() {
-        const cls = document.getElementById('classSelect').value;
-        const sel = document.getElementById('studentSelect');
-        sel.innerHTML = '<option value="">-- اختر الاسم --</option>';
-        if(students[cls]) students[cls].forEach(s => {
-            let opt = document.createElement('option');
-            opt.value = s; opt.text = s; sel.add(opt);
-        });
-    }
-
-    function startUpload() {
-        const name = document.getElementById('studentSelect').value;
-        if(!name) return alert("يرجى اختيار الاسم");
-        document.getElementById('studentLabel').innerText = name;
-        document.getElementById('loginStep').style.display = 'none';
-        document.getElementById('fileStep').style.display = 'block';
-        document.getElementById('mainTabs').style.display = 'none';
-    }
-
-    function uploadToCloudinary() {
-        const file = document.getElementById('videoFile').files[0];
-        const status = document.getElementById('status');
-        if(!file) return alert("يرجى اختيار ملف");
-
-        document.getElementById('upBtn').disabled = true;
-        document.getElementById('pBar').style.display = "block";
-        status.style.display = "block";
-        status.innerText = "⏳ جاري الإرسال...";
-
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', UPLOAD_PRESET);
-        formData.append('folder', 'Yazeed_Harith_Ahfaz/' + document.getElementById('studentLabel').innerText);
-
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`, true);
-
-        xhr.upload.onprogress = (e) => {
-            if (e.lengthComputable) {
-                const percent = (e.loaded / e.total) * 100;
-                document.getElementById('pFill').style.width = percent + "%";
-                status.innerText = `⏳ جاري الرفع: ${Math.round(percent)}%`;
-            }
-        };
-
-        xhr.onload = () => {
-            if (xhr.status === 200) {
-                status.innerText = "✅ تم الاستلام بنجاح!";
-                status.style.color = "#2ecc71";
-            } else {
-                status.innerText = "❌ فشل الإرسال، حاول ثانية";
-                document.getElementById('upBtn').disabled = false;
-            }
-        };
-        xhr.send(formData);
-    }
-</script>
-</body>
-</html>
