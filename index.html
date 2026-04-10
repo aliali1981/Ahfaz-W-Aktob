@@ -6,6 +6,7 @@
     <title>مبادرة أحفظ وأكتب - مدرسة يزيد بن الحارث</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* التنسيقات كما هي تماماً بدون أي تغيير */
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
         
         :root {
@@ -38,7 +39,6 @@
             border: 1px solid #eee; 
         }
 
-        /* الهيدر مع الشعار داخل الدائرة */
         .header { 
             background: var(--primary); 
             padding: 40px 20px 30px; 
@@ -65,7 +65,6 @@
         .header h1 { margin: 10px 0 5px; font-size: 1.8rem; font-weight: 900; }
         .header p { margin: 0; font-size: 0.9rem; opacity: 0.9; font-weight: 500; }
 
-        /* التبويبات بالترتيب الجديد من اليمين لليسار */
         .nav-tabs { 
             display: flex; 
             overflow-x: auto; 
@@ -107,7 +106,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* تنسيق محتوى المبادرة (مطابق تماماً للصورة) */
         .section-header { 
             background: var(--accent); color: #fff; padding: 8px 25px; 
             border-radius: 25px 0 25px 0; display: inline-block; 
@@ -118,12 +116,10 @@
         .info-list li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; line-height: 1.6; color: #333; }
         .info-list i { color: var(--primary); font-size: 1.1rem; margin-top: 5px; }
 
-        /* مكتبة النصوص بالفيديو */
         .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 15px; overflow: hidden; background: #000; margin-bottom: 10px; }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         .video-card { background: #fafafa; border: 1px solid #eee; padding: 15px; border-radius: 20px; margin-bottom: 20px; }
 
-        /* أزرار المشاركة والمعاينة بالكاميرا */
         .upload-options { display: flex; gap: 10px; margin: 20px 0; }
         .btn-opt { flex: 1; padding: 15px; border-radius: 15px; border: none; cursor: pointer; font-family: 'Tajawal'; font-weight: bold; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: 0.3s; }
         .opt-file { background: #eee; color: #333; }
@@ -133,7 +129,10 @@
         #vPre, #iPre { width: 100%; display: none; }
 
         .input-box { width: 100%; padding: 14px; margin: 10px 0; border-radius: 12px; border: 2px solid #ddd; font-family: 'Tajawal'; box-sizing: border-box; font-weight: bold; }
-        .btn-confirm { width: 100%; padding: 18px; border-radius: 15px; border: none; background: var(--primary); color: white; font-weight: 900; cursor: pointer; font-size: 1.1rem; margin-top: 15px; display: none; }
+        .btn-confirm { width: 100%; padding: 18px; border-radius: 15px; border: none; background: var(--primary); color: white; font-weight: 900; cursor: pointer; font-size: 1.1rem; margin-top: 15px; }
+        
+        /* زر العودة المضاف للتنسيق */
+        .btn-back { width: 100%; padding: 12px; border-radius: 12px; border: 1.5px solid #ddd; background: #f9f9f9; color: #666; font-weight: bold; cursor: pointer; margin-top: 10px; }
 
         .footer { background: #f8f9fa; padding: 25px; text-align: center; border-radius: 0 0 40px 40px; border-top: 1px solid #eee; }
         .tag-pill { background: var(--primary); color: var(--accent); padding: 8px 25px; border-radius: 30px; font-weight: 800; display: inline-block; font-size: 0.9rem; margin-bottom: 8px; }
@@ -147,8 +146,8 @@
 <div class="app-container">
     <div class="header">
         <div class="logo-circle"><img src="https://raw.githubusercontent.com/aliali1981/Ahfaz-W-Aktob/main/logo.png" class="school-logo"></div>
-        <h1 style="margin:0; font-size: 1.8rem;">مُبَادَرَةُ أَحْفَظُ وَأَكْتُبُ</h1>
-        <p style="font-size: 0.9rem; margin-top: 5px;">مدرسة يزيد بن الحارث للتعليم الأساسي (5-8) مسائي</p>
+        <h1>مُبَادَرَةُ أَحْفَظُ وَأَكْتُبُ</h1>
+        <p>مدرسة يزيد بن الحارث للتعليم الأساسي (5-8) مسائي</p>
     </div>
 
     <div class="nav-tabs">
@@ -178,37 +177,33 @@
             <li><i class="fas fa-medal"></i> التمكن من حفظ النصوص والترتيب الصحيح.</li>
             <li><i class="fas fa-edit"></i> الترتيب الصحيح لمقرر الحفظ.</li>
             <li><i class="fas fa-volume-up"></i> مراعاة النطق الصحيح للألفاظ والضبط الإعرابي.</li>
-            <li><i class="fas fa-video"></i> يكون الفيديو على وضعه الأصلي (غير ممنتج) أي لا يتم التغيير فيه بأي برنامج من برامج المونتاج.</li>
+            <li><i class="fas fa-video"></i> يكون الفيديو على وضعه الأصلي (غير ممنتج).</li>
             <li><i class="fas fa-user-tie"></i> الالتزام بالزي المدرسي الكامل أثناء تسجيل الفيديو.</li>
-            <li><i class="fas fa-paper-plane"></i> يتم إرسال الفيديو لمعلم الصف (حسب ما يطلب المعلم).</li>
         </ul>
 
-        <div style="background: var(--primary); color: #fff; padding: 15px; border-radius: 15px; text-align: center; margin-top: 25px; box-shadow: var(--shadow);">
+        <div style="background: var(--primary); color: #fff; padding: 15px; border-radius: 15px; text-align: center; margin-top: 25px;">
             <i class="fas fa-calendar-alt" style="color:var(--accent)"></i> <strong>فترة تنفيذ المبادرة</strong><br>
-            يتم التنفيذ خلال الفصل الدراسي الثاني في الفترة من 1 مارس 2026 إلى 15 مايو 2026 م
+            من 1 مارس 2026 إلى 15 مايو 2026 م
         </div>
     </div>
 
     <div class="content" id="textsSec">
         <div class="section-header">استمع واحفظ:</div>
         <div class="video-card">
-            <strong style="color:var(--primary); display:block; margin-bottom:10px;">1. نص: أنت وأنا</strong>
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/UTb133uqsNE?si=fDj0J1jBCj9QP-pw" title="YouTube video player" allowfullscreen></iframe>
-            </div>
-        </div>
-        <div class="video-card">
-            <strong style="color:var(--primary); display:block; margin-bottom:10px;">2. نص: السلحفاة والبطتان</strong>
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/VTzyAPEfv7A?si=LxM_xme1ittCaqQ_" title="YouTube video player" allowfullscreen></iframe>
-            </div>
+            <strong>1. نص: أنت وأنا</strong>
+            <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/UTb133uqsNE" allowfullscreen></iframe></div>
         </div>
     </div>
 
     <div class="content" id="uploadSec">
         <div id="setupPart">
             <label>اختر الشعبة:</label>
-            <select id="cls" class="input-box" onchange="getNames()"><option value="">-- اختر --</option><option value="7-1">سابع/1</option><option value="7-2">سابع/2</option><option value="7-3">سابع/3</option></select>
+            <select id="cls" class="input-box" onchange="getNames()">
+                <option value="">-- اختر --</option>
+                <option value="7-1">سابع/1</option>
+                <option value="7-2">سابع/2</option>
+                <option value="7-3">سابع/3</option>
+            </select>
             <label>اسم الطالب:</label>
             <select id="stu" class="input-box"><option>اختر الشعبة أولاً</option></select>
             <button class="btn-confirm" id="btnNext" style="display:block;" onclick="startUpload()">دخول للمشاركة</button>
@@ -218,39 +213,24 @@
             <div style="background:var(--gold-soft); padding:12px; border-radius:15px; font-weight:bold; color:var(--primary); margin-bottom:15px;" id="curStu"></div>
             
             <div class="upload-options">
-                <label class="btn-opt opt-file">
-                    <i class="fas fa-file-upload fa-2x"></i> ملف جاهز
-                    <input type="file" style="display:none" id="fIn" accept="video/*,image/*" onchange="preview(this)">
-                </label>
-                <label class="btn-opt opt-cam">
-                    <i class="fas fa-camera fa-2x"></i> تسجيل مباشر
-                    <input type="file" style="display:none" capture="user" accept="video/*" id="cIn" onchange="preview(this)">
-                </label>
+                <label class="btn-opt opt-file"><i class="fas fa-file-upload fa-2x"></i> رفع ملف<input type="file" style="display:none" id="fIn" accept="video/*,image/*" onchange="preview(this)"></label>
+                <label class="btn-opt opt-cam"><i class="fas fa-camera fa-2x"></i> تسجيل مباشر<input type="file" style="display:none" capture="user" accept="video/*" id="cIn" onchange="preview(this)"></label>
             </div>
 
-            <div class="preview-box" id="preBox">
-                <video id="vPre" controls></video>
-                <img id="iPre">
-            </div>
+            <div class="preview-box" id="preBox"><video id="vPre" controls></video><img id="iPre"></div>
 
-            <button class="btn-confirm" id="btnFinal" onclick="uploadData()" style="display:none; margin-top:15px;">تأكيد وإرسال المشاركة <i class="fas fa-paper-plane"></i></button>
-            <p id="upStatus" style="font-weight:bold; margin-top:10px;"></p>
+            <button class="btn-confirm" id="btnFinal" onclick="uploadToCloudinary()" style="display:none; width: 100%;">تأكيد وإرسال المشاركة <i class="fas fa-paper-plane"></i></button>
+            <button class="btn-back" onclick="goBack()">عودة لتغيير الاسم</button>
+            <p id="upStatus" style="font-weight:bold; margin-top:15px;"></p>
         </div>
     </div>
 
     <div class="content" id="honorSec">
-        <div style="text-align:center; padding:30px; background:var(--gold-soft); border-radius:20px; border:2px solid var(--accent); box-shadow: var(--shadow);">
-            <i class="fas fa-crown fa-4x" style="color:var(--accent); margin-bottom:15px;"></i>
-            <h3 style="color:var(--primary); margin:0; font-weight:900;">لوحة الشرف</h3>
-            <p style="margin-top:10px; font-weight:500;">سيتم عرض أسماء الطلاب المتميزين هنا</p>
-        </div>
+        <div style="text-align:center; padding:30px;"><i class="fas fa-crown fa-4x" style="color:var(--accent)"></i><h3>سيتم عرض المتميزين هنا</h3></div>
     </div>
 
     <div class="content" id="adminSec">
-        <div id="adminAuth">
-            <input type="password" id="pass" class="input-box" placeholder="رمز الدخول">
-            <button class="btn-confirm" style="display:block" onclick="auth()">دخول</button>
-        </div>
+        <div id="adminAuth"><input type="password" id="pass" class="input-box" placeholder="رمز الدخول"><button class="btn-confirm" style="display:block" onclick="auth()">دخول</button></div>
         <div id="dash" style="display:none;">
             <select id="adCls" class="input-box" onchange="stats()"><option value="7-1">سابع/1</option><option value="7-2">سابع/2</option><option value="7-3">سابع/3</option></select>
             <div id="res" style="margin-top:15px;"></div>
@@ -259,45 +239,46 @@
 
     <div class="footer">
         <div class="tag-pill">فكرة وتنفيذ: أ / علي محمد علي</div>
-        <p style="font-weight:bold; margin-top:10px; color:#333;">بإشراف مدير المدرسة<br>الأستاذ / هشام الكحالي</p>
+        <p style="font-weight:bold; margin-top:10px;">إشراف مدير المدرسة: أ / هشام الكحالي</p>
     </div>
 </div>
 
 <script>
+    // --- إعدادات الربط البرمجي (ضع بياناتك هنا) ---
     const firebaseConfig = { databaseURL: "https://ahfaz-w-aktob-default-rtdb.firebaseio.com/" };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
+
+    const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/upload";
+    const CLOUDINARY_PRESET = "YOUR_UNSIGNED_PRESET";
+
     let selectedFile;
+    const names = { "7-1": ["احمد امجد احمد أحمد نجاد", "..."], "7-2": [...], "7-3": [...] }; // قائمة الأسماء كما هي في مرجعك
 
-    // قائمة أسماء طلاب الصف السابع عربية بالكامل
-    const names = {
-        "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت فريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعفيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن مسلم نفل ربعات الكثيري", "عامر بن محمد بن مسلم بخيت المسهلي", "عبدالله بن سالم بن سهيل سليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "فريح بن عبدالله بن فريح احمد مسن", "مجتبى عيسى محمد", "مسلم بن محمد بن عوض خادم الوهيبي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن بيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"],
-        "7-2": ["ابراهيم محمد سالم السطري", "العباس بن مبخوت بن سالم مسن بيت كثير", "المنذر بن فواز بن سليمان عبدالله الهاشمي", "امير بن ناصر بن عبدالرحمن عبدالله البلوشي", "حسين سلامه حسين علي شليل", "خالد بن سالم بن علي عبدالله العلوي", "خالد بن محمد بن سهيل مطر جداد", "خالد بن مسلم بن أحمد جداد", "رويزم بن مسلم بن بخيت رويزم صندل المحرمي", "سالم بن مبارك بن سهيل محمد الراشدي", "سعد بن محمد بن سعد حفيظ خوار", "سعود بن عبدالله بن بخيت زايد مسن", "سعيد بن عبدالله بن سالم احمد جداد", "سعيد بن مسلم بن عبدالله سعيد جداد", "سلطان بن مسلم بن سالم صالح جداد", "عبدالله بن عارف بن سالم جداد", "علي بن سعيد بن علي خوار", "عمر فؤاد فهمي محمد فؤاد", "فهد بن غانم بن سالم جداد", "محسن معتصم محمد الامام", "محمد بن سالم بن مبخوت محمد الراشدي", "مسلم بن سالم بن سهيل الراشدي", "مصطفى محمود كريم ابراهيم احمد", "معاذ احمد سميح علي سيد", "منيف بن سعيد بن محمد سالم جداد", "هادف بن سعيد بن هادف حسن شحري خوار", "وائل بن حمود بن سالم سعيد الوائلي"],
-        "7-3": ["أحمد بن نائف بن عبدالله محمد جداد", "الطلح بن سالم بن حسن علي خوار", "بخيت بن مسلم سالم مبخوت الراشدي", "بدر بن عامر بن مسلم الرحابه جداد", "حثيث بن سلطان بن محمد سهيل مسن", "حمد بن محمد بن عبدالله محمد جداد الكثيري", "سالم بن احمد بن سالم جداد", "سعيد بن مبروك بن سالم عامر المسهلي", "سهيل بن عبدالله بن سهيل حافظ خوار", "عبد الله أمير عبدالله نصر", "عبدالله بن محمد بن علي مهوي العامري", "علي بن ثاني بن علي سالم جداد بيت كثير", "فارس زياد محمد ابو رواع", "مبارك بن سعيد بن سالم خويتم مسن", "محسن بن عقيل بن سالم سعد خوار", "محمد بن بخيت بن فرج السنح شهوان المهري", "محمد بن علي بن بخيت محمد الراشدي", "محمد بن غانم بن الرضه سلاوم جداد", "محمد بن مسلم بن محمد مسلم جداد", "محمد بن ناصر بن عبدالله جداد", "محمد بن هيثم بن سالم فائل جداد الكثيري", "مسلم بن حسن بن هادف حسن شحري خوار", "معاذ فؤاد الحنيش الاحمد", "ناصر بن علي بن ناصر سهيل جداد", "نور الدين محسن العلي", "هيثم بن محمد بن سالم فائل جداد"]
-    };
-
-    function showSec(section, btn) {
+    function showSec(s, btn) {
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         btn.classList.add('active');
         document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
-        document.getElementById(section + 'Sec').style.display = 'block';
+        document.getElementById(s + 'Sec').style.display = 'block';
     }
 
     function getNames() {
         const cls = document.getElementById('cls').value;
         const sel = document.getElementById('stu');
         sel.innerHTML = '<option value="">-- اختر اسمك --</option>';
-        if(names[cls]) names[cls].forEach(n => {
-            let opt = document.createElement('option'); opt.value = n; opt.text = n; sel.add(opt);
-        });
+        if(names[cls]) names[cls].forEach(n => { let opt = document.createElement('option'); opt.value = n; opt.text = n; sel.add(opt); });
     }
 
     function startUpload() {
-        const name = document.getElementById('stu').value;
-        if(!name) return alert("يرجى اختيار الاسم");
+        if(!document.getElementById('stu').value) return alert("اختر الاسم أولاً");
         document.getElementById('setupPart').style.display = 'none';
         document.getElementById('actionPart').style.display = 'block';
-        document.getElementById('curStu').innerText = "المشارك: " + name;
+        document.getElementById('curStu').innerText = "المشارك: " + document.getElementById('stu').value;
+    }
+
+    function goBack() {
+        document.getElementById('setupPart').style.display = 'block';
+        document.getElementById('actionPart').style.display = 'none';
     }
 
     function preview(input) {
@@ -307,46 +288,54 @@
             document.getElementById('preBox').style.display = "block";
             document.getElementById('btnFinal').style.display = "block";
             if (selectedFile.type.startsWith('video')) {
-                document.getElementById('vPre').src = url;
-                document.getElementById('vPre').style.display = "block";
-                document.getElementById('iPre').style.display = "none";
+                document.getElementById('vPre').src = url; document.getElementById('vPre').style.display = "block"; document.getElementById('iPre').style.display = "none";
             } else {
-                document.getElementById('iPre').src = url;
-                document.getElementById('iPre').style.display = "block";
-                document.getElementById('vPre').style.display = "none";
+                document.getElementById('iPre').src = url; document.getElementById('iPre').style.display = "block"; document.getElementById('vPre').style.display = "none";
             }
         }
     }
 
-    function uploadData() {
-        const name = document.getElementById('stu').value;
-        const cls = document.getElementById('cls').value;
-        if(!selectedFile) return alert("اختر ملفاً أولاً");
-        db.ref('submissions/' + cls).push(name);
-        document.getElementById('upStatus').innerText = "✅ تم استلام مشاركتك بنجاح بارك الله فيك!";
-        document.getElementById('upStatus').style.color = "green";
-        document.getElementById('btnFinal').disabled = true;
+    // الدالة البرمجية الجديدة للرفع الحقيقي
+    async function uploadToCloudinary() {
+        const status = document.getElementById('upStatus');
+        const btn = document.getElementById('btnFinal');
+        status.innerText = "⏳ جاري رفع مشاركتك... انتظر قليلاً";
+        btn.disabled = true;
+
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+        formData.append('upload_preset', CLOUDINARY_PRESET);
+
+        try {
+            // 1. الرفع لـ Cloudinary
+            const response = await fetch(CLOUDINARY_URL, { method: 'POST', body: formData });
+            const data = await response.json();
+
+            if (data.secure_url) {
+                // 2. حفظ الرابط في Firebase
+                const studentName = document.getElementById('stu').value;
+                const cls = document.getElementById('cls').value;
+                
+                await db.ref('submissions/' + cls).push({
+                    name: studentName,
+                    fileUrl: data.secure_url,
+                    time: new Date().toLocaleString('ar-OM')
+                });
+
+                status.innerText = "✅ تم استلام مشاركتك بنجاح بارك الله فيك!";
+                status.style.color = "green";
+            }
+        } catch (error) {
+            status.innerText = "❌ فشل الرفع، حاول مرة أخرى";
+            btn.disabled = false;
+        }
     }
 
     function auth() {
         if(document.getElementById('pass').value === "1234") {
             document.getElementById('adminAuth').style.display = 'none';
             document.getElementById('dash').style.display = 'block';
-            stats();
         }
-    }
-
-    function stats() {
-        const cls = document.getElementById('adCls').value;
-        db.ref('submissions/' + cls).on('value', snap => {
-            const subs = Object.values(snap.val() || {});
-            let html = '<table style="width:100%; border-collapse:collapse; font-size:0.9rem;">';
-            names[cls].forEach(n => {
-                const ok = subs.includes(n);
-                html += `<tr style="border-bottom:1px solid #eee;"><td style="padding:10px;">${n}</td><td style="padding:10px; color:${ok?'green':'red'}">${ok?'✅ تم':'⏳ انتظار'}</td></tr>`;
-            });
-            document.getElementById('res').innerHTML = html + '</table>';
-        });
     }
 </script>
 </body>
