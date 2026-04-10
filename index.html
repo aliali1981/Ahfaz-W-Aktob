@@ -9,103 +9,53 @@
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
         
         :root {
-            --primary: #004d61; 
-            --secondary: #00838f; 
-            --accent: #c5a021; 
-            --gold-soft: #fbf5e2;
-            --white: #ffffff;
-            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --primary: #004d61; --secondary: #00838f; --accent: #c5a021; 
+            --gold-soft: #fbf5e2; --white: #ffffff; --shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        body {
-            font-family: 'Tajawal', sans-serif;
-            margin: 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            padding: 20px 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        body { font-family: 'Tajawal', sans-serif; margin: 0; background: #f4f7f6; padding: 20px 10px; display: flex; flex-direction: column; align-items: center; }
 
-        .app-container {
-            width: 100%;
-            max-width: 580px;
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 40px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.8);
-            margin-bottom: 20px;
-        }
+        .app-container { width: 100%; max-width: 600px; background: #fff; border-radius: 40px; box-shadow: var(--shadow); overflow: hidden; margin-bottom: 20px; border: 1px solid #eee; }
 
-        .header {
-            background: var(--primary);
-            padding: 40px 20px 30px;
-            text-align: center;
-            color: var(--white);
-            position: relative;
-            clip-path: ellipse(120% 100% at 50% 0%);
-            border-bottom: 5px solid var(--accent);
-        }
-
-        .logo-circle {
-            width: 100px; height: 100px; background: var(--white); border-radius: 50%;
+        .header { background: var(--primary); padding: 40px 20px; text-align: center; color: #fff; border-bottom: 5px solid var(--accent); clip-path: ellipse(120% 100% at 50% 0%); }
+        .logo-circle { 
+            width: 100px; height: 100px; background: #fff; border-radius: 50%; 
             margin: 0 auto 15px; display: flex; justify-content: center; align-items: center;
-            border: 4px solid var(--accent); box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border: 4px solid var(--accent); box-shadow: 0 5px 15px rgba(0,0,0,0.2); overflow: hidden;
         }
-
-        .school-logo { max-width: 85%; max-height: 85%; object-fit: contain; }
+        .school-logo { width: 80px; height: 80px; object-fit: contain; }
 
         .nav-tabs { display: flex; background: #f1f3f5; margin: 15px; border-radius: 20px; padding: 5px; }
-        .tab { flex: 1; padding: 12px; text-align: center; font-weight: 700; cursor: pointer; border-radius: 15px; color: #555; transition: 0.3s; }
-        .tab.active { background: var(--white); color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .tab { flex: 1; padding: 12px; text-align: center; font-weight: 700; cursor: pointer; border-radius: 15px; color: #555; }
+        .tab.active { background: #fff; color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
         .content { padding: 0 25px 25px; }
 
-        /* تنسيق الأقسام كما في الصورة */
-        .section-header { 
-            background: var(--accent); 
-            color: #fff; 
-            padding: 8px 20px; 
-            border-radius: 25px 0 25px 0; 
-            display: inline-block; 
-            font-weight: 800; 
-            margin: 25px 0 15px; 
-            box-shadow: 3px 3px 0px var(--primary);
-        }
-
+        /* تنسيق محتوى المبادرة كما في الصورة */
+        .section-header { background: var(--accent); color: #fff; padding: 8px 25px; border-radius: 25px 0 25px 0; display: inline-block; font-weight: 800; margin: 25px 0 15px; box-shadow: 3px 3px 0 var(--primary); }
         .info-list { list-style: none; padding: 0; margin: 0; }
-        .info-list li { 
-            margin-bottom: 12px; 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            font-size: 0.95rem; 
-            color: #333; 
-            font-weight: 500;
-        }
-        .info-list i { color: var(--primary); font-size: 1.1rem; }
+        .info-list li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; line-height: 1.6; color: #333; }
+        .info-list i { color: var(--primary); font-size: 1.1rem; margin-top: 3px; }
 
-        /* منطقة الرفع والمعاينة */
-        .upload-options { display: flex; gap: 10px; margin-top: 20px; }
-        .btn-opt { flex: 1; padding: 15px; border-radius: 15px; border: none; cursor: pointer; font-family: 'Tajawal'; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 10px; transition: 0.3s; }
+        /* صفحة المشاركة */
+        .input-box { width: 100%; padding: 12px; margin: 10px 0; border-radius: 12px; border: 2px solid #ddd; font-family: 'Tajawal'; font-weight: bold; box-sizing: border-box; }
+        .upload-btns { display: flex; gap: 10px; margin: 20px 0; }
+        .btn-opt { flex: 1; padding: 15px; border-radius: 15px; border: none; cursor: pointer; font-family: 'Tajawal'; font-weight: bold; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: 0.3s; }
         .opt-file { background: #eee; color: #444; }
         .opt-cam { background: #d32f2f; color: white; }
 
-        .preview-area { width: 100%; border-radius: 20px; background: #000; margin-top: 20px; display: none; border: 4px solid #fff; box-shadow: var(--shadow); overflow: hidden; }
+        .preview-box { width: 100%; border-radius: 20px; background: #000; margin: 15px 0; display: none; overflow: hidden; border: 4px solid #fff; }
         #vPre, #iPre { width: 100%; display: none; }
 
-        .input-box { width: 100%; padding: 12px; margin: 10px 0; border-radius: 12px; border: 2px solid #ddd; font-family: 'Tajawal'; font-weight: 600; box-sizing: border-box; }
-        
-        .btn-confirm { width: 100%; padding: 18px; border-radius: 15px; border: none; background: var(--primary); color: white; font-family: 'Tajawal'; font-weight: 900; cursor: pointer; font-size: 1.1rem; margin-top: 15px; display: none; box-shadow: 0 5px 15px rgba(0,77,97,0.3); }
+        .btn-confirm { width: 100%; padding: 18px; border-radius: 15px; border: none; background: var(--primary); color: white; font-weight: 900; cursor: pointer; font-size: 1.1rem; }
 
-        .footer { background: #f8f9fa; padding: 25px; text-align: center; border-top: 1px solid #eee; border-radius: 0 0 40px 40px; }
-        .designer-pill { background: var(--primary); color: var(--accent); padding: 8px 25px; border-radius: 30px; font-weight: 800; display: inline-block; margin-bottom: 10px; font-size: 0.95rem; }
-        .manager-name { font-size: 1rem; color: #333; font-weight: 700; margin: 0; }
+        /* الإحصائيات */
+        .summary-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.85rem; }
+        .summary-table th { background: var(--primary); color: white; padding: 10px; }
+        .summary-table td { border: 1px solid #ddd; padding: 10px; text-align: center; }
 
-        #progWrap { height: 12px; background: #eee; border-radius: 10px; margin: 15px 0; display: none; overflow: hidden; }
-        #progBar { height: 100%; background: #27ae60; width: 0%; transition: 0.3s; }
+        .footer { background: #f8f9fa; padding: 25px; text-align: center; border-radius: 0 0 40px 40px; border-top: 1px solid #eee; }
+        .tag-pill { background: var(--primary); color: var(--accent); padding: 8px 25px; border-radius: 30px; font-weight: 800; display: inline-block; margin-bottom: 10px; }
     </style>
 
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
@@ -118,14 +68,14 @@
         <div class="logo-circle">
             <img src="https://raw.githubusercontent.com/aliali1981/Ahfaz-W-Aktob/main/logo.png" class="school-logo">
         </div>
-        <h1 style="margin:0; font-size: 2rem;">مُبَادَرَةُ أَحْفَظُ وَأَكْتُبُ</h1>
+        <h1 style="margin:0; font-size: 1.8rem;">مُبَادَرَةُ أَحْفَظُ وَأَكْتُبُ</h1>
         <p>مدرسة يزيد بن الحارث للتعليم الأساسي (5-8) مسائي</p>
     </div>
 
     <div class="nav-tabs">
-        <div class="tab active" onclick="showSection('info', this)">عن المبادرة</div>
-        <div class="tab" onclick="showSection('upload', this)">شارك الآن</div>
-        <div class="tab" onclick="showSection('admin', this)">الإدارة</div>
+        <div class="tab active" onclick="showSec('info', this)">عن المبادرة</div>
+        <div class="tab" onclick="showSec('upload', this)">شارك الآن</div>
+        <div class="tab" onclick="showSec('admin', this)">الإدارة</div>
     </div>
 
     <div class="content" id="infoSec">
@@ -137,8 +87,8 @@
         <div class="section-header">آلية تنفيذ المبادرة:</div>
         <ul class="info-list">
             <li><i class="fas fa-check-square"></i> يختار الطالب النص المقرر حفظه.</li>
-            <li><i class="fas fa-microphone-alt"></i> يختار الطالب طريقة التسميع إما (التسميع الشفوي) أو (التسميع الكتابي).</li>
-            <li><i class="fas fa-video"></i> في حال اختيار التسميع الشفوي، يقوم بإرسال فيديو مصور يعرض فيه حفظه.</li>
+            <li><i class="fas fa-check-square"></i> يختار الطالب طريقة التسميع إما (التسميع الشفوي) أو (التسميع الكتابي).</li>
+            <li><i class="fas fa-check-square"></i> في حال اختيار التسميع الشفوي، يقوم بإرسال فيديو مصور يعرض فيه حفظه.</li>
         </ul>
 
         <div class="section-header">شروط المبادرة:</div>
@@ -152,60 +102,51 @@
             <li><i class="fas fa-paper-plane"></i> يتم إرسال الفيديو لمعلم الصف (حسب ما يطلب المعلم).</li>
         </ul>
 
-        <div style="background: var(--primary); color: #fff; padding: 15px; border-radius: 15px; text-align: center; margin-top: 25px;">
-            <i class="fas fa-calendar-alt" style="color:var(--accent)"></i> <strong>فترة تنفيذ المبادرة</strong><br>
-            يتم التنفيذ خلال الفصل الدراسي الثاني في الفترة من 1 مارس 2026 إلى 15 مايو 2026 م
+        <div style="background: var(--primary); color: white; padding: 15px; border-radius: 15px; text-align: center; margin-top: 25px; box-shadow: var(--shadow);">
+            <i class="fas fa-calendar-alt" style="color:var(--accent)"></i> <strong>فترة تنفيذ المبادرة:</strong><br>
+            خلال الفصل الدراسي الثاني في الفترة من 1 مارس 2026 إلى 15 مايو 2026 م
         </div>
     </div>
 
     <div class="content" id="uploadSec" style="display:none;">
-        <div id="setupPart">
+        <div id="step1">
             <label>اختر الشعبة:</label>
             <select id="cls" class="input-box" onchange="getNames()"><option value="">-- اختر --</option><option value="7-1">سابع/1</option><option value="7-2">سابع/2</option><option value="7-3">سابع/3</option></select>
             <label>اسم الطالب:</label>
             <select id="stu" class="input-box"><option>اختر الشعبة أولاً</option></select>
-            <button class="btn-confirm" id="btnNext" style="display:block;" onclick="startUpload()">دخول للمشاركة</button>
+            <button class="btn-confirm" style="margin-top:15px;" onclick="startUp()">دخول للمشاركة</button>
         </div>
-
-        <div id="actionPart" style="display:none; text-align: center;">
-            <div style="background:var(--gold-soft); padding:12px; border-radius:15px; font-weight:bold; color:var(--primary);" id="curStu"></div>
-            
-            <div class="upload-options">
-                <label class="btn-opt opt-file">
-                    <i class="fas fa-upload fa-2x"></i> اختيار ملف
-                    <input type="file" style="display:none" id="fIn" accept="video/*,image/*" onchange="preview(this)">
-                </label>
-                <label class="btn-opt opt-cam">
-                    <i class="fas fa-video fa-2x"></i> تسجيل مباشر
-                    <input type="file" style="display:none" capture="user" accept="video/*" id="cIn" onchange="preview(this)">
-                </label>
+        <div id="step2" style="display:none; text-align:center;">
+            <div id="activeStu" style="background:var(--gold-soft); padding:12px; border-radius:15px; font-weight:bold; color:var(--primary); margin-bottom:15px;"></div>
+            <div class="upload-btns">
+                <label class="btn-opt opt-file"><i class="fas fa-file-upload fa-2x"></i> ملف من الجهاز<input type="file" style="display:none" id="fIn" onchange="pre(this)"></label>
+                <label class="btn-opt opt-cam"><i class="fas fa-video fa-2x"></i> تسجيل مباشر<input type="file" style="display:none" capture="user" accept="video/*" onchange="pre(this)"></label>
             </div>
-
-            <div class="preview-area" id="preBox">
-                <video id="vPre" controls></video>
-                <img id="iPre">
-            </div>
-
-            <div id="progWrap"><div id="progBar"></div></div>
-            <p id="upStatus" style="font-weight:bold; margin-top:10px;"></p>
-            <button class="btn-confirm" id="btnFinal" onclick="uploadData()">تأكيد وإرسال المشاركة <i class="fas fa-cloud-upload-alt"></i></button>
+            <div class="preview-box" id="preBox"><video id="vPre" controls></video><img id="iPre"></div>
+            <p id="upStatus" style="font-weight:bold; margin:10px 0;"></p>
+            <button class="btn-confirm" id="finalBtn" onclick="uploadData()">تأكيد وإرسال المشاركة <i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 
     <div class="content" id="adminSec" style="display:none;">
-        <div id="adminAuth">
+        <div id="authArea">
             <input type="password" id="pass" class="input-box" placeholder="رمز الدخول">
-            <button class="btn-confirm" style="display:block" onclick="auth()">دخول</button>
+            <button class="btn-confirm" onclick="auth()">دخول</button>
         </div>
-        <div id="dash" style="display:none;">
+        <div id="dashArea" style="display:none;">
             <select id="adCls" class="input-box" onchange="stats()"><option value="7-1">سابع/1</option><option value="7-2">سابع/2</option><option value="7-3">سابع/3</option></select>
-            <div id="res" style="margin-top:15px;"></div>
+            <div id="res"></div>
+            <h3 style="text-align:center; margin-top:30px; color:var(--primary);">الإحصائية العامة للمدرسة</h3>
+            <table class="summary-table">
+                <thead><tr><th>الشعبة</th><th>العدد</th><th>تم</th><th>باقي</th></tr></thead>
+                <tbody id="overallTable"></tbody>
+            </table>
         </div>
     </div>
 
     <div class="footer">
-        <div class="designer-pill">فكرة وتنفيذ: أ / علي محمد علي</div>
-        <p class="manager-name">مدير المدرسة<br>الأستاذ / هشام الكحالي</p>
+        <div class="tag-pill">فكرة وتنفيذ: أ / علي محمد علي</div>
+        <p style="font-weight:bold; color:#333; margin:5px 0;">بإشراف مدير المدرسة<br>الأستاذ / هشام الكحالي</p>
     </div>
 </div>
 
@@ -213,49 +154,42 @@
     const firebaseConfig = { databaseURL: "https://ahfaz-w-aktob-default-rtdb.firebaseio.com/" };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
-
-    const CLOUD = "duhzhaxxc"; 
-    const PRESET = "Ahfaz-W-Aktob";
-    let fileObj;
+    let selectedFile;
 
     const names = {
-        "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت فريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعفيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن muslim نفل ربعات الكثيري", "عامر بن محمد بن muslim بخيت المسهلي", "عبدالله بن سالم بن سهيل sليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "فريح بن عبدالله بن fريح احمد مسن", "مجتبى عيسى محمد", "muslim بن محمد بن عوض خادم الوهيبي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن بيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"],
-        "7-2": ["ابراهيم محمد سالم السطري", "العباس بن مبخوت بن سالم مسن بيت كثير", "المنذر بن فواز بن سليمان عبدالله الهاشمي", "امير بن ناصر بن عبدالرحمن عبدالله البلوشي", "حسين سلامه حسين علي شليل", "خالد بن سالم بن علي عبدالله العلوي", "خالد بن محمد بن سهيل مطر جداد", "خالد بن muslim بن أحمد جداد", "رويزم بن muslim بن بخيت رويزم صندل المحرمي", "سالم بن مبارك بن سهيل محمد الراشدي", "سعد بن محمد بن سعد حفيظ خوار", "سعود بن عبدالله بن بخيت زايد مسن", "سعيد بن عبدالله بن سالم احمد جداد", "سعيد بن muslim بن عبدالله سعيد جداد", "سلطان بن muslim بن سالم صالح جداد", "عبدالله بن عارف بن سالم جداد", "علي بن سعيد بن علي خوار", "عمر فؤاد فهمي محمد fؤاد", "فهد بن غانم بن سالم جداد", "محسن معتصم محمد الامام", "محمد بن سالم بن مبخوت محمد الراشدي", "muslim بن سالم بن سهيل الراشدي", "مصطفى محمود كريم ابراهيم احمد", "معاذ احمد سميح علي سيد", "منيف بن سعيد بن محمد سالم جداد", "هادف بن سعيد بن هادف حسن شحري خوار", "وائل بن حمود بن سالم سعيد الوائلي"],
-        "7-3": ["أحمد بن نائف بن عبدالله محمد جداد", "الطلح بن سالم بن حسن علي خوار", "بخيت بن muslim سالم مبخوت الراشدي", "بدر بن عامر بن muslim الرحابه جداد", "حثيث بن سلطان بن محمد سهيل مسن", "حمد بن محمد بن عبدالله محمد جداد الكثيري", "سالم بن احمد بن سالم جداد", "سعيد بن مبروك بن سالم عامر المسهلي", "سهيل بن عبدالله بن سهيل حافظ خوار", "عبد الله أمير عبدالله نصر", "عبدالله بن محمد بن علي مهوي العامري", "علي بن ثاني بن علي سالم جداد بيت كثير", "فارس زياد محمد ابو رواع", "مبارك بن سعيد بن سالم خويتم مسن", "محسن بن عقيل بن سالم سعد خوار", "محمد بن بخيت بن فرج السنح شهوان المهري", "محمد بن علي بن بخيت محمد الراشدي", "محمد بن غانم بن الرضه سلاوم جداد", "محمد بن muslim بن محمد muslim جداد", "محمد بن ناصر بن عبدالله جداد", "محمد بن هيثم بن سالم فائل جداد الكثيري", "muslim بن حسن بن هادف حسن شحري خوار", "معاذ فؤاد الحنيش الاحمد", "ناصر بن علي بن ناصر سهيل جداد", "نور الدين محسن العلي", "هيثم بن محمد بن سالم فائل جداد"]
+        "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت فريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعفيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن مسلم نفل ربعات الكثيري", "عامر بن محمد بن مسلم بخيت المسهلي", "عبدالله بن سالم بن سهيل سليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "فريح بن عبدالله بن فريح احمد مسن", "مجتبى عيسى محمد", "مسلم بن محمد بن عوض خادم الوهيبي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن بيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"],
+        "7-2": ["ابراهيم محمد سالم السطري", "العباس بن مبخوت بن سالم مسن بيت كثير", "المنذر بن فواز بن سليمان عبدالله الهاشمي", "امير بن ناصر بن عبدالرحمن عبدالله البلوشي", "حسين سلامه حسين علي شليل", "خالد بن سالم بن علي عبدالله العلوي", "خالد بن محمد بن سهيل مطر جداد", "خالد بن مسلم بن أحمد جداد", "رويزم بن مسلم بن بخيت رويزم صندل المحرمي", "سالم بن مبارك بن سهيل محمد الراشدي", "سعد بن محمد بن سعد حفيظ خوار", "سعود بن عبدالله بن بخيت زايد مسن", "سعيد بن عبدالله بن سالم احمد جداد", "سعيد بن مسلم بن عبدالله سعيد جداد", "سلطان بن مسلم بن سالم صالح جداد", "عبدالله بن عارف بن سالم جداد", "علي بن سعيد بن علي خوار", "عمر فؤاد فهمي محمد فؤاد", "فهد بن غانم بن سالم جداد", "محسن معتصم محمد الامام", "محمد بن سالم بن مبخوت محمد الراشدي", "مسلم بن سالم بن سهيل الراشدي", "مصطفى محمود كريم ابراهيم احمد", "معاذ احمد سميح علي سيد", "منيف بن سعيد بن محمد سالم جداد", "هادف بن سعيد بن هادف حسن شحري خوار", "وائل بن حمود بن سالم سعيد الوائلي"],
+        "7-3": ["أحمد بن نائف بن عبدالله محمد جداد", "الطلح بن سالم بن حسن علي خوار", "بخيت بن مسلم سالم مبخوت الراشدي", "بدر بن عامر بن مسلم الرحابه جداد", "حثيث بن سلطان بن محمد سهيل مسن", "حمد بن محمد بن عبدالله محمد جداد الكثيري", "سالم بن احمد بن سالم جداد", "سعيد بن مبروك بن سالم عامر المسهلي", "سهيل بن عبدالله بن سهيل حافظ خوار", "عبد الله أمير عبدالله نصر", "عبدالله بن محمد بن علي مهوي العامري", "علي بن ثاني بن علي سالم جداد بيت كثير", "فارس زياد محمد ابو رواع", "مبارك بن سعيد بن سالم خويتم مسن", "محسن بن عقيل بن سالم سعد خوار", "محمد بن بخيت بن فرج السنح شهوان المهري", "محمد بن علي بن بخيت محمد الراشدي", "محمد بن غانم بن الرضه سلاوم جداد", "محمد بن مسلم بن محمد مسلم جداد", "محمد بن ناصر بن عبدالله جداد", "محمد بن هيثم بن سالم فائل جداد الكثيري", "مسلم بن حسن بن هادف حسن شحري خوار", "معاذ فؤاد الحنيش الاحمد", "ناصر بن علي بن ناصر سهيل جداد", "نور الدين محسن العلي", "هيثم بن محمد بن سالم فائل جداد"]
     };
 
-    function showSection(s, b) {
+    function showSec(s, b) {
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         b.classList.add('active');
-        document.getElementById('infoSec').style.display = s === 'info' ? 'block' : 'none';
-        document.getElementById('uploadSec').style.display = s === 'upload' ? 'block' : 'none';
-        document.getElementById('adminSec').style.display = s === 'admin' ? 'block' : 'none';
+        document.getElementById('infoSec').style.display = s==='info'?'block':'none';
+        document.getElementById('uploadSec').style.display = s==='upload'?'block':'none';
+        document.getElementById('adminSec').style.display = s==='admin'?'block':'none';
     }
 
     function getNames() {
         const c = document.getElementById('cls').value;
         const s = document.getElementById('stu');
         s.innerHTML = '<option value="">-- اختر اسمك --</option>';
-        if(names[c]) names[c].forEach(n => {
-            let o = document.createElement('option'); o.value = n; o.text = n; s.add(o);
-        });
+        if(names[c]) names[c].forEach(n => { let o = document.createElement('option'); o.value = n; o.text = n; s.add(o); });
     }
 
-    function startUpload() {
-        const n = document.getElementById('stu').value;
-        if(!n) return alert("اختر اسمك");
-        document.getElementById('setupPart').style.display = 'none';
-        document.getElementById('actionPart').style.display = 'block';
-        document.getElementById('curStu').innerText = "مرحباً بك: " + n;
+    function startUp() {
+        if(!document.getElementById('stu').value) return alert("يرجى اختيار اسم الطالب أولاً");
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'block';
+        document.getElementById('activeStu').innerText = "البطل المشارك: " + document.getElementById('stu').value;
     }
 
-    function preview(i) {
+    function pre(i) {
         if (i.files && i.files[0]) {
-            fileObj = i.files[0];
-            const u = URL.createObjectURL(fileObj);
+            selectedFile = i.files[0];
+            const u = URL.createObjectURL(selectedFile);
             document.getElementById('preBox').style.display = "block";
-            document.getElementById('btnFinal').style.display = "block";
-            if (fileObj.type.startsWith('video')) {
+            if (selectedFile.type.startsWith('video')) {
                 document.getElementById('vPre').src = u; document.getElementById('vPre').style.display = "block";
                 document.getElementById('iPre').style.display = "none";
             } else {
@@ -266,41 +200,35 @@
     }
 
     function uploadData() {
-        const n = document.getElementById('stu').value;
-        const c = document.getElementById('cls').value;
-        if(!fileObj) return;
-        document.getElementById('progWrap').style.display = "block";
-        document.getElementById('btnFinal').disabled = true;
-        const fd = new FormData(); fd.append('file', fileObj); fd.append('upload_preset', PRESET);
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUD}/auto/upload`);
-        xhr.upload.onprogress = e => { document.getElementById('progBar').style.width = Math.round((e.loaded/e.total)*100) + "%"; };
-        xhr.onload = () => {
-            db.ref('submissions/' + c).push(n);
-            document.getElementById('upStatus').innerText = "✅ تم استلام مشاركتك بنجاح!";
-        };
-        xhr.send(fd);
+        if(!selectedFile) return alert("يرجى اختيار ملف أو تسجيل فيديو أولاً");
+        db.ref('submissions/' + document.getElementById('cls').value).push(document.getElementById('stu').value);
+        document.getElementById('upStatus').innerText = "✅ تم استلام مشاركتك بنجاح بارك الله فيك!";
+        document.getElementById('upStatus').style.color = "green";
     }
 
-    function auth() {
-        if(document.getElementById('pass').value === "1234") {
-            document.getElementById('adminAuth').style.display = 'none';
-            document.getElementById('dash').style.display = 'block';
-            stats();
-        } else alert("خطأ");
-    }
+    function auth() { if(document.getElementById('pass').value === "1234") { document.getElementById('authArea').style.display='none'; document.getElementById('dashArea').style.display='block'; stats(); } else alert("رمز الدخول غير صحيح"); }
 
     function stats() {
-        const c = document.getElementById('adCls').value;
-        db.ref('submissions/' + c).on('value', snap => {
-            const subs = Object.values(snap.val() || {});
-            let h = '<table style="width:100%; text-align:right;">';
-            names[c].forEach(n => {
+        const selectedCls = document.getElementById('adCls').value;
+        db.ref('submissions').on('value', snap => {
+            const allData = snap.val() || {};
+            const subs = Object.values(allData[selectedCls] || {});
+            let h = '<table style="width:100%; border-collapse:collapse; margin-top:10px;">';
+            names[selectedCls].forEach(n => {
                 const ok = subs.includes(n);
-                h += `<tr><td style="padding:10px; border-bottom:1px solid #eee;">${n}</td><td style="color:${ok?'green':'red'}">${ok?'✅ تم':'⏳ متبقي'}</td></tr>`;
+                h += `<tr style="border-bottom:1px solid #eee;"><td style="padding:10px;">${n}</td><td style="color:${ok?'green':'red'}; font-weight:bold;">${ok?'✅ تم':'⏳ لم يرسل'}</td></tr>`;
             });
             h += '</table>';
             document.getElementById('res').innerHTML = h;
+
+            let overallHtml = "";
+            for (let cls in names) {
+                const clsSubs = Object.values(allData[cls] || {});
+                const total = names[cls].length;
+                const done = names[cls].filter(n => clsSubs.includes(n)).length;
+                overallHtml += `<tr><td>${cls}</td><td>${total}</td><td style="color:green; font-weight:bold;">${done}</td><td style="color:red;">${total-done}</td></tr>`;
+            }
+            document.getElementById('overallTable').innerHTML = overallHtml;
         });
     }
 </script>
