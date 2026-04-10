@@ -13,7 +13,6 @@
             --secondary: #00838f; 
             --accent: #c5a021; 
             --gold-soft: #fbf5e2;
-            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             --white: #ffffff;
             --shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
@@ -21,29 +20,28 @@
         body {
             font-family: 'Tajawal', sans-serif;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
-            background: var(--bg-gradient);
-            padding: 20px 15px;
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .app-container {
             width: 100%;
             max-width: 580px;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             border-radius: 40px;
             box-shadow: var(--shadow);
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.8);
-            position: relative;
+            margin-bottom: 20px;
         }
 
-        /* رأس الصفحة - Header المحدث مع الشعار الدائري المدمج */
         .header {
             background: var(--primary);
-            padding: 45px 20px 35px;
+            padding: 40px 20px 30px;
             text-align: center;
             color: var(--white);
             position: relative;
@@ -52,315 +50,258 @@
         }
 
         .logo-circle {
-            width: 110px;
-            height: 110px;
-            background: var(--white);
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 4px solid var(--accent);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            overflow: hidden; 
+            width: 100px; height: 100px; background: var(--white); border-radius: 50%;
+            margin: 0 auto 15px; display: flex; justify-content: center; align-items: center;
+            border: 4px solid var(--accent); box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
-        .school-logo {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain; 
-        }
+        .school-logo { max-width: 85%; max-height: 85%; object-fit: contain; }
 
-        .header h1 { margin: 10px 0 5px; font-size: 1.8rem; font-weight: 900; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-        .header p { margin: 0; font-size: 0.95rem; opacity: 0.9; font-weight: 500; }
-
-        /* التبويبات - Tabs */
-        .nav-tabs { display: flex; background: #f1f3f5; margin: 20px; border-radius: 20px; padding: 5px; cursor: pointer; }
-        .tab { 
-            flex: 1; padding: 12px; text-align: center; font-weight: 700; 
-            transition: 0.4s ease; border-radius: 15px; color: #555;
-        }
+        .nav-tabs { display: flex; background: #f1f3f5; margin: 15px; border-radius: 20px; padding: 5px; }
+        .tab { flex: 1; padding: 12px; text-align: center; font-weight: 700; cursor: pointer; border-radius: 15px; color: #555; transition: 0.3s; }
         .tab.active { background: var(--white); color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
-        .content { padding: 0 30px 30px; }
+        .content { padding: 0 25px 25px; }
 
-        /* العناوين والفقرات - الدليل */
-        .section-title {
-            background: var(--gold-soft);
-            color: var(--primary);
-            padding: 10px 18px;
-            border-radius: 12px;
-            display: inline-block;
-            font-weight: 800;
-            font-size: 1.1rem;
-            margin: 25px 0 15px;
-            border-right: 5px solid var(--accent);
+        /* تنسيق الأقسام كما في الصورة */
+        .section-header { 
+            background: var(--accent); 
+            color: #fff; 
+            padding: 8px 20px; 
+            border-radius: 25px 0 25px 0; 
+            display: inline-block; 
+            font-weight: 800; 
+            margin: 25px 0 15px; 
+            box-shadow: 3px 3px 0px var(--primary);
         }
 
         .info-list { list-style: none; padding: 0; margin: 0; }
         .info-list li { 
-            margin-bottom: 12px; display: flex; align-items: flex-start; gap: 12px; 
-            font-size: 1rem; color: #333; line-height: 1.6;
+            margin-bottom: 12px; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            font-size: 0.95rem; 
+            color: #333; 
+            font-weight: 500;
         }
-        .info-list i { color: var(--secondary); margin-top: 5px; font-size: 1rem; }
+        .info-list i { color: var(--primary); font-size: 1.1rem; }
 
-        .highlight-banner {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white; padding: 20px; border-radius: 20px; text-align: center;
-            margin: 30px 0; font-weight: 700; border: 2px solid var(--accent);
-            box-shadow: 0 6px 15px rgba(0,77,97,0.3);
-        }
+        /* منطقة الرفع والمعاينة */
+        .upload-options { display: flex; gap: 10px; margin-top: 20px; }
+        .btn-opt { flex: 1; padding: 15px; border-radius: 15px; border: none; cursor: pointer; font-family: 'Tajawal'; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 10px; transition: 0.3s; }
+        .opt-file { background: #eee; color: #444; }
+        .opt-cam { background: #d32f2f; color: white; }
 
-        /* أدوات الرفع والتسجيل */
-        .controls { display: flex; gap: 12px; margin-bottom: 20px; }
-        .btn-main { 
-            width: 100%; padding: 16px; border-radius: 18px; border: none;
-            font-family: 'Tajawal'; font-weight: 700; cursor: pointer; transition: 0.3s;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            font-size: 1rem;
-        }
-        .btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(0,77,97,0.3); }
-        .btn-primary:hover { transform: translateY(-2px); background: var(--secondary); box-shadow: 0 6px 18px rgba(0,0,0,0.2); }
+        .preview-area { width: 100%; border-radius: 20px; background: #000; margin-top: 20px; display: none; border: 4px solid #fff; box-shadow: var(--shadow); overflow: hidden; }
+        #vPre, #iPre { width: 100%; display: none; }
+
+        .input-box { width: 100%; padding: 12px; margin: 10px 0; border-radius: 12px; border: 2px solid #ddd; font-family: 'Tajawal'; font-weight: 600; box-sizing: border-box; }
         
-        .btn-record { background: #d32f2f; color: white; }
-        .btn-secondary { background: #e0e0e0; color: #444; }
+        .btn-confirm { width: 100%; padding: 18px; border-radius: 15px; border: none; background: var(--primary); color: white; font-family: 'Tajawal'; font-weight: 900; cursor: pointer; font-size: 1.1rem; margin-top: 15px; display: none; box-shadow: 0 5px 15px rgba(0,77,97,0.3); }
 
-        /* معاينة الفيديو المحدثة */
-        video#preview { 
-            width: 100%; border-radius: 25px; background: #000; 
-            margin-bottom: 20px; border: 5px solid var(--white); box-shadow: var(--shadow);
-            display: none;
-        }
-        img#imgPreview {
-            width: 100%; border-radius: 25px; margin-bottom: 20px; border: 5px solid var(--white); box-shadow: var(--shadow);
-            display: none;
-        }
+        .footer { background: #f8f9fa; padding: 25px; text-align: center; border-top: 1px solid #eee; border-radius: 0 0 40px 40px; }
+        .designer-pill { background: var(--primary); color: var(--accent); padding: 8px 25px; border-radius: 30px; font-weight: 800; display: inline-block; margin-bottom: 10px; font-size: 0.95rem; }
+        .manager-name { font-size: 1rem; color: #333; font-weight: 700; margin: 0; }
 
-        .form-group { margin-bottom: 25px; }
-        .form-group label { display: block; margin-bottom: 10px; font-weight: 800; color: var(--primary); font-size: 1rem; }
-        select, input[type="file"] { 
-            width: 100%; padding: 15px; border-radius: 15px; border: 2px solid #eef0f2; 
-            background: #f8f9fa; font-family: 'Tajawal'; font-weight: 600; font-size: 1rem;
-        }
-        select:focus { border-color: var(--secondary); outline: none; }
-
-        .student-badge {
-            background: var(--primary); padding: 15px; border-radius: 18px;
-            text-align: center; margin-bottom: 25px;
-            color: var(--white); font-weight: 800; font-size: 1.1rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        /* التذييل الاحترافي - Footer المحدث */
-        .footer { 
-            background: #f8f9fa; padding: 30px; text-align: center; 
-            border-top: 1px solid #eee; position: relative;
-        }
-        .footer-content {
-            display: flex; flex-direction: column; align-items: center; gap: 12px;
-        }
-        .designer-tag {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--accent); padding: 8px 25px;
-            border-radius: 30px; font-weight: 800; font-size: 0.95rem; margin-bottom: 5px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-        }
-        .manager-tag { font-size: 0.95rem; color: #555; font-weight: 600; }
-        .manager-tag strong { color: var(--primary); }
-
-        #pBar { height: 14px; background: #e0e0e0; border-radius: 10px; overflow: hidden; display: none; margin: 20px 0; border: 1px solid #ccc; }
-        #pFill { height: 100%; background: linear-gradient(90deg, #4caf50, #8bc34a); transition: 0.3s; }
-        
-        #status { text-align: center; margin-top: 20px; padding: 10px; border-radius: 10px; font-weight: 800; font-size: 1.1rem; display: none; }
-        
-        /* لتسهيل الرفع من الهاتف */
-        .hidden-input { display: none; }
+        #progWrap { height: 12px; background: #eee; border-radius: 10px; margin: 15px 0; display: none; overflow: hidden; }
+        #progBar { height: 100%; background: #27ae60; width: 0%; transition: 0.3s; }
     </style>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 </head>
 <body>
 
 <div class="app-container">
     <div class="header">
         <div class="logo-circle">
-            <img src="https://raw.githubusercontent.com/aliali1981/Ahfaz-W-Aktob/main/logo.png" alt="شعار مدرسة يزيد بن الحارث" class="school-logo">
+            <img src="https://raw.githubusercontent.com/aliali1981/Ahfaz-W-Aktob/main/logo.png" class="school-logo">
         </div>
-        <h1>مبادرة أحفظ وأكتب</h1>
+        <h1 style="margin:0; font-size: 2rem;">مُبَادَرَةُ أَحْفَظُ وَأَكْتُبُ</h1>
         <p>مدرسة يزيد بن الحارث للتعليم الأساسي (5-8) مسائي</p>
     </div>
 
-    <div class="nav-tabs" id="mainTabs">
-        <div class="tab active" id="tabInfo" onclick="showSection('info')">عن المبادرة</div>
-        <div class="tab" id="tabUpload" onclick="showSection('upload')">شارك الآن</div>
+    <div class="nav-tabs">
+        <div class="tab active" onclick="showSection('info', this)">عن المبادرة</div>
+        <div class="tab" onclick="showSection('upload', this)">شارك الآن</div>
+        <div class="tab" onclick="showSection('admin', this)">الإدارة</div>
     </div>
 
-    <div class="content info-section" id="infoSection">
-        <div class="section-title"><i class="fas fa-bullseye"></i> أهداف المبادرة:</div>
+    <div class="content" id="infoSec">
+        <div class="section-header">أهداف المبادرة:</div>
         <ul class="info-list">
-            <li><i class="fas fa-arrow-alt-circle-left"></i> خدمة المخرجات التعليمية وحفظ النصوص الأدبية المقررة.</li>
+            <li><i class="fas fa-book-reader"></i> خدمة المخرجات التعليمية (حفظ النصوص الأدبية المقررة).</li>
         </ul>
 
-        <div class="section-title"><i class="fas fa-users-class"></i> الفئة المستهدفة:</div>
+        <div class="section-header">آلية تنفيذ المبادرة:</div>
         <ul class="info-list">
-            <li><i class="fas fa-arrow-alt-circle-left"></i> طلاب **الصف السابع** بمدرسة يزيد بن الحارث (5 - 8) **مسائي**.</li>
+            <li><i class="fas fa-check-square"></i> يختار الطالب النص المقرر حفظه.</li>
+            <li><i class="fas fa-microphone-alt"></i> يختار الطالب طريقة التسميع إما (التسميع الشفوي) أو (التسميع الكتابي).</li>
+            <li><i class="fas fa-video"></i> في حال اختيار التسميع الشفوي، يقوم بإرسال فيديو مصور يعرض فيه حفظه.</li>
         </ul>
 
-        <div class="section-title"><i class="fas fa-magic"></i> آلية التنفيذ:</div>
+        <div class="section-header">شروط المبادرة:</div>
         <ul class="info-list">
-            <li><i class="fas fa-arrow-alt-circle-left"></i> يختار الطالب النص المقرر حفظه.</li>
-            <li><i class="fas fa-arrow-alt-circle-left"></i> اختيار التسميع الشفوي (فيديو) أو الكتابي (صورة).</li>
-            <li><i class="fas fa-arrow-alt-circle-left"></i> في حال الشفوي، يتم رفع فيديو مصور يعرض فيه الحفظ.</li>
+            <li><i class="fas fa-briefcase"></i> يتم تنفيذ المبادرة من خلال اختيار الطالب إما (التسميع الشفوي) أو (التسميع الكتابي).</li>
+            <li><i class="fas fa-medal"></i> التمكن من حفظ النصوص.</li>
+            <li><i class="fas fa-edit"></i> الترتيب الصحيح لمقرر الحفظ.</li>
+            <li><i class="fas fa-volume-up"></i> مراعاة النطق الصحيح للألفاظ.</li>
+            <li><i class="fas fa-video"></i> يكون الفيديو على وضعه الأصلي (غير ممنتج) أي لا يتم التغيير فيه بأي برنامج من برامج المونتاج.</li>
+            <li><i class="fas fa-user-tie"></i> الالتزام بالزي المدرسي الكامل أثناء تسجيل الفيديو.</li>
+            <li><i class="fas fa-paper-plane"></i> يتم إرسال الفيديو لمعلم الصف (حسب ما يطلب المعلم).</li>
         </ul>
 
-        <div class="section-title"><i class="fas fa-check-double"></i> شروط المشاركة:</div>
-        <ul class="info-list">
-            <li><i class="fas fa-arrow-alt-circle-left"></i> التمكن التام من حفظ النصوص والترتيب الصحيح.</li>
-            <li><i class="fas fa-arrow-alt-circle-left"></i> الفيديو أصلي تماماً وبدون أي عملية مونتاج.</li>
-            <li><i class="fas fa-arrow-alt-circle-left"></i> الالتزام الكامل بالزي المدرسي أثناء التسجيل.</li>
-        </ul>
-
-        <div class="highlight-banner">
-            <i class="fas fa-calendar-check"></i> 
-            فترة التنفيذ: من 1 مارس 2026 إلى 15 مايو 2026 م
+        <div style="background: var(--primary); color: #fff; padding: 15px; border-radius: 15px; text-align: center; margin-top: 25px;">
+            <i class="fas fa-calendar-alt" style="color:var(--accent)"></i> <strong>فترة تنفيذ المبادرة</strong><br>
+            يتم التنفيذ خلال الفصل الدراسي الثاني في الفترة من 1 مارس 2026 إلى 15 مايو 2026 م
         </div>
-        
-        <button class="btn-main btn-primary" onclick="showSection('upload')">البدء في رفع المشاركة <i class="fas fa-chevron-left"></i></button>
     </div>
 
-    <div class="content" id="uploadSection" style="display:none;">
-        <div id="loginStep">
-            <div class="form-group">
-                <label>اختر الشعبة:</label>
-                <select id="classSelect" onchange="loadStudents()">
-                    <option value="">-- اختر --</option>
-                    <option value="7-1">سابع / 1</option>
-                    <option value="7-2">سابع / 2</option>
-                    <option value="7-3">سابع / 3</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>اسم الطالب:</label>
-                <select id="studentSelect"><option value="">اختر الشعبة أولاً</option></select>
-            </div>
-            <button class="btn-main btn-primary" onclick="goToUploadStep()">تأكيد الهوية والدخول <i class="fas fa-sign-in-alt"></i></button>
-            <button class="btn-main btn-secondary" onclick="showSection('info')">مراجعة الشروط</button>
+    <div class="content" id="uploadSec" style="display:none;">
+        <div id="setupPart">
+            <label>اختر الشعبة:</label>
+            <select id="cls" class="input-box" onchange="getNames()"><option value="">-- اختر --</option><option value="7-1">سابع/1</option><option value="7-2">سابع/2</option><option value="7-3">سابع/3</option></select>
+            <label>اسم الطالب:</label>
+            <select id="stu" class="input-box"><option>اختر الشعبة أولاً</option></select>
+            <button class="btn-confirm" id="btnNext" style="display:block;" onclick="startUpload()">دخول للمشاركة</button>
         </div>
 
-        <div id="fileStep" style="display:none;">
-            <div class="student-badge" id="studentLabel"></div>
+        <div id="actionPart" style="display:none; text-align: center;">
+            <div style="background:var(--gold-soft); padding:12px; border-radius:15px; font-weight:bold; color:var(--primary);" id="curStu"></div>
             
-            <div id="selectionMode" class="controls">
-                <label class="btn-main btn-secondary" style="cursor: pointer;">
-                    <i class="fas fa-folder-open"></i> ملف جاهز
-                    <input type="file" class="hidden-input" id="videoFile" accept="video/*,image/*" onchange="previewMedia(this)">
+            <div class="upload-options">
+                <label class="btn-opt opt-file">
+                    <i class="fas fa-upload fa-2x"></i> اختيار ملف
+                    <input type="file" style="display:none" id="fIn" accept="video/*,image/*" onchange="preview(this)">
                 </label>
-                <label class="btn-main btn-record" style="cursor: pointer;">
-                    <i class="fas fa-video"></i> تسجيل مباشر
-                    <input type="file" class="hidden-input" id="captureFile" accept="video/*" capture="user" onchange="previewMedia(this)">
+                <label class="btn-opt opt-cam">
+                    <i class="fas fa-video fa-2x"></i> تسجيل مباشر
+                    <input type="file" style="display:none" capture="user" accept="video/*" id="cIn" onchange="preview(this)">
                 </label>
             </div>
 
-            <video id="preview" controls></video>
-            <img id="imgPreview" alt="معاينة الصورة">
+            <div class="preview-area" id="preBox">
+                <video id="vPre" controls></video>
+                <img id="iPre">
+            </div>
 
-            <div id="pBar"><div id="pFill"></div></div>
-            
-            <button class="btn-main btn-primary" id="upBtn" onclick="finalUpload()" style="display:none;">تأكيد وإرسال الآن <i class="fas fa-paper-plane"></i></button>
-            <div id="status"></div>
-            <button class="btn-main btn-secondary" onclick="location.reload()" style="margin-top:10px; font-size:0.85rem;">تغيير الاسم أو الشعبة</button>
+            <div id="progWrap"><div id="progBar"></div></div>
+            <p id="upStatus" style="font-weight:bold; margin-top:10px;"></p>
+            <button class="btn-confirm" id="btnFinal" onclick="uploadData()">تأكيد وإرسال المشاركة <i class="fas fa-cloud-upload-alt"></i></button>
+        </div>
+    </div>
+
+    <div class="content" id="adminSec" style="display:none;">
+        <div id="adminAuth">
+            <input type="password" id="pass" class="input-box" placeholder="رمز الدخول">
+            <button class="btn-confirm" style="display:block" onclick="auth()">دخول</button>
+        </div>
+        <div id="dash" style="display:none;">
+            <select id="adCls" class="input-box" onchange="stats()"><option value="7-1">سابع/1</option><option value="7-2">سابع/2</option><option value="7-3">سابع/3</option></select>
+            <div id="res" style="margin-top:15px;"></div>
         </div>
     </div>
 
     <div class="footer">
-        <div class="footer-content">
-            <div class="designer-tag">فكرة وتنفيذ: أ/ علي محمد علي</div>
-            <div class="manager-tag">بإشراف مدير المدرسة: <strong>أ/ هشام الكحالي</strong></div>
-            <p style="font-size: 0.8rem; color: #999; margin-top: 5px;">© مدرسة يزيد بن الحارث المسائية 2026</p>
-        </div>
+        <div class="designer-pill">فكرة وتنفيذ: أ / علي محمد علي</div>
+        <p class="manager-name">مدير المدرسة<br>الأستاذ / هشام الكحالي</p>
     </div>
 </div>
 
 <script>
-    const CLOUD_NAME = "duhzhaxxc"; 
-    const UPLOAD_PRESET = "Ahfaz-W-Aktob"; 
-    let selectedFile;
+    const firebaseConfig = { databaseURL: "https://ahfaz-w-aktob-default-rtdb.firebaseio.com/" };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
-    const students = {
-        "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت فريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعفيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن مسلم نفل ربعات الكثيري", "عامر بن محمد بن muslim بخيت المسهلي", "عبدالله بن سالم بن سهيل sليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "فريح بن عبدالله بن fريح احمد مسن", "مجتبى عيسى محمد", "muslim بن محمد بن عوض خادم الوهيبي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن بيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"],
+    const CLOUD = "duhzhaxxc"; 
+    const PRESET = "Ahfaz-W-Aktob";
+    let fileObj;
+
+    const names = {
+        "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت فريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعفيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن muslim نفل ربعات الكثيري", "عامر بن محمد بن muslim بخيت المسهلي", "عبدالله بن سالم بن سهيل sليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "فريح بن عبدالله بن fريح احمد مسن", "مجتبى عيسى محمد", "muslim بن محمد بن عوض خادم الوهيبي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن بيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"],
         "7-2": ["ابراهيم محمد سالم السطري", "العباس بن مبخوت بن سالم مسن بيت كثير", "المنذر بن فواز بن سليمان عبدالله الهاشمي", "امير بن ناصر بن عبدالرحمن عبدالله البلوشي", "حسين سلامه حسين علي شليل", "خالد بن سالم بن علي عبدالله العلوي", "خالد بن محمد بن سهيل مطر جداد", "خالد بن muslim بن أحمد جداد", "رويزم بن muslim بن بخيت رويزم صندل المحرمي", "سالم بن مبارك بن سهيل محمد الراشدي", "سعد بن محمد بن سعد حفيظ خوار", "سعود بن عبدالله بن بخيت زايد مسن", "سعيد بن عبدالله بن سالم احمد جداد", "سعيد بن muslim بن عبدالله سعيد جداد", "سلطان بن muslim بن سالم صالح جداد", "عبدالله بن عارف بن سالم جداد", "علي بن سعيد بن علي خوار", "عمر فؤاد فهمي محمد fؤاد", "فهد بن غانم بن سالم جداد", "محسن معتصم محمد الامام", "محمد بن سالم بن مبخوت محمد الراشدي", "muslim بن سالم بن سهيل الراشدي", "مصطفى محمود كريم ابراهيم احمد", "معاذ احمد سميح علي سيد", "منيف بن سعيد بن محمد سالم جداد", "هادف بن سعيد بن هادف حسن شحري خوار", "وائل بن حمود بن سالم سعيد الوائلي"],
         "7-3": ["أحمد بن نائف بن عبدالله محمد جداد", "الطلح بن سالم بن حسن علي خوار", "بخيت بن muslim سالم مبخوت الراشدي", "بدر بن عامر بن muslim الرحابه جداد", "حثيث بن سلطان بن محمد سهيل مسن", "حمد بن محمد بن عبدالله محمد جداد الكثيري", "سالم بن احمد بن سالم جداد", "سعيد بن مبروك بن سالم عامر المسهلي", "سهيل بن عبدالله بن سهيل حافظ خوار", "عبد الله أمير عبدالله نصر", "عبدالله بن محمد بن علي مهوي العامري", "علي بن ثاني بن علي سالم جداد بيت كثير", "فارس زياد محمد ابو رواع", "مبارك بن سعيد بن سالم خويتم مسن", "محسن بن عقيل بن سالم سعد خوار", "محمد بن بخيت بن فرج السنح شهوان المهري", "محمد بن علي بن بخيت محمد الراشدي", "محمد بن غانم بن الرضه سلاوم جداد", "محمد بن muslim بن محمد muslim جداد", "محمد بن ناصر بن عبدالله جداد", "محمد بن هيثم بن سالم فائل جداد الكثيري", "muslim بن حسن بن هادف حسن شحري خوار", "معاذ فؤاد الحنيش الاحمد", "ناصر بن علي بن ناصر سهيل جداد", "نور الدين محسن العلي", "هيثم بن محمد بن سالم فائل جداد"]
     };
 
-    function showSection(type) {
-        document.getElementById('infoSection').style.display = type === 'info' ? 'block' : 'none';
-        document.getElementById('uploadSection').style.display = type === 'upload' ? 'block' : 'none';
-        document.getElementById('tabInfo').className = type === 'info' ? 'tab active' : 'tab';
-        document.getElementById('tabUpload').className = type === 'upload' ? 'tab active' : 'tab';
+    function showSection(s, b) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        b.classList.add('active');
+        document.getElementById('infoSec').style.display = s === 'info' ? 'block' : 'none';
+        document.getElementById('uploadSec').style.display = s === 'upload' ? 'block' : 'none';
+        document.getElementById('adminSec').style.display = s === 'admin' ? 'block' : 'none';
     }
 
-    function loadStudents() {
-        const cls = document.getElementById('classSelect').value;
-        const sel = document.getElementById('studentSelect');
-        sel.innerHTML = '<option value="">-- اختر --</option>';
-        if(students[cls]) students[cls].forEach(s => {
-            let opt = document.createElement('option'); opt.value = s; opt.text = s; sel.add(opt);
+    function getNames() {
+        const c = document.getElementById('cls').value;
+        const s = document.getElementById('stu');
+        s.innerHTML = '<option value="">-- اختر اسمك --</option>';
+        if(names[c]) names[c].forEach(n => {
+            let o = document.createElement('option'); o.value = n; o.text = n; s.add(o);
         });
     }
 
-    function goToUploadStep() {
-        const name = document.getElementById('studentSelect').value;
-        if(!name) return alert("يرجى اختيار اسم الطالب أولاً");
-        document.getElementById('studentLabel').innerText = "أهلاً بك يا بطل: " + name;
-        document.getElementById('loginStep').style.display = 'none';
-        document.getElementById('fileStep').style.display = 'block';
+    function startUpload() {
+        const n = document.getElementById('stu').value;
+        if(!n) return alert("اختر اسمك");
+        document.getElementById('setupPart').style.display = 'none';
+        document.getElementById('actionPart').style.display = 'block';
+        document.getElementById('curStu').innerText = "مرحباً بك: " + n;
     }
 
-    function previewMedia(input) {
-        if (input.files && input.files[0]) {
-            selectedFile = input.files[0];
-            const fileUrl = URL.createObjectURL(selectedFile);
-            const previewVideo = document.getElementById('preview');
-            const previewImg = document.getElementById('imgPreview');
-
-            if (selectedFile.type.startsWith('video')) {
-                previewVideo.src = fileUrl;
-                previewVideo.style.display = "block";
-                previewImg.style.display = "none";
-            } else if (selectedFile.type.startsWith('image')) {
-                previewImg.src = fileUrl;
-                previewImg.style.display = "block";
-                previewVideo.style.display = "none";
+    function preview(i) {
+        if (i.files && i.files[0]) {
+            fileObj = i.files[0];
+            const u = URL.createObjectURL(fileObj);
+            document.getElementById('preBox').style.display = "block";
+            document.getElementById('btnFinal').style.display = "block";
+            if (fileObj.type.startsWith('video')) {
+                document.getElementById('vPre').src = u; document.getElementById('vPre').style.display = "block";
+                document.getElementById('iPre').style.display = "none";
+            } else {
+                document.getElementById('iPre').src = u; document.getElementById('iPre').style.display = "block";
+                document.getElementById('vPre').style.display = "none";
             }
-            
-            document.getElementById('upBtn').style.display = "flex";
-            document.getElementById('status').innerText = "تم اختيار الملف، يمكنك معاينته الآن قبل الإرسال";
-            document.getElementById('status').style.display = "block";
         }
     }
 
-    function finalUpload() {
-        if(!selectedFile) return alert("يرجى اختيار ملف للمشاركة أولاً");
-        
-        document.getElementById('pBar').style.display = "block";
-        document.getElementById('upBtn').disabled = true;
-        
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-        formData.append('upload_preset', UPLOAD_PRESET);
-        formData.append('folder', 'Yazeed_Harith/' + document.getElementById('studentLabel').innerText);
-
+    function uploadData() {
+        const n = document.getElementById('stu').value;
+        const c = document.getElementById('cls').value;
+        if(!fileObj) return;
+        document.getElementById('progWrap').style.display = "block";
+        document.getElementById('btnFinal').disabled = true;
+        const fd = new FormData(); fd.append('file', fileObj); fd.append('upload_preset', PRESET);
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`);
-        xhr.upload.onprogress = e => {
-            const pct = Math.round((e.loaded/e.total)*100);
-            document.getElementById('pFill').style.width = pct + "%";
-            document.getElementById('status').innerText = "⏳ جاري الإرسال: " + pct + "%";
+        xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUD}/auto/upload`);
+        xhr.upload.onprogress = e => { document.getElementById('progBar').style.width = Math.round((e.loaded/e.total)*100) + "%"; };
+        xhr.onload = () => {
+            db.ref('submissions/' + c).push(n);
+            document.getElementById('upStatus').innerText = "✅ تم استلام مشاركتك بنجاح!";
         };
-        xhr.onload = () => { 
-            document.getElementById('status').innerText = "✅ تم استلام مشاركتك بنجاح! شكراً لك"; 
-            document.getElementById('status').style.color = "#2ecc71";
-            document.getElementById('upBtn').innerText = "تم الإرسال بنجاح";
-        };
-        xhr.send(formData);
+        xhr.send(fd);
+    }
+
+    function auth() {
+        if(document.getElementById('pass').value === "1234") {
+            document.getElementById('adminAuth').style.display = 'none';
+            document.getElementById('dash').style.display = 'block';
+            stats();
+        } else alert("خطأ");
+    }
+
+    function stats() {
+        const c = document.getElementById('adCls').value;
+        db.ref('submissions/' + c).on('value', snap => {
+            const subs = Object.values(snap.val() || {});
+            let h = '<table style="width:100%; text-align:right;">';
+            names[c].forEach(n => {
+                const ok = subs.includes(n);
+                h += `<tr><td style="padding:10px; border-bottom:1px solid #eee;">${n}</td><td style="color:${ok?'green':'red'}">${ok?'✅ تم':'⏳ متبقي'}</td></tr>`;
+            });
+            h += '</table>';
+            document.getElementById('res').innerHTML = h;
+        });
     }
 </script>
 </body>
