@@ -9,16 +9,13 @@
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
         
         :root {
-            --primary: #004d61;
-            --accent: #c5a021;
-            --bg-body: #f4f7f6;
-            --sidebar-width: 260px;
-            /* ألوان التبويبات المتميزة */
-            --color-info: #3498db;
-            --color-library: #9b59b6;
-            --color-upload: #e67e22;
-            --color-honor: #f1c40f;
-            --color-admin: #e74c3c;
+            --primary-dark: #002d38; 
+            --primary-mid: #004d61;  
+            --accent-gold: #c5a021;  
+            --gold-soft: #fbf5e2;    
+            --bg-body: #f4f7f6;      
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         body {
@@ -27,12 +24,13 @@
             background: var(--bg-body);
             display: flex;
             min-height: 100vh;
+            color: #333;
         }
 
-        /* القائمة الجانبية الرأسية */
+        /* القائمة الجانبية */
         .sidebar {
-            width: var(--sidebar-width);
-            background: var(--primary);
+            width: 280px;
+            background: var(--primary-dark);
             color: white;
             display: flex;
             flex-direction: column;
@@ -40,23 +38,31 @@
             height: 100vh;
             right: 0;
             top: 0;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            box-shadow: -5px 0 20px rgba(0,0,0,0.2);
             z-index: 1000;
         }
 
         .sidebar-header {
             padding: 30px 20px;
             text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .sidebar-header img {
-            width: 80px;
-            height: 80px;
+            width: 85px;
+            height: 85px;
             background: #fff;
             border-radius: 20px;
             padding: 5px;
             margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--accent-gold);
+            margin: 0;
         }
 
         .sidebar-nav {
@@ -67,109 +73,129 @@
         .tab-item {
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 15px 20px;
-            margin-bottom: 10px;
-            border-radius: 15px;
+            gap: 12px;
+            padding: 15px;
+            margin-bottom: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            color: #ecf0f1;
+            transition: 0.3s;
+            color: #bdc3c7;
             font-weight: 700;
-            text-decoration: none;
         }
 
-        /* ألوان الأيقونات عند النشاط */
-        .tab-item i { font-size: 1.2rem; width: 25px; text-align: center; transition: 0.3s; }
-        
-        .tab-item:hover { background: rgba(255,255,255,0.1); transform: translateX(-5px); }
+        .tab-item i { width: 25px; text-align: center; font-size: 1.2rem; }
+        .tab-item:hover { background: rgba(255,255,255,0.05); color: white; }
+        .tab-item.active { background: var(--accent-gold); color: var(--primary-dark); }
 
-        /* تنسيق التبويبات النشطة بالألوان المتميزة */
-        .tab-item.active[data-target="info"] { background: var(--color-info); color: white; }
-        .tab-item.active[data-target="texts"] { background: var(--color-library); color: white; }
-        .tab-item.active[data-target="upload"] { background: var(--color-upload); color: white; }
-        .tab-item.active[data-target="honor"] { background: var(--color-honor); color: #333; }
-        .tab-item.active[data-target="admin"] { background: var(--color-admin); color: white; }
+        /* التوقيع أسفل القائمة */
+        .sidebar-footer {
+            padding: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            background: rgba(0,0,0,0.15);
+            line-height: 1.6;
+        }
+        .sidebar-footer strong { color: var(--accent-gold); display: block; margin-top: 2px; }
 
-        /* منطقة المحتوى */
+        /* المحتوى */
         .main-content {
             flex: 1;
-            margin-right: var(--sidebar-width);
+            margin-right: 280px;
             padding: 40px;
             display: flex;
             justify-content: center;
         }
 
-        .content-container {
-            width: 100%;
-            max-width: 800px;
-        }
+        .content-container { width: 100%; max-width: 900px; }
 
-        .section-content {
-            display: none;
-            animation: fadeIn 0.5s ease-in-out;
-        }
+        .section-content { display: none; animation: fadeIn 0.5s ease-out; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* تنسيقات داخلية للأقسام */
-        .card {
-            background: white;
+        /* تصميم المبادرة بالأيقونات */
+        .card-gold {
+            background: var(--gold-soft);
             border-radius: 25px;
             padding: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
+            border: 2px solid var(--accent-gold);
             margin-bottom: 30px;
         }
 
-        .section-title {
-            font-size: 1.8rem;
+        .section-header-lux {
+            font-size: 2rem;
             font-weight: 900;
-            color: var(--primary);
-            margin-bottom: 25px;
+            color: var(--primary-dark);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .icon-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             gap: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
 
-        /* تخصيص هوية كل قسم */
-        #infoSec .section-title { color: var(--color-info); }
-        #textsSec .section-title { color: var(--color-library); }
-        #uploadSec .section-title { color: var(--color-upload); }
-        #honorSec .section-title { color: var(--color-honor); }
-        #adminSec .section-title { color: var(--color-admin); }
+        .icon-card i {
+            font-size: 1.8rem;
+            color: var(--primary-mid);
+            background: var(--gold-soft);
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
 
-        /* القوائم والجداول */
-        .list-unstyled { list-style: none; padding: 0; }
-        .list-unstyled li { padding: 12px; margin-bottom: 8px; background: #f8f9fa; border-radius: 12px; display: flex; align-items: center; gap: 12px; }
-        
+        .icon-card div h4 { margin: 0; font-size: 1rem; color: var(--primary-dark); }
+        .icon-card div p { margin: 5px 0 0; font-size: 0.85rem; color: #666; }
+
+        /* الجداول والرفع */
+        .card-white {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .input-box {
+            width: 100%; padding: 15px; margin-bottom: 15px;
+            border-radius: 10px; border: 1px solid #ddd;
+            font-family: 'Tajawal'; font-weight: bold;
+        }
+
+        .btn-lux {
+            background: var(--primary-mid); color: white; border: none;
+            padding: 15px; width: 100%; border-radius: 10px;
+            font-weight: 900; cursor: pointer; transition: 0.3s;
+        }
+        .btn-lux:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
         .admin-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .admin-table th { background: var(--primary); color: white; padding: 12px; font-size: 0.9rem; }
+        .admin-table th { background: var(--primary-dark); color: white; padding: 12px; }
         .admin-table td { padding: 10px; border-bottom: 1px solid #eee; text-align: center; }
 
-        .badge { padding: 5px 10px; border-radius: 8px; font-weight: bold; font-size: 0.8rem; }
-        .bg-done { background: #d4edda; color: #155724; }
-        .bg-wait { background: #fff3cd; color: #856404; }
-
         /* استجابة للهاتف */
-        @media (max-width: 768px) {
-            body { flex-direction: column; }
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-                box-shadow: none;
-            }
-            .sidebar-nav { display: flex; overflow-x: auto; padding: 10px; }
-            .tab-item { margin-bottom: 0; white-space: nowrap; padding: 10px 15px; }
+        @media (max-width: 900px) {
+            .sidebar { width: 100%; height: auto; position: relative; }
             .main-content { margin-right: 0; padding: 20px; }
-            .sidebar-header { display: none; }
+            .sidebar-nav { display: flex; overflow-x: auto; padding: 10px; }
+            .tab-item { white-space: nowrap; margin-bottom: 0; }
+            .sidebar-header, .sidebar-footer { display: none; }
         }
-
-        .input-box { width: 100%; padding: 15px; border-radius: 12px; border: 2px solid #eee; font-family: 'Tajawal'; font-weight: bold; margin-bottom: 15px; box-sizing: border-box;}
-        .btn-action { width: 100%; padding: 15px; border-radius: 12px; border: none; background: var(--primary); color: white; font-weight: 800; cursor: pointer; font-size: 1rem; }
     </style>
 
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
@@ -180,17 +206,18 @@
 <div class="sidebar">
     <div class="sidebar-header">
         <img src="https://raw.githubusercontent.com/aliali1981/Ahfaz-W-Aktob/main/logo.png" alt="Logo">
-        <div style="font-weight: 900;">مبادرة أحفظ وأكتب</div>
+        <h1>مبادرة أحفظ وأكتب</h1>
     </div>
     <div class="sidebar-nav">
-        <div class="tab-item active" data-target="info" onclick="toggleTab('info', this)"><i class="fas fa-info-circle"></i> عن المبادرة</div>
+        <div class="tab-item active" data-target="info" onclick="toggleTab('info', this)"><i class="fas fa-home"></i> عن المبادرة</div>
         <div class="tab-item" data-target="texts" onclick="toggleTab('texts', this)"><i class="fas fa-book-open"></i> مكتبة النصوص</div>
         <div class="tab-item" data-target="upload" onclick="toggleTab('upload', this)"><i class="fas fa-video"></i> شارك الآن</div>
-        <div class="tab-item" data-target="honor" onclick="toggleTab('honor', this)"><i class="fas fa-award"></i> لوحة الشرف</div>
-        <div class="tab-item" data-target="admin" onclick="toggleTab('admin', this)"><i class="fas fa-tools"></i> لوحة التحكم</div>
+        <div class="tab-item" data-target="honor" onclick="toggleTab('honor', this)"><i class="fas fa-trophy"></i> لوحة الشرف</div>
+        <div class="tab-item" data-target="admin" onclick="toggleTab('admin', this)"><i class="fas fa-user-shield"></i> لوحة التحكم</div>
     </div>
-    <div style="padding: 20px; text-align: center; font-size: 0.8rem; opacity: 0.6; border-top: 1px solid rgba(255,255,255,0.1);">
-        أ / علي محمد علي <br> مدرسة يزيد بن الحارث
+    <div class="sidebar-footer">
+        فكرة وتنفيذ <br> <strong>الأستاذ / علي محمد علي</strong>
+        تحت إشراف مدير المدرسة <br> <strong>الأستاذ / هشام الكحالي</strong>
     </div>
 </div>
 
@@ -198,89 +225,84 @@
     <div class="content-container">
 
         <div class="section-content" id="infoSec" style="display: block;">
-            <div class="section-title"><i class="fas fa-star"></i> أهداف المبادرة</div>
-            <div class="card">
-                <ul class="list-unstyled">
-                    <li><i class="fas fa-check-circle" style="color:var(--color-info)"></i> خدمة المخرجات التعليمية وحفظ النصوص الأدبية المقررة.</li>
-                    <li><i class="fas fa-brain" style="color:var(--color-info)"></i> إتقان مهارة الحفظ.</li>
-                    <li><i class="fas fa-microphone" style="color:var(--color-info)"></i> تنمية مهارة الإلقاء والتحدث بطلاقة أمام الكاميرا.</li>
-                </ul>
-                <div class="section-title" style="font-size: 1.3rem; margin-top: 20px;"><i class="fas fa-tasks"></i> آلية التنفيذ والشروط</div>
-                <ul class="list-unstyled">
-                    <li><i class="fas fa-id-badge"></i> الالتزام بالزي المدرسي الكامل (الدشداشة والمصر/الكمة).</li>
-                    <li><i class="fas fa-cut"></i> الفيديو بدون أي عملية مونتاج أو قص.</li>
-                    <li><i class="fas fa-volume-up"></i> وضوح الصوت والصورة بشكل جيد.</li>
-                </ul>
+            <div class="section-header-lux">مُبَادَرَةُ أَحْفَظُ وَأَكْتُبُ</div>
+            <div class="card-gold">
+                <h3 style="text-align:center; color:var(--primary-dark);"><i class="fas fa-bullseye"></i> أهداف المبادرة</h3>
+                <div class="icon-grid">
+                    <div class="icon-card"><i class="fas fa-graduation-cap"></i><div><h4>خدمة المخرجات</h4><p>حفظ النصوص الأدبية المقررة.</p></div></div>
+                    <div class="icon-card"><i class="fas fa-brain"></i><div><h4>إتقان الحفظ</h4><p>تعزيز مهارة الذاكرة والتركيز.</p></div></div>
+                    <div class="icon-card"><i class="fas fa-microphone"></i><div><h4>تنمية الإلقاء</h4><p>التحدث بطلاقة أمام الكاميرا.</p></div></div>
+                </div>
+
+                <h3 style="text-align:center; color:var(--primary-dark); margin-top:40px;"><i class="fas fa-tasks"></i> آلية التنفيذ والشروط</h3>
+                <div class="icon-grid">
+                    <div class="icon-card"><i class="fas fa-user-tie"></i><div><h4>الزي المدرسي</h4><p>الدشداشة والمصر/الكمة الكاملة.</p></div></div>
+                    <div class="icon-card"><i class="fas fa-video-slash"></i><div><h4>بدون مونتاج</h4><p>تصوير الفيديو لقطة واحدة مستمرة.</p></div></div>
+                    <div class="icon-card"><i class="fas fa-volume-up"></i><div><h4>وضوح الجودة</h4><p>صوت وصورة واضحة للمشارك.</p></div></div>
+                </div>
             </div>
         </div>
 
         <div class="section-content" id="textsSec">
-            <div class="section-title"><i class="fas fa-film"></i> مكتبة النصوص</div>
-            <div class="card">
-                <p>استمع للنصوص المقررة لتسهيل عملية الحفظ:</p>
-                <div style="margin-bottom: 25px;">
-                    <strong>• نص: أنت وأنا</strong>
-                    <div style="border-radius:15px; overflow:hidden; margin-top:10px;">
-                        <iframe width="100%" height="315" src="https://www.youtube.com/embed/UTb133uqsNE" frameborder="0" allowfullscreen></iframe>
-                    </div>
+            <div class="section-header-lux">مكتبة النصوص</div>
+            <div class="card-white">
+                <div style="margin-bottom:20px;">
+                    <strong>1. نص: أنت وأنا</strong>
+                    <iframe width="100%" height="315" style="border-radius:15px; margin-top:10px;" src="https://www.youtube.com/embed/UTb133uqsNE" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div>
-                    <strong>• نص: السلحفاة والبطتان</strong>
-                    <div style="border-radius:15px; overflow:hidden; margin-top:10px;">
-                        <iframe width="100%" height="315" src="https://www.youtube.com/embed/VTzyAPEfv7A" frameborder="0" allowfullscreen></iframe>
-                    </div>
+                    <strong>2. نص: السلحفاة والبطتان</strong>
+                    <iframe width="100%" height="315" style="border-radius:15px; margin-top:10px;" src="https://www.youtube.com/embed/VTzyAPEfv7A" frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
 
         <div class="section-content" id="uploadSec">
-            <div class="section-title"><i class="fas fa-upload"></i> شارك بمشاركتك</div>
-            <div class="card">
+            <div class="section-header-lux">إرسال المشاركة</div>
+            <div class="card-white">
                 <div id="step1">
                     <label>اختر الشعبة:</label>
-                    <select id="cls" class="input-box" onchange="updateStudents()"><option value="">-- اختر --</option><option value="7-1">سابع/1</option><option value="7-2">سابع/2</option><option value="7-3">سابع/3</option></select>
+                    <select id="cls" class="input-box" onchange="loadStudents()">
+                        <option value="">-- اختر --</option>
+                        <option value="7-1">سابع/1</option>
+                        <option value="7-2">سابع/2</option>
+                        <option value="7-3">سابع/3</option>
+                    </select>
                     <label>اسم الطالب:</label>
                     <select id="stu" class="input-box"><option value="">اختر الشعبة أولاً</option></select>
-                    <button class="btn-action" onclick="goStep2()" style="background:var(--color-upload)">دخول <i class="fas fa-arrow-left"></i></button>
+                    <button class="btn-lux" onclick="toStep2()">دخول للمشاركة <i class="fas fa-arrow-left"></i></button>
                 </div>
-                <div id="step2" style="display:none; text-align: center;">
-                    <div id="nameDisp" style="padding:15px; background:var(--bg-body); border-radius:15px; font-weight:900; margin-bottom:20px;"></div>
+                <div id="step2" style="display:none; text-align:center;">
+                    <div id="dispName" style="background:var(--gold-soft); padding:15px; border-radius:12px; font-weight:900; margin-bottom:20px; border:1px solid var(--accent-gold);"></div>
                     <div style="display:flex; gap:10px; margin-bottom:20px;">
-                        <label class="btn-action" style="background:#eee; color:#333; flex:1;"><i class="fas fa-file-video"></i> ملف<input type="file" id="fIn" hidden accept="video/*" onchange="previewV(this)"></label>
-                        <label class="btn-action" style="background:var(--color-admin); flex:1;"><i class="fas fa-camera"></i> تسجيل<input type="file" id="cIn" hidden capture="user" accept="video/*" onchange="previewV(this)"></label>
+                        <label class="btn-lux" style="background:#eee; color:#333; flex:1;"><i class="fas fa-file-video"></i> ملف<input type="file" id="fIn" hidden accept="video/*" onchange="preview(this)"></label>
+                        <label class="btn-lux" style="background:#d32f2f; flex:1;"><i class="fas fa-camera"></i> تسجيل<input type="file" id="cIn" hidden capture="user" accept="video/*" onchange="preview(this)"></label>
                     </div>
-                    <div id="vBox" style="display:none;">
+                    <div id="vPreBox" style="display:none;">
                         <video id="vPre" controls style="width:100%; border-radius:15px; margin-bottom:15px;"></video>
-                        <button class="btn-action" id="upBtn" onclick="uploadV()" style="background:#28a745;">تأكيد الإرسال <i class="fas fa-check-circle"></i></button>
+                        <button class="btn-lux" id="upBtn" onclick="startUpload()" style="background:#28a745;">تأكيد الإرسال</button>
                     </div>
                     <div id="pBar" style="display:none; background:#ddd; height:10px; border-radius:5px; margin-top:20px; overflow:hidden;"><div id="pFill" style="width:0%; height:100%; background:green;"></div></div>
-                    <p id="upMsg" style="margin-top:10px; font-weight:bold;"></p>
+                    <p id="upStatus" style="margin-top:10px; font-weight:bold;"></p>
                 </div>
             </div>
         </div>
 
         <div class="section-content" id="honorSec">
-            <div class="section-title"><i class="fas fa-medal"></i> لوحة شرف الفرسان</div>
-            <div id="hList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px;">
-                جاري التحميل...
-            </div>
+            <div class="section-header-lux">لوحة شرف الفرسان</div>
+            <div id="hList" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap:15px;"></div>
         </div>
 
         <div class="section-content" id="adminSec">
-            <div class="section-title"><i class="fas fa-shield-alt"></i> الإدارة والنتائج</div>
-            <div id="aAuth" class="card">
+            <div class="section-header-lux">لوحة التحكم</div>
+            <div id="aAuth" class="card-white">
                 <input type="password" id="pass" class="input-box" placeholder="كلمة المرور">
-                <button class="btn-action" onclick="checkA()" style="background:var(--color-admin)">دخول المسؤول</button>
+                <button class="btn-lux" onclick="checkA()">دخول المسؤول</button>
             </div>
             <div id="aDash" style="display:none;">
-                <div class="card">
-                    <strong>الإحصائيات العامة:</strong>
-                    <div id="statTable"></div>
-                </div>
-                <div class="card">
-                    <strong>التفاصيل لكل صف:</strong>
-                    <select id="adCls" class="input-box" onchange="renderDetails()" style="margin-top:10px;"><option value="7-1">سابع/1</option><option value="7-2">سابع/2</option><option value="7-3">سابع/3</option></select>
-                    <div id="detList"></div>
+                <div class="card-white" style="background:var(--primary-dark); color:white;">
+                    <strong>إحصائيات المشاركة:</strong>
+                    <div id="statBox"></div>
                 </div>
             </div>
         </div>
@@ -289,18 +311,17 @@
 </div>
 
 <script>
-    // تهيئة Firebase
-    const firebaseConfig = { databaseURL: "https://ahfaz-w-aktob-default-rtdb.firebaseio.com/" };
-    firebase.initializeApp(firebaseConfig);
+    // تهيئة البيانات والأسماء
+    const names = {
+        "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت فريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعفيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن مسلم نفل ربعات الكثيري", "عامر بن محمد بن مسلم بخيت المسهلي", "عبدالله بن سالم بن سهيل sليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "فريح بن عبدالله بن فريح احمد مسن", "مجتبى عيسى محمد", "مسلم بن محمد بن عوض خادم الوهيبي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن بيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"],
+        "7-2": ["ابراهيم محمد سالم السطري", "العباس بن مبخوت بن سالم مسن بيت كثير", "المنذر بن فواز بن سليمان عبدالله الهاشمي", "امير بن ناصر بن عبدالرحمن عبدالله البلوشي", "حسين سلامه حسين علي شليل", "خالد بن سالم بن علي عبدالله العلوي", "خالد بن محمد بن سهيل مطر جداد", "خالد بن مسلم بن أحمد جداد", "رويزم بن مسلم بن بخيت رويزم صندل المحرمي", "سالم بن مبارك بن سهيل محمد الراشدي", "سعد بن محمد بن سعد حفيظ خوار", "سعود بن عبدالله بن بخيت زايد مسن", "سعيد بن عبدالله بن سالم احمد جداد", "سعيد بن مسلم بن عبدالله سعيد جداد", "سلطان بن مسلم بن سالم صالح جداد", "عبدالله بن عارف بن سالم جداد", "علي بن سعيد بن علي خوار", "عمر فؤاد فهمي محمد فؤاد", "فهد بن غانم بن سالم جداد", "محسن معتصم محمد الامام", "محمد بن سالم بن مبخوت محمد الراشدي", "مسلم بن سالم بن سهيل الراشدي", "مصطفى محمود كريم ابراهيم احمد", "معاذ احمد سميح علي سيد", "منيف بن سعيد بن محمد سالم جداد", "هادف بن سعيد بن هادف حسن شحري خوار", "وائل بن حمود بن سالم سعيد الوائلي"],
+        "7-3": ["أحمد بن نائف بن عبدالله محمد جداد", "الطلح بن سالم بن حسن علي خوار", "بخيت بن مسلم سالم مبخوت الراشدي", "بدر بن عامر بن مسلم الرحابه جداد", "حثيث بن سلطان بن محمد سهيل مسن", "حمد بن محمد بن عبدالله محمد جداد الكثيري", "سالم بن احمد بن سالم جداد", "سعيد بن مبروك بن سالم عامر المسهلي", "سهيل بن عبدالله بن سهيل حافظ خوار", "عبد الله أمير عبدالله نصر", "عبدالله بن محمد بن علي مهوي العامري", "علي بن ثاني بن علي سالم جداد بيت كثير", "فارس زياد محمد ابو رواع", "مبارك بن سعيد بن سالم خويتم مسن", "محسن بن عقيل بن سالم سعد خوار", "محمد بن بخيت بن فرج السنح شهوان المهري", "محمد بن علي بن بخيت محمد الراشدي", "محمد بن غانم بن الرضه سلاوم جداد", "محمد بن مسلم بن محمد مسلم جداد", "محمد بن ناصر بن عبدالله جداد", "محمد بن هيثم بن سالم فائل جداد الكثيري", "مسلم بن حسن بن هادف حسن شحري خوار", "معاذ فؤاد الحنيش الاحمد", "ناصر بن علي بن ناصر سهيل جداد", "نور الدين محسن العلي", "هيثم بن محمد بن سالم فائل جداد"]
+    };
+
+    firebase.initializeApp({ databaseURL: "https://ahfaz-w-aktob-default-rtdb.firebaseio.com/" });
     const db = firebase.database();
     const CLOUD = "duhzhaxxc";
     const PRESET = "Ahfaz-W-Aktob";
-
-    const names = {
-        "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت فريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعفيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن مسلم نفل ربعات الكثيري", "عامر بن محمد بن مسلم بخيت المسهلي", "عبدالله بن سالم بن سهيل سليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "فريح بن عبدالله بن فريح احمد مسن", "مجتبى عيسى محمد", "مسلم بن محمد بن عوض خادم الوهيبي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن بيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"],
-        "7-2": ["ابراهيم محمد سالم السطري", "العباس بن مبخوت بن سالم مسن بيت كثير", "المنذر بن fواز بن سليمان عبدالله الهاشمي", "امير بن ناصر بن عبدالرحمن عبدالله البلوشي", "حسين سلامه حسين علي شليل", "خالد بن سالم بن علي عبدالله العلوي", "خالد بن محمد بن سهيل مطر جداد", "خالد بن مسلم بن أحمد جداد", "رويزم بن مسلم بن بخيت رويزم صندل المحرمي", "سالم بن مبارك بن سهيل محمد الراشدي", "سعد بن محمد بن سعد حفيظ خوار", "سعود بن عبدالله بن بخيت زايد مسن", "سعيد بن عبدالله بن سالم احمد جداد", "سعيد بن مسلم بن عبدالله سعيد جداد", "سلطان بن مسلم بن سالم صالح جداد", "عبدالله بن عارف بن سالم جداد", "علي بن سعيد بن علي خوار", "عمر فؤاد فهمي محمد فؤاد", "فهد بن غانم بن سالم جداد", "محسن معتصم محمد الامام", "محمد بن سالم بن مبخوت محمد الراشدي", "مسلم بن سالم بن سهيل الراشدي", "مصطفى محمود كريم ابراهيم احمد", "معاذ احمد سميح علي سيد", "منيف بن سعيد بن محمد سالم جداد", "هادف بن سعيد بن هادف حسن شحري خوار", "وائل بن حمود بن سالم سعيد الوائلي"],
-        "7-3": ["أحمد بن نائف بن عبدالله محمد جداد", "الطلح بن سالم بن حسن علي خوار", "بخيت بن مسلم سالم مبخوت الراشدي", "بدر بن عامر بن مسلم الرحابه جداد", "حثيث بن سلطان بن محمد سهيل مسن", "حمد بن محمد بن عبدالله محمد جداد الكثيري", "سالم بن احمد بن سالم جداد", "سعيد بن مبروك بن سالم عامر المسهلي", "سهيل بن عبدالله بن سهيل حافظ خوار", "عبد الله أمير عبدالله نصر", "عبدالله بن محمد بن علي مهوي العامري", "علي بن ثاني بن علي سالم جداد بيت كثير", "فارس زياد محمد ابو رواع", "مبارك بن سعيد بن سالم خويتم مسن", "محسن بن عقيل بن سالم سعد خوار", "محمد بن بخيت بن فرج السنح شهوان المهري", "محمد بن علي بن بخيت محمد الراشدي", "محمد بن غانم بن الرضه سلاوم جداد", "محمد بن مسلم بن محمد مسلم جداد", "محمد بن ناصر بن عبدالله جداد", "محمد بن هيثم بن سالم فائل جداد الكثيري", "مسلم بن حسن بن هادف حسن شحري خوار", "معاذ فؤاد الحنيش الاحمد", "ناصر بن علي بن ناصر سهيل جداد", "نور الدين محسن العلي", "هيثم بن محمد بن سالم فائل جداد"]
-    };
 
     function toggleTab(id, el) {
         document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
@@ -310,54 +331,53 @@
         if(id === 'honor') loadHonor();
     }
 
-    function updateStudents() {
-        const cls = document.getElementById('cls').value;
-        const sel = document.getElementById('stu');
-        sel.innerHTML = '<option value="">-- اختر --</option>';
-        if(names[cls]) names[cls].forEach(n => {
-            let opt = document.createElement('option'); opt.value = n; opt.text = n; sel.add(opt);
-        });
+    function loadStudents() {
+        const c = document.getElementById('cls').value;
+        const s = document.getElementById('stu');
+        s.innerHTML = '<option value="">-- اختر --</option>';
+        if(names[c]) names[c].forEach(n => s.add(new Option(n, n)));
     }
 
-    function goStep2() {
+    function toStep2() {
         if(!document.getElementById('stu').value) return alert("اختر الاسم");
         document.getElementById('step1').style.display = 'none';
         document.getElementById('step2').style.display = 'block';
-        document.getElementById('nameDisp').innerText = "المشارك: " + document.getElementById('stu').value;
+        document.getElementById('dispName').innerText = "المشارك: " + document.getElementById('stu').value;
     }
 
-    let file;
-    function previewV(input) {
+    let selectedFile;
+    function preview(input) {
         if(input.files && input.files[0]) {
-            file = input.files[0];
-            document.getElementById('vPre').src = URL.createObjectURL(file);
-            document.getElementById('vBox').style.display = 'block';
+            selectedFile = input.files[0];
+            document.getElementById('vPre').src = URL.createObjectURL(selectedFile);
+            document.getElementById('vPreBox').style.display = 'block';
         }
     }
 
-    function uploadV() {
-        const msg = document.getElementById('upMsg');
+    function startUpload() {
+        const btn = document.getElementById('upBtn');
         const fill = document.getElementById('pFill');
+        const stat = document.getElementById('upStatus');
+        btn.disabled = true;
         document.getElementById('pBar').style.display = 'block';
-        document.getElementById('upBtn').disabled = true;
 
         const fd = new FormData();
-        fd.append('file', file);
+        fd.append('file', selectedFile);
         fd.append('upload_preset', PRESET);
 
         const xhr = new XMLHttpRequest();
         xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUD}/upload`, true);
         xhr.upload.onprogress = (e) => {
-            const p = (e.loaded / e.total) * 100;
+            const p = Math.round((e.loaded / e.total) * 100);
             fill.style.width = p + '%';
-            msg.innerText = `جاري الإرسال... ${Math.round(p)}%`;
+            stat.innerText = `جاري الرفع... ${p}%`;
         };
         xhr.onload = () => {
             if(xhr.status === 200) {
                 const res = JSON.parse(xhr.responseText);
                 db.ref('submissions/' + document.getElementById('cls').value).push({
                     student: document.getElementById('stu').value, video: res.secure_url
-                }).then(() => { msg.innerHTML = "✅ تم الإرسال بنجاح!"; msg.style.color = "green"; });
+                }).then(() => { stat.innerHTML = "✅ تم الإرسال بنجاح!"; stat.style.color = "green"; });
             }
         };
         xhr.send(fd);
@@ -366,11 +386,11 @@
     function loadHonor() {
         db.ref('submissions').on('value', snap => {
             const data = snap.val() || {}; let list = [];
-            Object.values(data).forEach(cls => Object.values(cls).forEach(s => list.push(s.student)));
-            let html = ""; [...new Set(list)].forEach(n => {
-                html += `<div style="background:white; padding:20px; border-radius:15px; text-align:center; box-shadow:0 5px 15px rgba(0,0,0,0.05); border-bottom:4px solid var(--color-honor);"><i class="fas fa-medal fa-2x" style="color:var(--color-honor)"></i><br><br><b>${n}</b></div>`;
+            Object.values(data).forEach(c => Object.values(c).forEach(s => list.push(s.student)));
+            let h = ""; [...new Set(list)].forEach(n => {
+                h += `<div style="background:white; padding:15px; border-radius:12px; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.05); border-bottom:3px solid var(--accent-gold); font-weight:bold;">${n}</div>`;
             });
-            document.getElementById('hList').innerHTML = html || "بانتظار الفرسان...";
+            document.getElementById('hList').innerHTML = h || "بانتظار الفرسان...";
         });
     }
 
@@ -378,39 +398,20 @@
         if(document.getElementById('pass').value === "1234") {
             document.getElementById('aAuth').style.display = 'none';
             document.getElementById('aDash').style.display = 'block';
-            renderStats();
+            updateStats();
         } else alert("كلمة المرور خطأ");
     }
 
-    function renderStats() {
+    function updateStats() {
         db.ref('submissions').on('value', snap => {
             const data = snap.val() || {};
-            let html = `<table class="admin-table"><thead><tr><th>الصف</th><th>الطلاب</th><th>أرسل</th><th>باقي</th><th>النسبة</th></tr></thead><tbody>`;
-            let tAll = 0, tSent = 0;
+            let h = `<table class="admin-table"><thead><tr><th>الصف</th><th>الطلاب</th><th>أرسل</th><th>النسبة</th></tr></thead><tbody>`;
             ["7-1", "7-2", "7-3"].forEach(cid => {
                 const tot = names[cid].length;
                 const sent = data[cid] ? Object.keys(data[cid]).length : 0;
-                const per = Math.round((sent/tot)*100);
-                tAll += tot; tSent += sent;
-                html += `<tr><td>${cid}</td><td>${tot}</td><td>${sent}</td><td>${tot-sent}</td><td>${per}%</td></tr>`;
+                h += `<tr><td>${cid}</td><td>${tot}</td><td>${sent}</td><td>${Math.round((sent/tot)*100)}%</td></tr>`;
             });
-            html += `<tr style="background:#eee; font-weight:bold;"><td>الإجمالي</td><td>${tAll}</td><td>${tSent}</td><td>${tAll-tSent}</td><td>${Math.round((tSent/tAll)*100)}%</td></tr></tbody></table>`;
-            document.getElementById('statTable').innerHTML = html;
-            renderDetails();
-        });
-    }
-
-    function renderDetails() {
-        const cls = document.getElementById('adCls').value;
-        db.ref('submissions/' + cls).once('value', snap => {
-            const subs = snap.val() || {};
-            const sentNames = Object.values(subs).map(s => s.student);
-            let html = `<div style="margin-top:10px;">`;
-            names[cls].forEach(n => {
-                const ok = sentNames.includes(n);
-                html += `<div style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee;"><span>${n}</span><span class="badge ${ok?'bg-done':'bg-wait'}">${ok?'تم':'⏳'}</span></div>`;
-            });
-            document.getElementById('detList').innerHTML = html + "</div>";
+            document.getElementById('statBox').innerHTML = h + "</tbody></table>";
         });
     }
 </script>
