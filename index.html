@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مبادرة أحفظ وأكتب - مدرسة يزيد بن الحارث</title>
+    <title>تطبيق مبادرة أحفظ وأكتب</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
@@ -18,8 +18,7 @@
             --shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        /* تحسينات الخطوط العامة للجوال */
-        html { font-size: 16px; } 
+        html { font-size: 16px; }
         @media (max-width: 480px) { html { font-size: 14px; } }
 
         body {
@@ -27,11 +26,11 @@
             margin: 0;
             background: var(--bg-body);
             color: #333;
-            line-height: 1.6; /* تباعد أسطر مريح */
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* واجهة القائمة الرئيسية */
+        /* القائمة الرئيسية */
         #mainMenu {
             width: 100%;
             min-height: 100vh;
@@ -42,141 +41,141 @@
             padding: 40px 0;
         }
 
-        .menu-header { text-align: center; margin-bottom: 25px; width: 90%; }
-        .menu-header img { width: 85px; background: #fff; border-radius: 18px; padding: 5px; margin-bottom: 12px; }
-        .menu-header h1 { 
-            color: var(--accent-gold); 
-            font-size: 1.6rem; 
-            font-weight: 900;
-            letter-spacing: 0.5px;
-        }
+        .menu-header { text-align: center; margin-bottom: 30px; }
+        .menu-header img { width: 90px; background: #fff; border-radius: 20px; padding: 5px; margin-bottom: 15px; border: 2px solid var(--accent-gold); }
+        .menu-header h1 { color: var(--accent-gold); font-size: 1.8rem; font-weight: 900; margin: 0; }
 
         .nav-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* ترتيب ثنائي ليناسب اليد */
-            gap: 12px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
             width: 92%;
-            max-width: 500px;
+            max-width: 600px;
         }
 
         .menu-item {
-            background: rgba(255,255,255,0.07);
-            color: #ecf0f1;
-            padding: 20px 10px;
-            border-radius: 18px;
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            padding: 25px 15px;
+            border-radius: 20px;
             text-align: center;
             cursor: pointer;
             border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
         }
-        .menu-item i { font-size: 1.8rem; margin-bottom: 8px; display: block; color: var(--accent-gold); }
-        .menu-item span { font-weight: 700; font-size: 0.95rem; }
+        .menu-item i { font-size: 2rem; margin-bottom: 10px; display: block; color: var(--accent-gold); }
+        .menu-item span { font-weight: 700; font-size: 1.1rem; }
+        .menu-item:hover { background: var(--accent-gold); color: var(--primary-dark); }
 
-        /* منطقة المحتوى المخصص للجوال */
-        #contentArea {
-            display: none;
-            padding: 15px;
+        .footer-info {
+            margin-top: auto;
+            text-align: center;
+            padding: 30px;
+            color: #ccc;
+            background: rgba(0,0,0,0.2);
             width: 100%;
-            box-sizing: border-box;
+            border-top: 2px solid var(--accent-gold);
+            font-size: 1rem;
+        }
+        .footer-info strong { color: var(--accent-gold); font-weight: 900; }
+
+        /* منطقة المحتوى */
+        #contentArea { display: none; padding: 15px; min-height: 100vh; }
+        .back-btn {
+            background: var(--primary-dark); color: var(--accent-gold);
+            padding: 12px 20px; border-radius: 12px; border: none;
+            font-weight: 900; cursor: pointer; margin-bottom: 20px;
         }
 
-        .back-btn {
-            background: var(--primary-dark);
+        /* عن المبادرة */
+        .initiative-card {
+            background: var(--gold-soft);
+            border-radius: 25px;
+            padding: 25px;
+            border: 2px solid var(--accent-gold);
+            margin-bottom: 20px;
+        }
+        .info-group { margin-bottom: 25px; }
+        .info-group h3 {
+            background: var(--accent-gold); color: var(--primary-dark);
+            padding: 10px 20px; border-radius: 15px; display: inline-block;
+            font-size: 1.1rem; margin-bottom: 15px;
+        }
+        .info-item {
+            background: white; padding: 15px; border-radius: 15px;
+            display: flex; align-items: center; gap: 15px; margin-bottom: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+        .info-item i { color: var(--primary-mid); font-size: 1.3rem; width: 30px; text-align: center; }
+        .info-item p { margin: 0; font-weight: 700; font-size: 0.95rem; color: #444; }
+
+        .period-box {
+            background: #28a745; color: white; padding: 15px;
+            border-radius: 15px; text-align: center; font-weight: 800;
+        }
+
+        .card-white { background: white; padding: 25px; border-radius: 20px; box-shadow: var(--shadow); }
+        .input-box { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1.5px solid #eee; font-family: 'Tajawal'; font-weight: 700; box-sizing: border-box; }
+        .btn-lux { background: var(--primary-mid); color: white; border: none; padding: 18px; width: 100%; border-radius: 12px; font-weight: 900; cursor: pointer; }
+
+        /* لوحة الشرف الاحترافية */
+        .honor-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border-top: 5px solid var(--accent-gold);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            animation: fadeIn 0.5s;
+        }
+        .honor-card i.badge {
+            font-size: 2rem;
             color: var(--accent-gold);
-            padding: 12px 20px;
-            border-radius: 10px;
+            background: var(--gold-soft);
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            font-weight: 800;
-            margin-bottom: 20px;
-            border: none;
-            font-size: 0.9rem;
-            width: fit-content;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 5px;
         }
-
-        .section-title {
-            font-size: 1.4rem;
+        .honor-card .name {
             font-weight: 900;
+            font-size: 0.9rem;
             color: var(--primary-dark);
-            text-align: center;
-            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .honor-card .rank {
+            font-size: 0.75rem;
+            color: #28a745;
+            background: #e8f5e9;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-weight: bold;
         }
 
-        /* تنسيق بطاقات المعلومات بسلاسة */
-        .card-gold { 
-            background: var(--gold-soft); 
-            border-radius: 20px; 
-            padding: 20px; 
-            border: 1.5px solid var(--accent-gold); 
-        }
+        /* لوحة التحكم */
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
+        .stat-card { background: var(--primary-dark); color: white; padding: 15px; border-radius: 15px; text-align: center; border-bottom: 4px solid var(--accent-gold); }
+        .stat-card h4 { margin: 0; font-size: 0.8rem; opacity: 0.8; }
+        .stat-card div { font-size: 1.8rem; font-weight: 900; color: var(--accent-gold); margin-top: 5px; }
 
-        .icon-card { 
-            background: white; 
-            padding: 15px; 
-            border-radius: 15px; 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            margin-bottom: 10px;
-        }
-        .icon-card i { 
-            font-size: 1.3rem; 
-            color: var(--primary-mid); 
-            background: var(--gold-soft); 
-            width: 45px; height: 45px; 
-            display: flex; align-items: center; justify-content: center; 
-            border-radius: 10px; flex-shrink: 0;
-        }
-        .icon-card h4 { margin: 0; font-size: 0.95rem; font-weight: 800; }
-        .icon-card p { margin: 3px 0 0; font-size: 0.85rem; color: #555; line-height: 1.4; }
+        .admin-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
+        .admin-table th { background: var(--primary-mid); color: white; padding: 12px; border: 1px solid rgba(255,255,255,0.1); }
+        .admin-table td { padding: 10px; border: 1px solid #eee; text-align: center; background: #fff; font-weight: bold; }
+        
+        .status-sent { color: #28a745; font-weight: 900; }
+        .status-none { color: #d32f2f; font-weight: 400; opacity: 0.7; }
 
-        .card-white { 
-            background: white; 
-            padding: 20px; 
-            border-radius: 18px; 
-            box-shadow: var(--shadow); 
-        }
-
-        .input-box { 
-            width: 100%; 
-            padding: 14px; 
-            margin-bottom: 12px; 
-            border-radius: 10px; 
-            border: 1.5px solid #eee; 
-            font-family: 'Tajawal'; 
-            font-size: 1rem;
-            box-sizing: border-box; 
-        }
-
-        .btn-lux { 
-            background: var(--primary-mid); 
-            color: white; 
-            padding: 16px; 
-            width: 100%; 
-            border-radius: 12px; 
-            font-weight: 800; 
-            font-size: 1rem;
-            border: none;
-        }
-
-        .sidebar-footer-menu { 
-            color: #95a5a6; 
-            text-align: center; 
-            padding: 25px; 
-            font-size: 0.8rem; 
-            border-top: 1px solid rgba(255,255,255,0.05); 
-            margin-top: auto; 
-        }
-
-        /* إخفاء التبويبات غير النشطة */
         .section-content { display: none; animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* تعديلات لوحة التحكم للجوال */
-        .admin-table { width: 100%; font-size: 0.85rem; }
-        .admin-table th { background: var(--primary-dark); color: white; padding: 10px 5px; }
-        .admin-table td { padding: 8px 5px; border-bottom: 1px solid #eee; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     </style>
 
@@ -192,16 +191,16 @@
         </div>
 
         <div class="nav-grid">
-            <div class="menu-item" onclick="openSection('info')"><i class="fas fa-bullseye"></i><span>عن المبادرة</span></div>
+            <div class="menu-item" onclick="openSection('info')"><i class="fas fa-file-invoice"></i><span>عن المبادرة</span></div>
             <div class="menu-item" onclick="openSection('texts')"><i class="fas fa-book-open"></i><span>مكتبة النصوص</span></div>
-            <div class="menu-item" onclick="openSection('upload')"><i class="fas fa-video"></i><span>شارك الآن</span></div>
-            <div class="menu-item" onclick="openSection('honor')"><i class="fas fa-medal"></i><span>لوحة الشرف</span></div>
-            <div class="menu-item" style="grid-column: span 2;" onclick="openSection('admin')"><i class="fas fa-user-shield"></i><span>لوحة التحكم</span></div>
+            <div class="menu-item" onclick="openSection('upload')"><i class="fas fa-cloud-upload-alt"></i><span>شارك الآن</span></div>
+            <div class="menu-item" onclick="openSection('honor')"><i class="fas fa-trophy"></i><span>لوحة الشرف</span></div>
+            <div class="menu-item" style="grid-column: span 2;" onclick="openSection('admin')"><i class="fas fa-chart-line"></i><span>لوحة التحكم</span></div>
         </div>
 
-        <div class="sidebar-footer-menu">
-            فكرة وتنفيذ <strong>أ / علي محمد علي</strong> <br>
-            تحت إشراف <strong>أ / هشام الكحالي</strong>
+        <div class="footer-info">
+            فكرة وتنفيذ: <strong>أ / علي محمد علي</strong> <br>
+            تحت إشراف مدير المدرسة: <strong>الأستاذ / هشام الكحالي</strong>
         </div>
     </div>
 
@@ -209,78 +208,115 @@
         <button class="back-btn" onclick="backToMenu()"><i class="fas fa-chevron-right"></i> القائمة الرئيسية</button>
 
         <div class="section-content" id="infoSec">
-            <div class="section-title">عن المبادرة</div>
-            <div class="card-gold">
-                <h3 style="font-size: 1.1rem; border-bottom: 1px solid var(--accent-gold); padding-bottom: 8px;">• الأهداف:</h3>
-                <div class="icon-card"><i class="fas fa-check"></i><div><h4>خدمة المخرجات</h4><p>حفظ النصوص الأدبية المقررة.</p></div></div>
-                <div class="icon-card"><i class="fas fa-brain"></i><div><h4>إتقان الحفظ</h4><p>تنمية المهارات الذهنية للطلاب.</p></div></div>
-                
-                <h3 style="font-size: 1.1rem; border-bottom: 1px solid var(--accent-gold); padding-bottom: 8px; margin-top: 15px;">• الشروط:</h3>
-                <div class="icon-card"><i class="fas fa-user-tie"></i><div><h4>الزي المدرسي</h4><p>الالتزام بالدشداشة والمصر.</p></div></div>
-                <div class="icon-card"><i class="fas fa-volume-up"></i><div><h4>الجودة</h4><p>وضوح الصوت والصورة في التصوير.</p></div></div>
-            </div>
-        </div>
-
-        <div class="section-content" id="textsSec">
-            <div class="section-title">مكتبة النصوص</div>
-            <div class="card-white">
-                <p style="font-weight: 800; color: var(--primary-mid);">1. نص: أنت وأنا</p>
-                <div style="border-radius:12px; overflow:hidden; border:1px solid #ddd; margin-bottom: 15px;">
-                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/UTb133uqsNE" frameborder="0" allowfullscreen></iframe>
+            <div class="initiative-card">
+                <div class="info-group">
+                    <h3>أهداف المبادرة:</h3>
+                    <div class="info-item"><i class="fas fa-book"></i><p>خدمة المخرجات التعليمية (حفظ النصوص الأدبية المقررة).</p></div>
                 </div>
-                <p style="font-weight: 800; color: var(--primary-mid);">2. نص: السلحفاة والبطتان</p>
-                <div style="border-radius:12px; overflow:hidden; border:1px solid #ddd;">
-                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/VTzyAPEfv7A" frameborder="0" allowfullscreen></iframe>
+                <div class="info-group">
+                    <h3>آلية تنفيذ المبادرة:</h3>
+                    <div class="info-item"><i class="fas fa-list-ol"></i><p>يختار الطالب النص المقرر حفظه.</p></div>
+                    <div class="info-item"><i class="fas fa-exchange-alt"></i><p>يختار الطالب طريقة التسميع (شفوي أو كتابي).</p></div>
+                    <div class="info-item"><i class="fas fa-video"></i><p>في التسميع الشفوي، يرسل الطالب فيديو مصور يعرض حفظه.</p></div>
+                </div>
+                <div class="info-group">
+                    <h3>شروط المبادرة:</h3>
+                    <div class="info-item"><i class="fas fa-check-circle"></i><p>التمكن من حفظ النصوص.</p></div>
+                    <div class="info-item"><i class="fas fa-sort-amount-down"></i><p>الترتيب الصحيح لمقرر الحفظ.</p></div>
+                    <div class="info-item"><i class="fas fa-bullhorn"></i><p>مراعاة النطق الصحيح للألفاظ.</p></div>
+                    <div class="info-item"><i class="fas fa-film"></i><p>الفيديو أصلي (غير مونتاج) بدون تعديل برامج.</p></div>
+                    <div class="info-item"><i class="fas fa-user-tie"></i><p>الالتزام بالزي المدرسي الكامل أثناء التصوير.</p></div>
+                    <div class="info-item"><i class="fas fa-paper-plane"></i><p>يتم إرسال الفيديو لمعلم الصف.</p></div>
+                </div>
+                <div class="period-box">
+                    <i class="fas fa-calendar-alt"></i> فترة التنفيذ: <br>
+                    من 1 مارس 2026 إلى 15 مايو 2026 م
                 </div>
             </div>
         </div>
 
         <div class="section-content" id="uploadSec">
-            <div class="section-title">إرسال المشاركة</div>
+            <h2 style="text-align:center;">إرسال مشاركة جديدة</h2>
             <div class="card-white">
                 <div id="step1">
-                    <select id="cls" class="input-box" onchange="loadStudents()"><option value="">-- اختر الصف --</option><option value="7-1">سابع/1</option><option value="7-2">سابع/2</option><option value="7-3">سابع/3</option></select>
-                    <select id="stu" class="input-box"><option value="">اختر الاسم</option></select>
-                    <button class="btn-lux" onclick="toStep2()">بدء الرفع</button>
+                    <label>اختر الشعبة:</label>
+                    <select id="cls" class="input-box" onchange="loadStudents()">
+                        <option value="">-- اختر الصف --</option>
+                        <option value="7-1">سابع / 1</option>
+                        <option value="7-2">سابع / 2</option>
+                        <option value="7-3">سابع / 3</option>
+                    </select>
+                    <label>اسم الطالب:</label>
+                    <select id="stu" class="input-box"><option value="">اختر الشعبة أولاً</option></select>
+                    <button class="btn-lux" onclick="toStep2()">متابعة</button>
                 </div>
                 <div id="step2" style="display:none; text-align:center;">
-                    <div id="dispName" style="background:var(--gold-soft); padding:12px; border-radius:10px; font-weight:800; margin-bottom:15px; font-size: 0.9rem;"></div>
-                    <div style="display:flex; gap:8px;">
-                        <label class="btn-lux" style="background:#eee; color:#333; flex:1; font-size: 0.9rem;"><i class="fas fa-file"></i> ملف<input type="file" id="fIn" hidden accept="video/*" onchange="preview(this)"></label>
-                        <label class="btn-lux" style="background:#d32f2f; flex:1; font-size: 0.9rem;"><i class="fas fa-camera"></i> كاميرا<input type="file" id="cIn" hidden capture="user" accept="video/*" onchange="preview(this)"></label>
+                    <div id="dispName" style="background:var(--gold-soft); padding:15px; border-radius:15px; font-weight:900; margin-bottom:20px; border:1px solid var(--accent-gold);"></div>
+                    <div style="display:flex; gap:10px; margin-bottom:20px;">
+                        <label class="btn-lux" style="background:#eee; color:#333; flex:1;"><i class="fas fa-file"></i> ملف<input type="file" id="fIn" hidden accept="video/*" onchange="preview(this)"></label>
+                        <label class="btn-lux" style="background:#d32f2f; flex:1;"><i class="fas fa-camera"></i> كاميرا<input type="file" id="cIn" hidden capture="user" accept="video/*" onchange="preview(this)"></label>
                     </div>
-                    <div id="vPreBox" style="display:none; margin-top: 15px;">
-                        <video id="vPre" controls style="width:100%; border-radius:12px;"></video>
-                        <button class="btn-lux" id="upBtn" onclick="startUpload()" style="background:#28a745; margin-top: 10px;">إرسال الفيديو</button>
+                    <div id="vPreBox" style="display:none;">
+                        <video id="vPre" controls style="width:100%; border-radius:15px; margin-bottom:15px;"></video>
+                        <button class="btn-lux" id="upBtn" onclick="startUpload()" style="background:#28a745;">تأكيد الإرسال النهائي</button>
                     </div>
-                    <div id="pBar" style="display:none; background:#ddd; height:8px; border-radius:4px; margin-top:15px; overflow:hidden;"><div id="pFill" style="width:0%; height:100%; background:#28a745;"></div></div>
-                    <p id="upStatus" style="margin-top:8px; font-size: 0.85rem; font-weight: bold;"></p>
+                    <div id="pBar" style="display:none; background:#ddd; height:10px; border-radius:5px; overflow:hidden;"><div id="pFill" style="width:0%; height:100%; background:#28a745;"></div></div>
+                    <p id="upStatus" style="margin-top:10px; font-weight:bold;"></p>
                 </div>
+            </div>
+        </div>
+
+        <div class="section-content" id="adminSec">
+            <h2 style="text-align:center;">لوحة متابعة المبادرة</h2>
+            <div id="aAuth" class="card-white">
+                <input type="password" id="pass" class="input-box" placeholder="كلمة المرور">
+                <button class="btn-lux" onclick="checkA()">دخول المسؤول</button>
+            </div>
+            <div id="aDash" style="display:none;">
+                <div class="stat-grid">
+                    <div class="stat-card"><h4>إجمالي الطلاب</h4><div id="tStu">78</div></div>
+                    <div class="stat-card"><h4>المشاركات</h4><div id="tSent">0</div></div>
+                    <div class="stat-card"><h4>النسبة العامة</h4><div id="tPerc">0%</div></div>
+                </div>
+                <div class="card-white">
+                    <h3 style="margin-top:0; font-size:1rem; color:var(--primary-mid);">متابعة تسليم الطلاب:</h3>
+                    <select id="adminClsFilter" class="input-box" onchange="updateStats()">
+                        <option value="all">كل الصفوف (إحصائية عامة)</option>
+                        <option value="7-1">سابع / 1 (تفصيلي)</option>
+                        <option value="7-2">سابع / 2 (تفصيلي)</option>
+                        <option value="7-3">سابع / 3 (تفصيلي)</option>
+                    </select>
+                    <div id="adminTableBox" style="max-height: 400px; overflow-y: auto;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-content" id="textsSec">
+            <h2 style="text-align:center;">مكتبة النصوص</h2>
+            <div class="card-white" style="margin-bottom: 20px;">
+                <p><strong>1. نص: أنت وأنا</strong></p>
+                <iframe width="100%" height="250" src="https://www.youtube.com/embed/UTb133uqsNE" frameborder="0" style="border-radius:15px;"></iframe>
+            </div>
+            <div class="card-white">
+                <p><strong>2. نص: السلحفاة والبطتان</strong></p>
+                <iframe width="100%" height="250" src="https://www.youtube.com/embed/VTzyAPEfv7A" frameborder="0" style="border-radius:15px;"></iframe>
             </div>
         </div>
 
         <div class="section-content" id="honorSec">
-            <div class="section-title">لوحة الشرف</div>
-            <div id="hList" style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px;"></div>
-        </div>
-
-        <div class="section-content" id="adminSec">
-            <div class="section-title">الإدارة</div>
-            <div id="aAuth" class="card-white">
-                <input type="password" id="pass" class="input-box" placeholder="كلمة المرور">
-                <button class="btn-lux" onclick="checkA()">دخول</button>
-            </div>
-            <div id="aDash" style="display:none;">
-                <div class="card-white" style="overflow-x: auto; padding: 10px;">
-                    <div id="statBox"></div>
+            <h2 style="text-align:center; color: var(--primary-dark);">لوحة شرف فرسان اللغة العربية</h2>
+            <div id="hList" style="display:grid; grid-template-columns: repeat(2, 1fr); gap:15px;">
                 </div>
-            </div>
         </div>
     </div>
 
 <script>
-    // تهيئة Firebase والبيانات
-    const names = { "7-1": ["احمد امجد احمد أحمد نجاد", "..."], "7-2": ["..."], "7-3": ["..."] }; // القائمة كاملة كما في الكود السابق
+    const names = {
+        "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت فريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعفيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن مسلم نفل ربعات الكثيري", "عامر بن محمد بن مسلم بخيت المسهلي", "عبدالله بن سالم بن سهيل sليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "فريح بن عبدالله بن fريح احمد مسن", "مجتبى عيسى محمد", "مسلم بن محمد بن عوض خادم الوهيبي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن بيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"],
+        "7-2": ["ابراهيم محمد سالم السطري", "العباس بن مبخوت بن سالم مسن بيت كثير", "المنذر بن فواز بن سليمان عبدالله الهاشمي", "امير بن ناصر بن عبدالرحمن عبدالله البلوشي", "حسين سلامه حسين علي شليل", "خالد بن سالم بن علي عبدالله العلوي", "خالد بن محمد بن سهيل مطر جداد", "خالد بن مسلم بن أحمد جداد", "رويزم بن مسلم بن بخيت رويزم صندل المحرمي", "سالم بن مبارك بن سهيل محمد الراشدي", "سعد بن محمد بن سعد حفيظ خوار", "سعود بن عبدالله بن بخيت زايد مسن", "سعيد بن عبدالله بن سالم احمد جداد", "سعيد بن مسلم بن عبدالله سعيد جداد", "سلطان بن مسلم بن سالم صالح جداد", "عبدالله بن عارف بن سالم جداد", "علي بن سعيد بن علي خوار", "عمر فؤاد فهمي محمد فؤاد", "فهد بن غانم بن سالم جداد", "محسن معتصم محمد الامام", "محمد بن سالم بن مبخوت محمد الراشدي", "مسلم بن سالم بن سهيل الراشدي", "مصطفى محمود كريم ابراهيم احمد", "معاذ احمد سميح علي سيد", "منيف بن سعيد بن محمد سالم جداد", "هادف بن سعيد بن هادف حسن شحري خوار", "وائل بن حمود بن سالم سعيد الوائلي"],
+        "7-3": ["أحمد بن نائف بن عبدالله محمد جداد", "الطلح بن سالم بن حسن علي خوار", "بخيت بن مسلم سالم مبخوت الراشدي", "بدر بن عامر بن مسلم الرحابه جداد", "حثيث بن سلطان بن محمد سهيل مسن", "حمد بن محمد بن عبدالله محمد جداد الكثيري", "سالم بن احمد بن سالم جداد", "سعيد بن مبروك بن سالم عامر المسهلي", "سهيل بن عبدالله بن سهيل حافظ خوار", "عبد الله أمير عبدالله نصر", "عبدالله بن محمد بن علي مهوي العامري", "علي بن ثاني بن علي سالم جداد بيت كثير", "فارس زياد محمد ابو رواع", "مبارك بن سعيد بن سالم خويتم مسن", "محسن بن عقيل بن سالم سعد خوار", "محمد بن بخيت بن فرج السنح شهوان المهري", "محمد بن علي بن بخيت محمد الراشدي", "محمد بن غانم بن الرضه سلاوم جداد", "محمد بن مسلم بن محمد مسلم جداد", "محمد بن ناصر بن عبدالله جداد", "محمد بن هيثم بن سالم فائل جداد الكثيري", "مسلم بن حسن بن هادف حسن شحري خوار", "معاذ فؤاد الحنيش الاحمد", "ناصر بن علي بن ناصر سهيل جداد", "نور الدين محسن العلي", "هيثم بن محمد بن سالم فائل جداد"]
+    };
+
     firebase.initializeApp({ databaseURL: "https://ahfaz-w-aktob-default-rtdb.firebaseio.com/" });
     const db = firebase.database();
 
@@ -298,34 +334,126 @@
         document.getElementById('contentArea').style.display = 'none';
     }
 
-    // نفس دوال الرفع والبيانات من الكود السابق تعمل هنا بسلاسة
     function loadStudents() {
         const c = document.getElementById('cls').value;
         const s = document.getElementById('stu');
-        s.innerHTML = '<option value="">اختر الاسم</option>';
+        s.innerHTML = '<option value="">-- اختر الاسم --</option>';
         if(names[c]) names[c].forEach(n => s.add(new Option(n, n)));
     }
-    
+
     function toStep2() {
-        const name = document.getElementById('stu').value;
-        if(!name) return alert("اختر الاسم أولاً");
+        const n = document.getElementById('stu').value;
+        if(!n) return alert("اختر الاسم");
         document.getElementById('step1').style.display = 'none';
         document.getElementById('step2').style.display = 'block';
-        document.getElementById('dispName').innerText = "المشارك: " + name;
+        document.getElementById('dispName').innerText = "المشارك: " + n;
     }
 
+    let selectedFile;
+    function preview(input) {
+        if(input.files && input.files[0]) {
+            selectedFile = input.files[0];
+            document.getElementById('vPre').src = URL.createObjectURL(selectedFile);
+            document.getElementById('vPreBox').style.display = 'block';
+        }
+    }
+
+    function startUpload() {
+        const btn = document.getElementById('upBtn');
+        const fill = document.getElementById('pFill');
+        const stat = document.getElementById('upStatus');
+        btn.disabled = true;
+        document.getElementById('pBar').style.display = 'block';
+
+        const fd = new FormData();
+        fd.append('file', selectedFile);
+        fd.append('upload_preset', "Ahfaz-W-Aktob");
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', `https://api.cloudinary.com/v1_1/duhzhaxxc/upload`, true);
+        xhr.upload.onprogress = (e) => {
+            const p = Math.round((e.loaded / e.total) * 100);
+            fill.style.width = p + '%';
+            stat.innerText = `جاري الرفع... ${p}%`;
+        };
+        xhr.onload = () => {
+            if(xhr.status === 200) {
+                const res = JSON.parse(xhr.responseText);
+                db.ref('submissions/' + document.getElementById('cls').value).push({
+                    student: document.getElementById('stu').value, video: res.secure_url, date: new Date().toLocaleDateString()
+                }).then(() => { stat.innerHTML = "✅ تم الإرسال بنجاح!"; stat.style.color = "green"; });
+            }
+        };
+        xhr.send(fd);
+    }
+
+    // تعديل لوحة الشرف لتكون احترافية
     function loadHonor() {
         db.ref('submissions').on('value', snap => {
-            const data = snap.val() || {}; let list = [];
+            const data = snap.val() || {}; 
+            let list = [];
             Object.values(data).forEach(c => Object.values(c).forEach(s => list.push(s.student)));
-            let h = ""; [...new Set(list)].forEach(n => {
-                h += `<div style="background:white; padding:12px; border-radius:12px; text-align:center; font-size:0.8rem; box-shadow:0 2px 5px rgba(0,0,0,0.05); border-bottom:3px solid var(--accent-gold); font-weight:800;">${n}</div>`;
+            
+            let h = ""; 
+            [...new Set(list)].forEach(n => {
+                h += `
+                <div class="honor-card">
+                    <i class="fas fa-trophy badge"></i>
+                    <div class="name">${n}</div>
+                    <div class="rank"><i class="fas fa-star"></i> فارس الحفظ</div>
+                </div>`;
             });
-            document.getElementById('hList').innerHTML = h || "بانتظار الفرسان...";
+            document.getElementById('hList').innerHTML = h || `<p style="grid-column: span 2; text-align:center;">بانتظار الفرسان الأوائل...</p>`;
         });
     }
 
-    // بقية الدوال البرمجية (preview, upload, checkA) تبقى كما هي من النسخة السابقة.
+    function checkA() {
+        if(document.getElementById('pass').value === "1234") {
+            document.getElementById('aAuth').style.display = 'none';
+            document.getElementById('aDash').style.display = 'block';
+            updateStats();
+        } else alert("خطأ!");
+    }
+
+    function updateStats() {
+        db.ref('submissions').on('value', snap => {
+            const data = snap.val() || {};
+            const filter = document.getElementById('adminClsFilter').value;
+            let totalSent = 0;
+            let h = "";
+
+            if (filter === 'all') {
+                h = `<table class="admin-table"><thead><tr><th>الصف</th><th>الطلاب</th><th>المشاركون</th><th>النسبة</th></tr></thead><tbody>`;
+                ["7-1", "7-2", "7-3"].forEach(cid => {
+                    const tot = names[cid].length;
+                    const sent = data[cid] ? Object.keys(data[cid]).length : 0;
+                    totalSent += sent;
+                    h += `<tr><td>${cid}</td><td>${tot}</td><td>${sent}</td><td>${Math.round((sent/tot)*100)}%</td></tr>`;
+                });
+                h += "</tbody></table>";
+            } else {
+                const sentList = data[filter] ? Object.values(data[filter]).map(s => s.student) : [];
+                h = `<table class="admin-table"><thead><tr><th>م</th><th>اسم الطالب</th><th>الحالة</th></tr></thead><tbody>`;
+                names[filter].forEach((name, idx) => {
+                    const hasSent = sentList.includes(name);
+                    h += `<tr>
+                            <td>${idx + 1}</td>
+                            <td style="text-align:right; padding-right:10px;">${name}</td>
+                            <td class="${hasSent ? 'status-sent' : 'status-none'}">${hasSent ? '✅ تم الإرسال' : '❌ لم يرسل'}</td>
+                          </tr>`;
+                });
+                h += "</tbody></table>";
+                
+                ["7-1", "7-2", "7-3"].forEach(cid => {
+                    totalSent += data[cid] ? Object.keys(data[cid]).length : 0;
+                });
+            }
+            
+            document.getElementById('tSent').innerText = totalSent;
+            document.getElementById('tPerc').innerText = Math.round((totalSent/78)*100) + "%";
+            document.getElementById('adminTableBox').innerHTML = h;
+        });
+    }
 </script>
 </body>
 </html>
