@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تطبيق مبادرة أحفظ وأكتب</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
         
@@ -32,7 +36,7 @@
         .menu-item span { font-weight: 700; font-size: 1.1rem; }
         .menu-item:hover { background: var(--accent-gold); color: var(--primary-dark); }
 
-        .footer-info { margin-top: auto; text-align: center; padding: 30px; color: #ccc; background: rgba(0,0,0,0.2); width: 100%; border-top: 2px solid var(--accent-gold); font-size: 1rem; }
+        .footer-info { margin-top: auto; text-align: center; padding: 30 Arabicpx; color: #ccc; background: rgba(0,0,0,0.2); width: 100%; border-top: 2px solid var(--accent-gold); font-size: 1rem; }
         .footer-info strong { color: var(--accent-gold); font-weight: 900; }
 
         #contentArea { display: none; padding: 15px; min-height: 100vh; }
@@ -72,15 +76,12 @@
         .section-content { display: none; animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
-
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 </head>
 <body>
 
     <div id="mainMenu">
         <div class="menu-header">
-            <img src="https://raw.githubusercontent.com/aliali1981/Ahfaz-W-Aktob/main/logo.png" alt="Logo">
+            <img src="https://raw.githubusercontent.com/aliali1981/Ahfaz-W-Aktob/main/logo.png" alt="Logo" onerror="this.src='https://via.placeholder.com/90?text=Logo'">
             <h1>مبادرة أحفظ وأكتب</h1>
         </div>
 
@@ -228,8 +229,15 @@
         "7-3": ["أحمد بن نائف بن عبدالله محمد جداد", "الطلح بن سالم بن حسن علي خوار", "بخيت بن مسلم سالم مبخوت الراشدي", "بدر بن عامر بن مسلم الرحابه جداد", "حثيث بن سلطان بن محمد سهيل مسن", "حمد بن محمد بن عبدالله محمد جداد الكثيري", "سالم بن احمد بن سالم جداد", "سعيد بن مبروك بن سالم عامر المسهلي", "سهيل بن عبدالله بن سهيل حافظ خوار", "عبد الله أمير عبدالله نصر", "عبدالله بن محمد بن علي مهوي العامري", "علي بن ثاني بن علي سالم جداد بيت كثير", "فارس زياد محمد ابو رواع", "مبارك بن سعيد بن سالم خويتم مسن", "محسن بن عقيل بن سالم سعد خوار", "محمد بن بخيت بن فرج السنح شهوان المهري", "محمد بن علي بن بخيت محمد الراشدي", "محمد بن غانم بن الرضه سلاوم جداد", "محمد بن مسلم بن محمد مسلم جداد", "محمد بن ناصر بن عبدالله جداد", "محمد بن هيثم بن سالم فائل جداد الكثيري", "مسلم بن حسن بن هادف حسن شحري خوار", "معاذ فؤاد الحنيش الاحمد", "ناصر بن علي بن ناصر سهيل جداد", "نور الدين محسن العلي", "هيثم بن محمد بن سالم فائل جداد"]
     };
 
-    firebase.initializeApp({ databaseURL: "https://ahfaz-w-aktob-default-rtdb.firebaseio.com/" });
-    const db = firebase.database();
+    // تهيئة Firebase بطريقة v8 المستقرة
+    const firebaseConfig = { databaseURL: "https://ahfaz-w-aktob-default-rtdb.firebaseio.com/" };
+    
+    try {
+        firebase.initializeApp(firebaseConfig);
+        var db = firebase.database();
+    } catch (e) {
+        console.error("Firebase Auth Error: ", e);
+    }
 
     function openSection(id) {
         document.getElementById('mainMenu').style.display = 'none';
@@ -297,6 +305,9 @@
                     stat.style.color = "green";
                     setTimeout(() => location.reload(), 2000);
                 });
+            } else {
+                alert("حدث خطأ في الرفع، يرجى المحاولة لاحقاً");
+                btn.disabled = false;
             }
         };
         xhr.send(fd);
@@ -346,7 +357,6 @@
             let totalSent = 0;
             let h = "";
 
-            // حساب الإحصائيات العامة للمدرسة دائماً
             ["7-1", "7-2", "7-3"].forEach(cid => {
                 totalSent += data[cid] ? Object.keys(data[cid]).length : 0;
             });
@@ -363,7 +373,6 @@
                 h += "</tbody></table>";
             } else {
                 const subs = data[filter] || {};
-                const sentList = Object.values(subs).map(s => s.student);
                 h = `<table class="admin-table"><thead><tr><th>الطالب</th><th>الحالة</th><th>تحكم</th></tr></thead><tbody>`;
                 names[filter].forEach(name => {
                     const subKey = Object.keys(subs).find(k => subs[k].student === name);
