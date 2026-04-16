@@ -2,10 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>تطبيق مبادرة أحفظ وأكتب</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
         
@@ -21,6 +20,7 @@
 
         body { font-family: 'Tajawal', sans-serif; margin: 0; background: var(--bg-body); color: #333; line-height: 1.6; overflow-x: hidden; }
 
+        /* القائمة تظهر بشكل افتراضي لضمان عدم وجود شاشة بيضاء */
         #mainMenu { width: 100%; min-height: 100vh; background: var(--primary-dark); display: flex; flex-direction: column; align-items: center; padding: 40px 0; }
         .menu-header { text-align: center; margin-bottom: 30px; }
         .menu-header img { width: 90px; background: #fff; border-radius: 20px; padding: 5px; margin-bottom: 15px; border: 2px solid var(--accent-gold); }
@@ -72,9 +72,6 @@
         .section-content { display: none; animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
-
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 </head>
 <body>
 
@@ -148,10 +145,10 @@
                 <div id="dispName" style="background:var(--gold-soft); padding:15px; border-radius:15px; font-weight:900; margin-bottom:20px; border:1px solid var(--accent-gold); text-align:center;"></div>
                 <div style="display:flex; gap:10px; margin-bottom:20px;">
                     <label class="btn-lux" style="background:#eee; color:#333; flex:1; cursor:pointer;"><i class="fas fa-file"></i> اختر ملف<input type="file" id="fIn" hidden accept="video/*" onchange="preview(this)"></label>
-                    <label class="btn-lux" style="background:#d32f2f; flex:1; cursor:pointer;"><i class="fas fa-camera"></i> سجل الفيديو بالكاميرا<input type="file" id="cIn" hidden capture="user" accept="video/*" onchange="preview(this)"></label>
+                    <label class="btn-lux" style="background:#d32f2f; flex:1; cursor:pointer;"><i class="fas fa-camera"></i> سجل<input type="file" id="cIn" hidden capture="user" accept="video/*" onchange="preview(this)"></label>
                 </div>
                 <div id="vPreBox" style="display:none; text-align:center;">
-                    <p style="font-weight:bold;">معاينة الفيديو قبل الإرسال:</p>
+                    <p style="font-weight:bold;">معاينة الفيديو:</p>
                     <video id="vPre" controls style="width:100%; border-radius:15px; margin-bottom:15px;"></video>
                     <button class="btn-lux" id="upBtn" onclick="startUpload()" style="background:#28a745;">تأكيد الإرسال النهائي</button>
                 </div>
@@ -183,9 +180,9 @@
                     <div class="stat-card"><h4>النسبة العامة</h4><div id="tPerc">0%</div></div>
                 </div>
                 <div class="card-white">
-                    <label>اختر الصف للمتابعة التفصيلية:</label>
+                    <label>اختر الصف للمتابعة:</label>
                     <select id="adminClsFilter" class="input-box" onchange="updateStats()">
-                        <option value="all">إحصائية كل الصفوف</option>
+                        <option value="all">كل الصفوف</option>
                         <option value="7-1">السابع 1</option>
                         <option value="7-2">السابع 2</option>
                         <option value="7-3">السابع 3</option>
@@ -221,183 +218,193 @@
         </div>
     </div>
 
-<script>
-    const names = {
-        "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت فريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعفيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن مسلم نفل ربعات الكثيري", "عامر بن محمد بن مسلم بخيت المسهلي", "عبدالله بن سالم بن سهيل sليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "فريح بن عبدالله بن fريح احمد مسن", "مجتبى عيسى محمد", "مسلم بن محمد بن عوض خادم الوهيبي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن بيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"],
-        "7-2": ["ابراهيم محمد سالم السطري", "العباس بن مبخوت بن سالم مسن بيت كثير", "المنذر بن فواز بن سليمان عبدالله الهاشمي", "امير بن ناصر بن عبدالرحمن عبدالله البلوشي", "حسين سلامه حسين علي شليل", "خالد بن سالم بن علي عبدالله العلوي", "خالد بن محمد بن سهيل مطر جداد", "خالد بن مسلم بن أحمد جداد", "رويزم بن مسلم بن بخيت رويزم صندل المحرمي", "سالم بن مبارك بن سهيل محمد الراشدي", "سعد بن محمد بن سعد حفيظ خوار", "سعود بن عبدالله بن بخيت زايد مسن", "سعيد بن عبدالله بن سالم احمد جداد", "سعيد بن مسلم بن عبدالله سعيد جداد", "سلطان بن مسلم بن سالم صالح جداد", "عبدالله بن عارف بن سالم جداد", "علي بن سعيد بن علي خوار", "عمر فؤاد فهمي محمد فؤاد", "فهد بن غانم بن سالم جداد", "محسن معتصم محمد الامام", "محمد بن سالم بن مبخوت محمد الراشدي", "مسلم بن سالم بن سهيل الراشدي", "مصطفى محمود كريم ابراهيم احمد", "معاذ احمد سميح علي سيد", "منيف بن سعيد بن محمد سالم جداد", "هادف بن سعيد بن هادف حسن شحري خوار", "وائل بن حمود بن سالم سعيد الوائلي"],
-        "7-3": ["أحمد بن نائف بن عبدالله محمد جداد", "الطلح بن سالم بن حسن علي خوار", "بخيت بن مسلم سالم مبخوت الراشدي", "بدر بن عامر بن مسلم الرحابه جداد", "حثيث بن سلطان بن محمد سهيل مسن", "حمد بن محمد بن عبدالله محمد جداد الكثيري", "سالم بن احمد بن سالم جداد", "سعيد بن مبروك بن سالم عامر المسهلي", "سهيل بن عبدالله بن سهيل حافظ خوار", "عبد الله أمير عبدالله نصر", "عبدالله بن محمد بن علي مهوي العامري", "علي بن ثاني بن علي سالم جداد بيت كثير", "فارس زياد محمد ابو رواع", "مبارك بن سعيد بن سالم خويتم مسن", "محسن بن عقيل بن سالم سعد خوار", "محمد بن بخيت بن فرج السنح شهوان المهري", "محمد بن علي بن بخيت محمد الراشدي", "محمد بن غانم بن الرضه سلاوم جداد", "محمد بن مسلم بن محمد مسلم جداد", "محمد بن ناصر بن عبدالله جداد", "محمد بن هيثم بن سالم فائل جداد الكثيري", "مسلم بن حسن بن هادف حسن شحري خوار", "معاذ فؤاد الحنيش الاحمد", "ناصر بن علي بن ناصر سهيل جداد", "نور الدين محسن العلي", "هيثم بن محمد بن سالم فائل جداد"]
-    };
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 
-    firebase.initializeApp({ databaseURL: "https://ahfaz-w-aktob-default-rtdb.firebaseio.com/" });
-    const db = firebase.database();
-
-    function openSection(id) {
-        document.getElementById('mainMenu').style.display = 'none';
-        document.getElementById('contentArea').style.display = 'block';
-        document.querySelectorAll('.section-content').forEach(s => s.style.display = 'none');
-        document.getElementById(id + 'Sec').style.display = 'block';
-        if(id === 'honor') loadHonor();
-        if(id === 'gallery') loadGallery();
-        window.scrollTo(0,0);
-    }
-
-    function backToMenu() {
-        document.getElementById('mainMenu').style.display = 'flex';
-        document.getElementById('contentArea').style.display = 'none';
-    }
-
-    function loadStudents() {
-        const c = document.getElementById('cls').value;
-        const s = document.getElementById('stu');
-        s.innerHTML = '<option value="">-- اختر الاسم --</option>';
-        if(names[c]) names[c].forEach(n => s.add(new Option(n, n)));
-    }
-
-    function toStep2() {
-        if(!document.getElementById('stu').value) return alert("الرجاء اختيار الاسم");
-        document.getElementById('uploadStep1').style.display = 'none';
-        document.getElementById('uploadStep2').style.display = 'block';
-        document.getElementById('dispName').innerText = "المشارك: " + document.getElementById('stu').value;
-    }
-
-    let selectedFile;
-    function preview(input) {
-        if(input.files && input.files[0]) {
-            selectedFile = input.files[0];
-            document.getElementById('vPre').src = URL.createObjectURL(selectedFile);
-            document.getElementById('vPreBox').style.display = 'block';
-        }
-    }
-
-    function startUpload() {
-        const btn = document.getElementById('upBtn');
-        const fill = document.getElementById('pFill');
-        const stat = document.getElementById('upStatus');
-        btn.disabled = true;
-        document.getElementById('pBar').style.display = 'block';
-
-        const fd = new FormData();
-        fd.append('file', selectedFile);
-        fd.append('upload_preset', "Ahfaz-W-Aktob");
-
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', `https://api.cloudinary.com/v1_1/duhzhaxxc/upload`, true);
-        xhr.upload.onprogress = (e) => {
-            const p = Math.round((e.loaded / e.total) * 100);
-            fill.style.width = p + '%';
-            stat.innerText = `جاري الرفع... ${p}%`;
+    <script>
+        // مصفوفة الطلاب
+        const names = {
+            "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت فريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعفيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن مسلم نفل ربعات الكثيري", "عامر بن محمد بن مسلم بخيت المسهلي", "عبدالله بن سالم بن سهيل sليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "فريح بن عبدالله بن fريح احمد مسن", "مجتبى عيسى محمد", "مسلم بن محمد بن عوض خادم الوهيبي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن بيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"],
+            "7-2": ["ابراهيم محمد سالم السطري", "العباس بن مبخوت بن سالم مسن بيت كثير", "المنذر بن فواز بن سليمان عبدالله الهاشمي", "امير بن ناصر بن عبدالرحمن عبدالله البلوشي", "حسين سلامه حسين علي شليل", "خالد بن سالم بن علي عبدالله العلوي", "خالد بن محمد بن سهيل مطر جداد", "خالد بن مسلم بن أحمد جداد", "رويزم بن مسلم بن بخيت رويزم صندل المحرمي", "سالم بن مبارك بن سهيل محمد الراشدي", "سعد بن محمد بن سعد حفيظ خوار", "سعود بن عبدالله بن بخيت زايد مسن", "سعيد بن عبدالله بن سالم احمد جداد", "سعيد بن مسلم بن عبدالله سعيد جداد", "سلطان بن مسلم بن سالم صالح جداد", "عبدالله بن عارف بن سالم جداد", "علي بن سعيد بن علي خوار", "عمر فؤاد فهمي محمد فؤاد", "فهد بن غانم بن سالم جداد", "محسن معتصم محمد الامام", "محمد بن سالم بن مبخوت محمد الراشدي", "مسلم بن سالم بن سهيل الراشدي", "مصطفى محمود كريم ابراهيم احمد", "معاذ احمد سميح علي سيد", "منيف بن سعيد بن محمد سالم جداد", "هادف بن سعيد بن هادف حسن شحري خوار", "وائل بن حمود بن سالم سعيد الوائلي"],
+            "7-3": ["أحمد بن نائف بن عبدالله محمد جداد", "الطلح بن سالم بن حسن علي خوار", "بخيت بن مسلم سالم مبخوت الراشدي", "بدر بن عامر بن مسلم الرحابه جداد", "حثيث بن سلطان بن محمد سهيل مسن", "حمد بن محمد بن عبدالله محمد جداد الكثيري", "سالم بن احمد بن سالم جداد", "سعيد بن مبروك بن سالم عامر المسهلي", "سهيل بن عبدالله بن سهيل حافظ خوار", "عبد الله أمير عبدالله نصر", "عبدالله بن محمد بن علي مهوي العامري", "علي بن ثاني بن علي سالم جداد بيت كثير", "فارس زياد محمد ابو رواع", "مبارك بن سعيد بن سالم خويتم مسن", "محسن بن عقيل بن سالم سعد خوار", "محمد بن بخيت بن فرج السنح شهوان المهري", "محمد بن علي بن بخيت محمد الراشدي", "محمد بن غانم بن الرضه سلاوم جداد", "محمد بن مسلم بن محمد مسلم جداد", "محمد بن ناصر بن عبدالله جداد", "محمد بن هيثم بن سالم فائل جداد الكثيري", "مسلم بن حسن بن هادف حسن شحري خوار", "معاذ فؤاد الحنيش الاحمد", "ناصر بن علي بن ناصر سهيل جداد", "نور الدين محسن العلي", "هيثم بن محمد بن سالم فائل جداد"]
         };
-        xhr.onload = () => {
-            if(xhr.status === 200) {
-                const res = JSON.parse(xhr.responseText);
-                db.ref('submissions/' + document.getElementById('cls').value).push({
-                    student: document.getElementById('stu').value, video: res.secure_url, medal: "", featured: false
-                }).then(() => { 
-                    stat.innerHTML = "✅ تم الإرسال بنجاح!"; 
-                    stat.style.color = "green";
-                    setTimeout(() => location.reload(), 2000);
-                });
-            }
-        };
-        xhr.send(fd);
-    }
 
-    function loadHonor() {
-        db.ref('submissions').on('value', snap => {
-            const data = snap.val() || {}; let h = "";
-            Object.values(data).forEach(c => Object.values(c).forEach(s => {
-                h += `<div class="honor-card">
-                        <i class="fas fa-trophy badge"></i>
-                        <div class="name">${s.student}</div>
-                        ${s.medal ? `<div class="medal-tag"><i class="fas fa-award"></i> ${s.medal}</div>` : ''}
-                      </div>`;
-            }));
-            document.getElementById('hList').innerHTML = h || "بانتظار فرساننا...";
-        });
-    }
-
-    function loadGallery() {
-        db.ref('submissions').on('value', snap => {
-            const data = snap.val() || {}; let h = "";
-            Object.values(data).forEach(c => Object.values(c).forEach(s => {
-                if(s.featured) {
-                    h += `<div class="card-white" style="text-align:center;">
-                            <h3>الفارس: ${s.student}</h3>
-                            <video controls style="width:100%; border-radius:15px;"><source src="${s.video}"></video>
-                          </div>`;
+        var db;
+        // تهيئة Firebase بأمان
+        window.onload = function() {
+            try {
+                if (typeof firebase !== 'undefined') {
+                    firebase.initializeApp({ databaseURL: "https://ahfaz-w-aktob-default-rtdb.firebaseio.com/" });
+                    db = firebase.database();
                 }
-            }));
-            document.getElementById('featuredGallery').innerHTML = h || "<p style='text-align:center;'>المعرض سيحتوي على أفضل المشاركات قريباً</p>";
-        });
-    }
+            } catch (e) { console.error("Firebase init error", e); }
+        };
 
-    function checkA() {
-        if(document.getElementById('pass').value === "1234") {
-            document.getElementById('aAuth').style.display = 'none';
-            document.getElementById('aDash').style.display = 'block';
-            updateStats();
-        } else alert("خطأ في كلمة المرور!");
-    }
+        function openSection(id) {
+            document.getElementById('mainMenu').style.display = 'none';
+            document.getElementById('contentArea').style.display = 'block';
+            var secs = document.getElementsByClassName('section-content');
+            for(var i=0; i<secs.length; i++) secs[i].style.display = 'none';
+            document.getElementById(id + 'Sec').style.display = 'block';
+            if(id === 'honor') loadHonor();
+            if(id === 'gallery') loadGallery();
+            window.scrollTo(0,0);
+        }
 
-    function updateStats() {
-        db.ref('submissions').on('value', snap => {
-            const data = snap.val() || {};
-            const filter = document.getElementById('adminClsFilter').value;
-            let totalSent = 0;
-            let h = "";
+        function backToMenu() {
+            document.getElementById('mainMenu').style.display = 'flex';
+            document.getElementById('contentArea').style.display = 'none';
+        }
 
-            // حساب الإحصائيات العامة للمدرسة دائماً
-            ["7-1", "7-2", "7-3"].forEach(cid => {
-                totalSent += data[cid] ? Object.keys(data[cid]).length : 0;
-            });
-            document.getElementById('tSent').innerText = totalSent;
-            document.getElementById('tPerc').innerText = Math.round((totalSent/78)*100) + "%";
+        function loadStudents() {
+            const c = document.getElementById('cls').value;
+            const s = document.getElementById('stu');
+            s.innerHTML = '<option value="">-- اختر الاسم --</option>';
+            if(names[c]) names[c].forEach(n => s.add(new Option(n, n)));
+        }
 
-            if (filter === 'all') {
-                h = `<table class="admin-table"><thead><tr><th>الصف</th><th>الطلاب</th><th>المشاركون</th><th>النسبة</th></tr></thead><tbody>`;
-                ["7-1", "7-2", "7-3"].forEach(cid => {
-                    const tot = names[cid].length;
-                    const sent = data[cid] ? Object.keys(data[cid]).length : 0;
-                    h += `<tr><td>${cid}</td><td>${tot}</td><td>${sent}</td><td>${Math.round((sent/tot)*100)}%</td></tr>`;
-                });
-                h += "</tbody></table>";
-            } else {
-                const subs = data[filter] || {};
-                const sentList = Object.values(subs).map(s => s.student);
-                h = `<table class="admin-table"><thead><tr><th>الطالب</th><th>الحالة</th><th>تحكم</th></tr></thead><tbody>`;
-                names[filter].forEach(name => {
-                    const subKey = Object.keys(subs).find(k => subs[k].student === name);
-                    const hasSent = !!subKey;
-                    h += `<tr>
-                            <td style="text-align:right;">${name}</td>
-                            <td class="${hasSent ? 'status-sent' : 'status-none'}">${hasSent ? '✅ تم الإرسال' : '❌ لم يرسل بعد'}</td>
-                            <td>
-                                ${hasSent ? `
-                                    <button class="btn-sm" style="background:#c5a021" onclick="giveMedal('${filter}','${subKey}')">وسام</button>
-                                    <button class="btn-sm" style="background:#004d61" onclick="toggleFeatured('${filter}','${subKey}',${!subs[subKey].featured})">${subs[subKey].featured ? 'إخفاء' : 'تميز'}</button>
-                                    <button class="btn-sm" style="background:green" onclick="genCert('${name}')">شهادة</button>
-                                ` : '---'}
-                            </td>
-                          </tr>`;
-                });
-                h += "</tbody></table>";
+        function toStep2() {
+            if(!document.getElementById('stu').value) return alert("الرجاء اختيار الاسم");
+            document.getElementById('uploadStep1').style.display = 'none';
+            document.getElementById('uploadStep2').style.display = 'block';
+            document.getElementById('dispName').innerText = "المشارك: " + document.getElementById('stu').value;
+        }
+
+        let selectedFile;
+        function preview(input) {
+            if(input.files && input.files[0]) {
+                selectedFile = input.files[0];
+                document.getElementById('vPre').src = URL.createObjectURL(selectedFile);
+                document.getElementById('vPreBox').style.display = 'block';
             }
-            document.getElementById('adminTableBox').innerHTML = h;
-        });
-    }
+        }
 
-    function giveMedal(c, k) { const m = prompt("ادخل نوع الوسام (مثلاً: الحافظ المتقن أو البلبل الفصيح):"); if(m) db.ref(`submissions/${c}/${k}`).update({medal: m}); }
-    function toggleFeatured(c, k, v) { db.ref(`submissions/${c}/${k}`).update({featured: v}); }
-    function genCert(name) {
-        document.getElementById('certName').innerText = name;
-        const cert = document.getElementById('certTemplate');
-        html2canvas(cert).then(canvas => {
-            const link = document.createElement('a');
-            link.download = `شهادة_${name}.png`;
-            link.href = canvas.toDataURL();
-            link.click();
-        });
-    }
-</script>
+        function startUpload() {
+            if(!selectedFile) return;
+            const btn = document.getElementById('upBtn');
+            const fill = document.getElementById('pFill');
+            const stat = document.getElementById('upStatus');
+            btn.disabled = true;
+            document.getElementById('pBar').style.display = 'block';
+
+            const fd = new FormData();
+            fd.append('file', selectedFile);
+            fd.append('upload_preset', "Ahfaz-W-Aktob");
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', "https://api.cloudinary.com/v1_1/duhzhaxxc/upload", true);
+            xhr.upload.onprogress = (e) => {
+                const p = Math.round((e.loaded / e.total) * 100);
+                fill.style.width = p + '%';
+                stat.innerText = "جاري الرفع... " + p + "%";
+            };
+            xhr.onload = () => {
+                if(xhr.status === 200) {
+                    const res = JSON.parse(xhr.responseText);
+                    db.ref('submissions/' + document.getElementById('cls').value).push({
+                        student: document.getElementById('stu').value, video: res.secure_url, medal: "", featured: false
+                    }).then(() => { 
+                        stat.innerHTML = "✅ تم الإرسال بنجاح!"; 
+                        setTimeout(() => location.reload(), 2000);
+                    });
+                } else {
+                    alert("فشل الرفع، حاول مرة أخرى");
+                    btn.disabled = false;
+                }
+            };
+            xhr.send(fd);
+        }
+
+        function loadHonor() {
+            if(!db) return;
+            db.ref('submissions').on('value', snap => {
+                const data = snap.val() || {}; let h = "";
+                Object.values(data).forEach(c => Object.values(c).forEach(s => {
+                    h += `<div class="honor-card">
+                            <i class="fas fa-trophy badge"></i>
+                            <div class="name">${s.student}</div>
+                            ${s.medal ? `<div class="medal-tag"><i class="fas fa-award"></i> ${s.medal}</div>` : ''}
+                          </div>`;
+                }));
+                document.getElementById('hList').innerHTML = h || "بانتظار فرساننا...";
+            });
+        }
+
+        function loadGallery() {
+            if(!db) return;
+            db.ref('submissions').on('value', snap => {
+                const data = snap.val() || {}; let h = "";
+                Object.values(data).forEach(c => Object.values(c).forEach(s => {
+                    if(s.featured) {
+                        h += `<div class="card-white" style="text-align:center;">
+                                <h3>الفارس: ${s.student}</h3>
+                                <video controls style="width:100%; border-radius:15px;"><source src="${s.video}"></video>
+                              </div>`;
+                    }
+                }));
+                document.getElementById('featuredGallery').innerHTML = h || "<p style='text-align:center;'>المعرض سيحتوي على أفضل المشاركات قريباً</p>";
+            });
+        }
+
+        function checkA() {
+            if(document.getElementById('pass').value === "1234") {
+                document.getElementById('aAuth').style.display = 'none';
+                document.getElementById('aDash').style.display = 'block';
+                updateStats();
+            } else alert("خطأ في كلمة المرور!");
+        }
+
+        function updateStats() {
+            if(!db) return;
+            db.ref('submissions').on('value', snap => {
+                const data = snap.val() || {};
+                const filter = document.getElementById('adminClsFilter').value;
+                let totalSent = 0;
+                let h = "";
+                ["7-1", "7-2", "7-3"].forEach(cid => { totalSent += data[cid] ? Object.keys(data[cid]).length : 0; });
+                document.getElementById('tSent').innerText = totalSent;
+                document.getElementById('tPerc').innerText = Math.round((totalSent/78)*100) + "%";
+
+                if (filter === 'all') {
+                    h = `<table class="admin-table"><thead><tr><th>الصف</th><th>الطلاب</th><th>المشاركون</th><th>النسبة</th></tr></thead><tbody>`;
+                    ["7-1", "7-2", "7-3"].forEach(cid => {
+                        const tot = names[cid].length;
+                        const sent = data[cid] ? Object.keys(data[cid]).length : 0;
+                        h += `<tr><td>${cid}</td><td>${tot}</td><td>${sent}</td><td>${Math.round((sent/tot)*100)}%</td></tr>`;
+                    });
+                    h += "</tbody></table>";
+                } else {
+                    const subs = data[filter] || {};
+                    h = `<table class="admin-table"><thead><tr><th>الطالب</th><th>الحالة</th><th>تحكم</th></tr></thead><tbody>`;
+                    names[filter].forEach(name => {
+                        const subKey = Object.keys(subs).find(k => subs[k].student === name);
+                        const hasSent = !!subKey;
+                        h += `<tr>
+                                <td style="text-align:right;">${name}</td>
+                                <td class="${hasSent ? 'status-sent' : 'status-none'}">${hasSent ? '✅ تم' : '❌ لا'}</td>
+                                <td>
+                                    ${hasSent ? `<button class="btn-sm" style="background:#c5a021" onclick="giveMedal('${filter}','${subKey}')">وسام</button>
+                                    <button class="btn-sm" style="background:green" onclick="genCert('${name}')">شهادة</button>` : '---'}
+                                </td>
+                              </tr>`;
+                    });
+                    h += "</tbody></table>";
+                }
+                document.getElementById('adminTableBox').innerHTML = h;
+            });
+        }
+
+        function giveMedal(c, k) { const m = prompt("نوع الوسام:"); if(m) db.ref(`submissions/${c}/${k}`).update({medal: m}); }
+        function genCert(name) {
+            document.getElementById('certName').innerText = name;
+            html2canvas(document.getElementById('certTemplate')).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `شهادة_${name}.png`;
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+    </script>
 </body>
 </html>
