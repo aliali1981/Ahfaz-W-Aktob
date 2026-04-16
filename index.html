@@ -85,12 +85,12 @@
         </div>
 
         <div class="nav-grid">
-            <div class="menu-item" onclick="openSection('info')"><i class="fas fa-info-circle"></i><span>عن المبادرة</span></div>
+            <div class="menu-item" onclick="openSection('info')"><i class="fas fa-file-invoice"></i><span>عن المبادرة</span></div>
             <div class="menu-item" onclick="openSection('texts')"><i class="fas fa-book-open"></i><span>مكتبة النصوص</span></div>
-            <div class="menu-item" onclick="openSection('upload')"><i class="fas fa-microphone-alt"></i><span>تسميع الطالب</span></div>
+            <div class="menu-item" onclick="openSection('upload')"><i class="fas fa-cloud-upload-alt"></i><span>شارك الآن</span></div>
             <div class="menu-item" onclick="openSection('honor')"><i class="fas fa-trophy"></i><span>لوحة الشرف</span></div>
-            <div class="menu-item" onclick="openSection('gallery')"><i class="fas fa-star"></i><span>المشاركات المميزة</span></div>
-            <div class="menu-item" onclick="openSection('admin')"><i class="fas fa-user-shield"></i><span>لوحة التحكم</span></div>
+            <div class="menu-item" onclick="openSection('gallery')"><i class="fas fa-play-circle"></i><span>معرض التميز</span></div>
+            <div class="menu-item" onclick="openSection('admin')"><i class="fas fa-chart-line"></i><span>لوحة التحكم</span></div>
         </div>
 
         <div class="footer-info">
@@ -106,13 +106,22 @@
             <div class="initiative-card">
                 <div class="info-group">
                     <h3>أهداف المبادرة:</h3>
-                    <div class="info-item"><i class="fas fa-check"></i><p>إتقان مهارة حفظ النصوص الأدبية المقررة.</p></div>
-                    <div class="info-item"><i class="fas fa-check"></i><p>تنمية مهارات الإلقاء والثقة بالنفس.</p></div>
+                    <div class="info-item"><i class="fas fa-book"></i><p>خدمة المخرجات التعليمية (حفظ النصوص الأدبية المقررة).</p></div>
                 </div>
                 <div class="info-group">
-                    <h3>آلية التنفيذ:</h3>
-                    <div class="info-item"><i class="fas fa-video"></i><p>يسجل الطالب فيديو يظهر فيه مهارة الحفظ بوضوح.</p></div>
-                    <div class="info-item"><i class="fas fa-user-tie"></i><p>الالتزام بالزي المدرسي والمظهر اللائق.</p></div>
+                    <h3>آلية تنفيذ المبادرة:</h3>
+                    <div class="info-item"><i class="fas fa-list-ol"></i><p>يختار الطالب النص المقرر حفظه.</p></div>
+                    <div class="info-item"><i class="fas fa-exchange-alt"></i><p>يختار الطالب طريقة التسميع (شفوي أو كتابي).</p></div>
+                    <div class="info-item"><i class="fas fa-video"></i><p>في التسميع الشفوي، يرسل الطالب فيديو مصور يعرض حفظه.</p></div>
+                </div>
+                <div class="info-group">
+                    <h3>شروط المبادرة:</h3>
+                    <div class="info-item"><i class="fas fa-check-circle"></i><p>التمكن من حفظ النصوص.</p></div>
+                    <div class="info-item"><i class="fas fa-sort-amount-down"></i><p>الترتيب الصحيح لمقرر الحفظ.</p></div>
+                    <div class="info-item"><i class="fas fa-bullhorn"></i><p>مراعاة النطق الصحيح للألفاظ.</p></div>
+                    <div class="info-item"><i class="fas fa-film"></i><p>الفيديو أصلي (غير ممنتج) بدون تعديل برامجي.</p></div>
+                    <div class="info-item"><i class="fas fa-user-tie"></i><p>الالتزام بالزي المدرسي الكامل أثناء التصوير.</p></div>
+                    <div class="info-item"><i class="fas fa-paper-plane"></i><p>يتم إرسال الفيديو من خلال شارك الآن.</p></div>
                 </div>
                 <div class="period-box">
                     <i class="fas fa-calendar-alt"></i> فترة التنفيذ: <br>
@@ -124,26 +133,27 @@
         <div class="section-content" id="uploadSec">
             <h2 style="text-align:center;">إرسال مشاركة جديدة</h2>
             <div class="card-white" id="uploadStep1">
-                <label>اختر الصف:</label>
+                <label>اختر الشعبة:</label>
                 <select id="cls" class="input-box" onchange="loadStudents()">
                     <option value="">-- اختر الصف --</option>
                     <option value="7-1">الصف السابع 1</option>
                     <option value="7-2">الصف السابع 2</option>
                     <option value="7-3">الصف السابع 3</option>
                 </select>
-                <label>اسم الفارس:</label>
-                <select id="stu" class="input-box"><option value="">اختر الصف أولاً</option></select>
-                <button class="btn-lux" onclick="toStep2()">متابعة للتسجيل</button>
+                <label>اسم الطالب:</label>
+                <select id="stu" class="input-box"><option value="">اختر الشعبة أولاً</option></select>
+                <button class="btn-lux" onclick="toStep2()">متابعة لرفع المشاركات</button>
             </div>
             <div id="uploadStep2" style="display:none;" class="card-white">
                 <div id="dispName" style="background:var(--gold-soft); padding:15px; border-radius:15px; font-weight:900; margin-bottom:20px; border:1px solid var(--accent-gold); text-align:center;"></div>
                 <div style="display:flex; gap:10px; margin-bottom:20px;">
-                    <label class="btn-lux" style="background:#eee; color:#333; flex:1; cursor:pointer;"><i class="fas fa-file-video"></i> اختر فيديو<input type="file" id="fIn" hidden accept="video/*" onchange="preview(this)"></label>
-                    <label class="btn-lux" style="background:#d32f2f; flex:1; cursor:pointer;"><i class="fas fa-camera"></i> تسجيل حي<input type="file" id="cIn" hidden capture="user" accept="video/*" onchange="preview(this)"></label>
+                    <label class="btn-lux" style="background:#eee; color:#333; flex:1; cursor:pointer;"><i class="fas fa-file"></i> اختر ملف<input type="file" id="fIn" hidden accept="video/*" onchange="preview(this)"></label>
+                    <label class="btn-lux" style="background:#d32f2f; flex:1; cursor:pointer;"><i class="fas fa-camera"></i> سجل الفيديو بالكاميرا<input type="file" id="cIn" hidden capture="user" accept="video/*" onchange="preview(this)"></label>
                 </div>
                 <div id="vPreBox" style="display:none; text-align:center;">
+                    <p style="font-weight:bold;">معاينة الفيديو قبل الإرسال:</p>
                     <video id="vPre" controls style="width:100%; border-radius:15px; margin-bottom:15px;"></video>
-                    <button class="btn-lux" id="upBtn" onclick="startUpload()" style="background:#28a745;">تأكيد الإرسال</button>
+                    <button class="btn-lux" id="upBtn" onclick="startUpload()" style="background:#28a745;">تأكيد الإرسال النهائي</button>
                 </div>
                 <div id="pBar" style="display:none; background:#ddd; height:10px; border-radius:5px; overflow:hidden; margin-top:15px;"><div id="pFill" style="width:0%; height:100%; background:#28a745;"></div></div>
                 <p id="upStatus" style="text-align:center; font-weight:bold; margin-top:10px;"></p>
@@ -151,39 +161,48 @@
         </div>
 
         <div class="section-content" id="gallerySec">
-            <h2 style="text-align:center;">معرض المبدعين</h2>
+            <h2 style="text-align:center;">فرسان الإلقاء والتميز</h2>
             <div id="featuredGallery" style="display:grid; grid-template-columns: 1fr; gap:15px;"></div>
         </div>
 
         <div class="section-content" id="honorSec">
-            <h2 style="text-align:center;">لوحة شرف فرسان اللغة</h2>
+            <h2 style="text-align:center;">لوحة شرف الفرسان</h2>
             <div id="hList" style="display:grid; grid-template-columns: repeat(2, 1fr); gap:15px;"></div>
         </div>
 
         <div class="section-content" id="adminSec">
-            <h2 style="text-align:center;">إدارة المبادرة</h2>
+            <h2 style="text-align:center;">لوحة متابعة المبادرة</h2>
             <div id="aAuth" class="card-white">
                 <input type="password" id="pass" class="input-box" placeholder="كلمة المرور">
-                <button class="btn-lux" onclick="checkA()">دخول المعلم</button>
+                <button class="btn-lux" onclick="checkA()">دخول المسؤول</button>
             </div>
             <div id="aDash" style="display:none;">
                 <div class="stat-grid">
-                    <div class="stat-card"><h4>عدد الطلاب</h4><div id="tStu">78</div></div>
-                    <div class="stat-card"><h4>المشاركات</h4><div id="tSent">0</div></div>
-                    <div class="stat-card"><h4>النسبة</h4><div id="tPerc">0%</div></div>
+                    <div class="stat-card"><h4>إجمالي المدرسة</h4><div id="tStu">78</div></div>
+                    <div class="stat-card"><h4>إجمالي المشاركات</h4><div id="tSent">0</div></div>
+                    <div class="stat-card"><h4>النسبة العامة</h4><div id="tPerc">0%</div></div>
                 </div>
-                <div id="adminTableBox" style="max-height: 400px; overflow-y: auto;"></div>
+                <div class="card-white">
+                    <label>اختر الصف للمتابعة التفصيلية:</label>
+                    <select id="adminClsFilter" class="input-box" onchange="updateStats()">
+                        <option value="all">إحصائية كل الصفوف</option>
+                        <option value="7-1">السابع 1</option>
+                        <option value="7-2">السابع 2</option>
+                        <option value="7-3">السابع 3</option>
+                    </select>
+                    <div id="adminTableBox" style="max-height: 400px; overflow-y: auto;"></div>
+                </div>
             </div>
         </div>
 
         <div class="section-content" id="textsSec">
-            <h2 style="text-align:center;">مكتبة نصوص الحفظ</h2>
-            <div class="card-white">
-                <p><strong>1. نص: أنت وأنا</strong> (المقرر حفظه)</p>
+            <h2 style="text-align:center;">مكتبة النصوص</h2>
+            <div class="card-white" style="margin-bottom: 20px;">
+                <p><strong>1. نص: أنت وأنا</strong></p>
                 <iframe width="100%" height="250" src="https://www.youtube.com/embed/UTb133uqsNE" frameborder="0" style="border-radius:15px;"></iframe>
             </div>
-            <div class="card-white" style="margin-top:15px;">
-                <p><strong>2. نص: السلحفاة والبطتان</strong> (المقرر حفظه)</p>
+            <div class="card-white">
+                <p><strong>2. نص: السلحفاة والبطتان</strong></p>
                 <iframe width="100%" height="250" src="https://www.youtube.com/embed/VTzyAPEfv7A" frameborder="0" style="border-radius:15px;"></iframe>
             </div>
         </div>
@@ -191,10 +210,10 @@
 
     <div id="certTemplate">
         <div class="cert-inner">
-            <h1 style="color:var(--primary-dark); font-size:40px; margin:0;">شهادة تميز في الحفظ</h1>
-            <p style="font-size:24px;">يسر مبادرة "أحفظ وأكتب" أن تكرم الفارس:</p>
-            <h2 id="certName" style="color:var(--accent-gold); font-size:35px; border-bottom:2px solid; display:inline-block;">اسم الطالب</h2>
-            <p style="font-size:20px;">لإتقانه مهارة الحفظ والإلقاء المتميز.</p>
+            <h1 style="color:var(--primary-dark); font-size:40px; margin:0;">شهادة تقدير وتفوق</h1>
+            <p style="font-size:24px;">يسر مبادرة "أحفظ وأكتب" أن تمنح الفارس:</p>
+            <h2 id="certName" style="color:var(--accent-gold); font-size:35px; border-bottom:2px solid; display:inline-block;">الطالب...</h2>
+            <p style="font-size:20px;">تقديراً لتميزه في مهارات الحفظ والإلقاء.</p>
             <div style="display:flex; justify-content: space-around; margin-top:30px;">
                 <div><p>معلم المادة</p><strong>أ / علي محمد علي</strong></div>
                 <div><p>مدير المدرسة</p><strong>أ / هشام الكحالي</strong></div>
@@ -235,10 +254,10 @@
     }
 
     function toStep2() {
-        if(!document.getElementById('stu').value) return alert("الرجاء اختيار اسم الطالب");
+        if(!document.getElementById('stu').value) return alert("الرجاء اختيار الاسم");
         document.getElementById('uploadStep1').style.display = 'none';
         document.getElementById('uploadStep2').style.display = 'block';
-        document.getElementById('dispName').innerText = "فارس الحفظ: " + document.getElementById('stu').value;
+        document.getElementById('dispName').innerText = "المشارك: " + document.getElementById('stu').value;
     }
 
     let selectedFile;
@@ -266,7 +285,7 @@
         xhr.upload.onprogress = (e) => {
             const p = Math.round((e.loaded / e.total) * 100);
             fill.style.width = p + '%';
-            stat.innerText = `جاري رفع الفيديو... ${p}%`;
+            stat.innerText = `جاري الرفع... ${p}%`;
         };
         xhr.onload = () => {
             if(xhr.status === 200) {
@@ -274,7 +293,8 @@
                 db.ref('submissions/' + document.getElementById('cls').value).push({
                     student: document.getElementById('stu').value, video: res.secure_url, medal: "", featured: false
                 }).then(() => { 
-                    stat.innerHTML = "✅ تم الإرسال بنجاح! بارك الله فيك يا بطل"; 
+                    stat.innerHTML = "✅ تم الإرسال بنجاح!"; 
+                    stat.style.color = "green";
                     setTimeout(() => location.reload(), 2000);
                 });
             }
@@ -287,12 +307,12 @@
             const data = snap.val() || {}; let h = "";
             Object.values(data).forEach(c => Object.values(c).forEach(s => {
                 h += `<div class="honor-card">
-                        <i class="fas fa-medal badge"></i>
+                        <i class="fas fa-trophy badge"></i>
                         <div class="name">${s.student}</div>
-                        ${s.medal ? `<div class="medal-tag">${s.medal}</div>` : ''}
+                        ${s.medal ? `<div class="medal-tag"><i class="fas fa-award"></i> ${s.medal}</div>` : ''}
                       </div>`;
             }));
-            document.getElementById('hList').innerHTML = h || "بانتظار الفرسان الأوائل...";
+            document.getElementById('hList').innerHTML = h || "بانتظار فرساننا...";
         });
     }
 
@@ -307,7 +327,7 @@
                           </div>`;
                 }
             }));
-            document.getElementById('featuredGallery').innerHTML = h || "<p style='text-align:center;'>المعرض قيد التجهيز بأفضل الفيديوهات</p>";
+            document.getElementById('featuredGallery').innerHTML = h || "<p style='text-align:center;'>المعرض سيحتوي على أفضل المشاركات قريباً</p>";
         });
     }
 
@@ -322,32 +342,51 @@
     function updateStats() {
         db.ref('submissions').on('value', snap => {
             const data = snap.val() || {};
+            const filter = document.getElementById('adminClsFilter').value;
             let totalSent = 0;
-            ["7-1", "7-2", "7-3"].forEach(cid => { totalSent += data[cid] ? Object.keys(data[cid]).length : 0; });
+            let h = "";
+
+            // حساب الإحصائيات العامة للمدرسة دائماً
+            ["7-1", "7-2", "7-3"].forEach(cid => {
+                totalSent += data[cid] ? Object.keys(data[cid]).length : 0;
+            });
             document.getElementById('tSent').innerText = totalSent;
             document.getElementById('tPerc').innerText = Math.round((totalSent/78)*100) + "%";
 
-            let h = `<table class="admin-table"><thead><tr><th>الطالب</th><th>الفيديو</th><th>تحكم</th></tr></thead><tbody>`;
-            ["7-1", "7-2", "7-3"].forEach(cid => {
-                const subs = data[cid] || {};
-                Object.keys(subs).forEach(k => {
+            if (filter === 'all') {
+                h = `<table class="admin-table"><thead><tr><th>الصف</th><th>الطلاب</th><th>المشاركون</th><th>النسبة</th></tr></thead><tbody>`;
+                ["7-1", "7-2", "7-3"].forEach(cid => {
+                    const tot = names[cid].length;
+                    const sent = data[cid] ? Object.keys(data[cid]).length : 0;
+                    h += `<tr><td>${cid}</td><td>${tot}</td><td>${sent}</td><td>${Math.round((sent/tot)*100)}%</td></tr>`;
+                });
+                h += "</tbody></table>";
+            } else {
+                const subs = data[filter] || {};
+                const sentList = Object.values(subs).map(s => s.student);
+                h = `<table class="admin-table"><thead><tr><th>الطالب</th><th>الحالة</th><th>تحكم</th></tr></thead><tbody>`;
+                names[filter].forEach(name => {
+                    const subKey = Object.keys(subs).find(k => subs[k].student === name);
+                    const hasSent = !!subKey;
                     h += `<tr>
-                            <td>${subs[k].student}</td>
-                            <td><a href="${subs[k].video}" target="_blank">مشاهدة</a></td>
+                            <td style="text-align:right;">${name}</td>
+                            <td class="${hasSent ? 'status-sent' : 'status-none'}">${hasSent ? '✅ تم الإرسال' : '❌ لم يرسل بعد'}</td>
                             <td>
-                                <button class="btn-sm" style="background:#c5a021" onclick="giveMedal('${cid}','${k}')">وسام</button>
-                                <button class="btn-sm" style="background:#004d61" onclick="toggleFeatured('${cid}','${k}',${!subs[k].featured})">${subs[k].featured ? 'إخفاء' : 'تميز'}</button>
-                                <button class="btn-sm" style="background:green" onclick="genCert('${subs[k].student}')">شهادة</button>
+                                ${hasSent ? `
+                                    <button class="btn-sm" style="background:#c5a021" onclick="giveMedal('${filter}','${subKey}')">وسام</button>
+                                    <button class="btn-sm" style="background:#004d61" onclick="toggleFeatured('${filter}','${subKey}',${!subs[subKey].featured})">${subs[subKey].featured ? 'إخفاء' : 'تميز'}</button>
+                                    <button class="btn-sm" style="background:green" onclick="genCert('${name}')">شهادة</button>
+                                ` : '---'}
                             </td>
                           </tr>`;
                 });
-            });
-            h += "</tbody></table>";
+                h += "</tbody></table>";
+            }
             document.getElementById('adminTableBox').innerHTML = h;
         });
     }
 
-    function giveMedal(c, k) { const m = prompt("ادخل لقب الطالب (مثلاً: الحافظ الذهبي):"); if(m) db.ref(`submissions/${c}/${k}`).update({medal: m}); }
+    function giveMedal(c, k) { const m = prompt("ادخل نوع الوسام (مثلاً: الحافظ المتقن أو البلبل الفصيح):"); if(m) db.ref(`submissions/${c}/${k}`).update({medal: m}); }
     function toggleFeatured(c, k, v) { db.ref(`submissions/${c}/${k}`).update({featured: v}); }
     function genCert(name) {
         document.getElementById('certName').innerText = name;
