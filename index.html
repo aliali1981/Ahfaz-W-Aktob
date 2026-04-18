@@ -21,6 +21,19 @@
 
         body { font-family: 'Tajawal', sans-serif; margin: 0; background: var(--bg); color: #333; text-align: right; overflow-x: hidden; }
 
+        /* التذييل الموحد */
+        .universal-footer {
+            position: fixed; bottom: 20px; left: 5%; width: 90%; 
+            background: rgba(0, 45, 56, 0.9); backdrop-filter: blur(15px);
+            border-radius: 20px; padding: 12px; border: 1px solid rgba(197, 160, 33, 0.4);
+            display: flex; justify-content: space-around; align-items: center;
+            z-index: 9999; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .f-item { text-align: center; color: white; }
+        .f-item i { color: var(--accent); font-size: 1.3rem; margin-bottom: 5px; display: block; }
+        .f-item span { font-size: 0.75rem; opacity: 0.8; font-weight: bold; }
+        .f-item b { display: block; font-size: 0.9rem; margin-top: 3px; }
+
         #mainMenu { width: 100%; min-height: 100vh; background: var(--primary); display: flex; flex-direction: column; align-items: center; padding: 40px 0; position: relative; }
         .logo-circle { 
             width: 140px; height: 140px; background: white; border-radius: 50%; 
@@ -33,24 +46,12 @@
         .main-title { color: #fff; font-size: 2.2rem; font-weight: 900; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .school-info { color: var(--accent); font-weight: 700; font-size: 1.1rem; margin-bottom: 30px; text-align: center; }
 
-        .universal-footer {
-            position: fixed; bottom: 20px; left: 5%; width: 90%; 
-            background: rgba(0, 45, 56, 0.9); backdrop-filter: blur(15px);
-            border-radius: 20px; padding: 12px; border: 1px solid rgba(197, 160, 33, 0.3);
-            display: flex; justify-content: space-around; align-items: center;
-            z-index: 9999; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-        }
-        .f-item { text-align: center; color: white; }
-        .f-item i { color: var(--accent); font-size: 1.1rem; margin-bottom: 4px; display: block; }
-        .f-item span { font-size: 0.7rem; opacity: 0.8; font-weight: bold; }
-        .f-item b { display: block; font-size: 0.85rem; margin-top: 2px; }
-
-        .nav-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 90%; max-width: 500px; padding-bottom: 120px; }
+        .nav-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 90%; max-width: 500px; padding-bottom: 140px; }
         .menu-btn { background: rgba(255,255,255,0.1); color: #fff; padding: 25px 10px; border-radius: 20px; text-align: center; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
         .menu-btn i { font-size: 2rem; margin-bottom: 12px; display: block; color: var(--accent); }
         .menu-btn:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); }
 
-        #contentArea { display: none; padding: 20px; padding-bottom: 140px; min-height: 100vh; box-sizing: border-box; }
+        #contentArea { display: none; padding: 20px; padding-bottom: 150px; min-height: 100vh; box-sizing: border-box; }
         .back-nav { background: var(--primary); color: var(--accent); padding: 15px; border-radius: 12px; border: none; font-weight: 900; cursor: pointer; margin-bottom: 20px; width: 100%; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: var(--shadow); }
 
         .info-card { background: white; padding: 20px; border-radius: 20px; margin-bottom: 15px; border-right: 6px solid var(--accent); box-shadow: var(--shadow); }
@@ -113,7 +114,7 @@
                 <ul class="info-list">
                     <li><i class="fas fa-hand-pointer"></i> يختار الطالب النص المقرر حفظه.</li>
                     <li><i class="fas fa-tasks"></i> يختار طريقة التسميع (شفوي أو كتابي).</li>
-                    <li><i class="fas fa-video"></i> إرسال فيديو مصور في حال اختيار التسميع الشfوي.</li>
+                    <li><i class="fas fa-video"></i> إرسال فيديو مصور في حال اختيار التسميع الشفوي.</li>
                 </ul>
             </div>
             <div class="info-card">
@@ -158,8 +159,8 @@
                 <select id="cls" onchange="loadStu()" style="width:100%; padding:15px; border-radius:12px; margin-bottom:10px;"><option value="">اختر الفصل</option><option value="7-1">7-1</option><option value="7-2">7-2</option><option value="7-3">7-3</option></select>
                 <select id="stu" style="width:100%; padding:15px; border-radius:12px; margin-bottom:20px;"><option>اختر الاسم</option></select>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                    <button class="menu-btn" style="background:var(--primary)" onclick="doUploadDevice()"><i class="fas fa-upload"></i> من الجهاز</button>
-                    <button class="menu-btn" style="background:var(--danger)" onclick="doUploadCamera()"><i class="fas fa-camera"></i> الكاميرا</button>
+                    <button class="menu-btn" style="background:var(--primary)" onclick="doUploadDevice()"><i class="fas fa-file-upload"></i> من الجهاز</button>
+                    <button class="menu-btn" style="background:var(--danger)" onclick="doUploadCamera()"><i class="fas fa-video"></i> الكاميرا</button>
                 </div>
                 <input type="file" id="fIn" style="display:none" onchange="processFile()">
                 <p id="upStatus" style="margin-top:15px; font-weight:bold"></p>
@@ -173,7 +174,13 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script>
-        const studentData = { "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت fريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعfيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن مسلم نfل رfعات الكثيري", "عامر بن محمد بن مسلم بخيت المسهلي", "عبدالله بن سالم بن سهيل sليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "fريح بن عبدالله بن fريح احمد مسن", "مجتfى عيسى محمد", "مسلم بن محمد بن عوض خادم الوهيfي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن fيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"], "7-2": ["ابراهيم محمد سالم السطري", "العباس بن مfخوت بن سالم مسن fيت كثير", "المنذر بن fواز بن سليمان عبدالله الهاشمي", "امير بن ناصر بن عبدالرحمن عبدالله البلوشي", "حسين سلامه حسين علي شليل", "خالد بن سالم بن علي عبدالله العلوي", "خالد بن محمد بن سهيل مطر جداد", "خالد بن مسلم بن أحمد جداد", "رويزم بن مسلم بن بخيت رويزم صندل المحرمي", "سالم بن مfارك بن سهيل محمد الراشدي", "سعد بن محمد بن سعد حfيظ خوار", "سعود بن عبدالله بن بخيت زايد مسن", "سعيد بن عبدالله بن سالم احمد جداد", "سعيد بن مسلم بن عبدالله سعيد جداد", "سلطان بن مسلم بن سالم صالح جداد", "عبدالله بن عارf بن سالم جداد", "علي بن سعيد بن علي خوار", "عمر fؤاد fهمي محمد fؤاد", "fهد بن غانم بن سالم جداد", "محسن معتصم محمد الامام", "محمد بن سالم بن مfخوت محمد الراشدي", "مسلم بن سالم بن سهيل الراشدي", "مصطfى محمود كريم ابراهيم احمد", "معاذ احمد سميح علي سيد", "منيف بن سعيد بن محمد سالم جداد", "هادف بن سعيد بن هادف حسن شحري خوار", "وائل بن حمود بن سالم سعيد الوائلي"], "7-3": ["أحمد بن نائف بن عبدالله محمد جداد", "الطلح بن سالم بن حسن علي خوار", "بخيت بن مسلم سالم مfخوت الراشدي", "fدر بن عامر بن مسلم الرحاfه جداد", "حثيث بن سلطان بن محمد سهيل مسن", "حمد بن محمد بن عبدالله محمد جداد الكثيري", "سالم بن احمد بن سالم جداد", "سعيد بن مfروك بن سالم عامر المسهلي", "سهيل بن عبدالله بن سهيل حاfظ خوار", "عبد الله أمير عبدالله نصر", "عبدالله بن محمد بن علي مهوي العامري", "علي بن ثاني بن علي سالم جداد fيت كثير", "fارس زياد محمد اfو رواع", "مfارك بن سعيد بن سالم خويتم مسن", "محسن بن عقيل بن سالم سعد خوار", "محمد بن بخيت بن fرج السنح شهوان المهري", "محمد بن علي بن بخيت محمد الراشدي", "محمد بن غانم بن الرضه سلاوم جداد", "محمد بن مسلم بن محمد مسلم جداد", "محمد بن ناصر بن عبدالله جداد", "محمد بن هيثم بن سالم fائل جداد الكثيري", "مسلم بن حسن بن هادف حسن شحري خوار", "معاذ fؤاد الحنيش الاحمد", "ناصر بن علي بن ناصر سهيل جداد", "نور الدين محسن العلي", "هيثم بن محمد بن سالم fائل جداد"] };
+        /* تم تنقية الأسماء من الحروف الإنجليزية */
+        const studentData = { 
+            "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت فريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعفيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن مسلم نفل ربعات الكثيري", "عامر بن محمد بن مسلم بخيت المسهلي", "عبدالله بن سالم بن سهيل سليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "فريح بن عبدالله بن فريح احمد مسن", "مجتبى عيسى محمد", "مسلم بن محمد بن عوض خادم الوهيبي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن بيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"], 
+            "7-2": ["ابراهيم محمد سالم السطري", "العباس بن مبخوت بن سالم مسن بيت كثير", "المنذر بن فواز بن سليمان عبدالله الهاشمي", "امير بن ناصر بن عبدالرحمن عبدالله البلوشي", "حسين سلامه حسين علي شليل", "خالد بن سالم بن علي عبدالله العلوي", "خالد بن محمد بن سهيل مطر جداد", "خالد بن مسلم بن أحمد جداد", "رويزم بن مسلم بن بخيت رويزم صندل المحرمي", "سالم بن مبارك بن سهيل محمد الراشدي", "سعد بن محمد بن سعد حفيظ خوار", "سعود بن عبدالله بن بخيت زايد مسن", "سعيد بن عبدالله بن سالم احمد جداد", "سعيد بن مسلم بن عبدالله سعيد جداد", "سلطان بن مسلم بن سالم صالح جداد", "عبدالله بن عارف بن سالم جداد", "علي بن سعيد بن علي خوار", "عمر فؤاد فهمي محمد فؤاد", "فهد بن غانم بن سالم جداد", "محسن معتصم محمد الامام", "محمد بن سالم بن مبخوت محمد الراشدي", "مسلم بن سالم بن سهيل الراشدي", "مصطفى محمود كريم ابراهيم احمد", "معاذ احمد سميح علي سيد", "منيف بن سعيد بن محمد سالم جداد", "هادف بن سعيد بن هادف حسن شحري خوار", "وائل بن حمود بن سالم سعيد الوائلي"], 
+            "7-3": ["أحمد بن نائف بن عبدالله محمد جداد", "الطلح بن سالم بن حسن علي خوار", "بخيت بن مسلم سالم مبخوت الراشدي", "بدر بن عامر بن مسلم الرحابه جداد", "حثيث بن سلطان بن محمد سهيل مسن", "حمد بن محمد بن عبدالله محمد جداد الكثيري", "سالم بن احمد بن سالم جداد", "سعيد بن مبروك بن سالم عامر المسهلي", "سهيل بن عبدالله بن سهيل حافظ خوار", "عبد الله أمير عبدالله نصر", "عبدالله بن محمد بن علي مهوي العامري", "علي بن ثاني بن علي سالم جداد بيت كثير", "فارس زياد محمد ابو رواع", "مبارك بن سعيد بن سالم خويتم مسن", "محسن بن عقيل بن سالم سعد خوار", "محمد بن بخيت بن فرج السنح شهوان المهري", "محمد بن علي بن بخيت محمد الراشدي", "محمد بن غانم بن الرضه سلاوم جداد", "محمد بن مسلم بن محمد مسلم جداد", "محمد بن ناصر بن عبدالله جداد", "محمد بن هيثم بن سالم فائل جداد الكثيري", "مسلم بن حسن بن هادف حسن شحري خوار", "معاذ فؤاد الحنيش الاحمد", "ناصر بن علي بن ناصر سهيل جداد", "نور الدين محسن العلي", "هيثم بن محمد بن سالم فائل جداد"] 
+        };
+
         var db, subs = {};
         firebase.initializeApp({ databaseURL: "https://ahfaz-w-aktob-default-rtdb.firebaseio.com/" });
         db = firebase.database();
@@ -190,18 +197,8 @@
             if(studentData[cls]) studentData[cls].forEach(n => { let o=document.createElement('option'); o.value=n; o.text=n; stu.add(o); });
         }
 
-        /* إصلاح وظائف الرفع */
-        function doUploadDevice() {
-            const fIn = document.getElementById('fIn');
-            fIn.removeAttribute('capture');
-            fIn.click();
-        }
-
-        function doUploadCamera() {
-            const fIn = document.getElementById('fIn');
-            fIn.setAttribute('capture', 'user');
-            fIn.click();
-        }
+        function doUploadDevice() { const f = document.getElementById('fIn'); f.removeAttribute('capture'); f.click(); }
+        function doUploadCamera() { const f = document.getElementById('fIn'); f.setAttribute('capture', 'user'); f.click(); }
 
         function processFile() {
             const file = document.getElementById('fIn').files[0];
@@ -229,7 +226,7 @@
                     if(filter!=="all" && filter!==cls) return;
                     const row = document.createElement('div');
                     row.className = `student-row ${v?'sent':''}`;
-                    row.innerHTML = `<div style="display:flex; justify-content:space-fetween"><b>${name}</b> <small>${v?'✓ أرسل':'متبقي'}</small></div>
+                    row.innerHTML = `<div style="display:flex; justify-content:space-between"><b>${name}</b> <small>${v?'✓ أرسل':'متبقي'}</small></div>
                         ${v?`<div class="action-btns">
                             <button class="btn-act btn-view" onclick="window.open('${v}')"><i class="fas fa-play"></i> فيديو</button>
                             <button class="btn-act btn-star ${isF?'active':''}" onclick="mark('${cls}','${k}',${isF})"><i class="fas fa-star"></i> متميز</button>
