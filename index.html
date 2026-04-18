@@ -21,7 +21,6 @@
 
         body { font-family: 'Tajawal', sans-serif; margin: 0; background: var(--bg); color: #333; text-align: right; overflow-x: hidden; }
 
-        /* التذييل الموحد */
         .universal-footer {
             position: fixed; bottom: 20px; left: 5%; width: 90%; 
             background: rgba(0, 45, 56, 0.9); backdrop-filter: blur(15px);
@@ -61,10 +60,18 @@
         .info-list i { color: var(--accent); font-size: 1.1rem; margin-top: 4px; }
 
         .admin-header { background: white; padding: 20px; border-radius: 20px; box-shadow: var(--shadow); margin-bottom: 25px; border-top: 5px solid var(--accent); }
+
+        /* تنسيق شريط التقدم */
+        .progress-container { width: 100%; background: #eee; border-radius: 10px; margin: 15px 0; display: none; overflow: hidden; }
+        #progressBar { width: 0%; height: 12px; background: var(--success); transition: 0.3s; }
+        
+        /* تنسيق المعاينة */
+        #previewBox { display: none; width: 100%; margin-top: 15px; border-radius: 15px; overflow: hidden; border: 2px solid var(--accent); }
+        #finalUploadBtn { display: none; width: 100%; background: var(--success); color: white; padding: 15px; border-radius: 12px; border: none; font-weight: 900; margin-top: 10px; cursor: pointer; }
+
         .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
         .stat-card { background: #fcfcfc; padding: 15px; border-radius: 15px; text-align: center; border: 1px solid #eee; }
         .stat-card i { font-size: 1.4rem; color: var(--accent); margin-bottom: 8px; display: block; }
-        .stat-card span { font-size: 0.8rem; color: #888; font-weight: bold; }
         .stat-card b { display: block; font-size: 1.4rem; color: var(--primary); margin-top: 5px; }
 
         .student-row { background: white; padding: 18px; border-radius: 20px; margin-bottom: 15px; box-shadow: var(--shadow); border-right: 8px solid #ddd; }
@@ -134,6 +141,29 @@
             </div>
         </div>
 
+        <div id="uploadSec" class="section" style="display:none">
+            <div class="admin-header" style="text-align:center">
+                <select id="cls" onchange="loadStu()" style="width:100%; padding:15px; border-radius:12px; margin-bottom:10px;"><option value="">اختر الفصل</option><option value="7-1">7-1</option><option value="7-2">7-2</option><option value="7-3">7-3</option></select>
+                <select id="stu" style="width:100%; padding:15px; border-radius:12px; margin-bottom:20px;"><option>اختر الاسم</option></select>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <button class="menu-btn" style="background:var(--primary)" onclick="doUploadDevice()"><i class="fas fa-file-upload"></i> من الجهاز</button>
+                    <button class="menu-btn" style="background:var(--danger)" onclick="doUploadCamera()"><i class="fas fa-video"></i> الكاميرا</button>
+                </div>
+                
+                <video id="previewBox" controls></video>
+                
+                <div class="progress-container" id="progCont">
+                    <div id="progressBar"></div>
+                </div>
+                
+                <p id="upStatus" style="margin-top:10px; font-weight:bold; color: var(--primary)"></p>
+                
+                <button id="finalUploadBtn" onclick="sendToFirebase()"><i class="fas fa-paper-plane"></i> إرسال الفيديو النهائي</button>
+                
+                <input type="file" id="fIn" style="display:none" onchange="handleFileSelect()">
+            </div>
+        </div>
+
         <div id="adminSec" class="section" style="display:none">
             <div class="admin-header">
                 <div class="stats-grid">
@@ -154,19 +184,6 @@
             <div class="info-card"><h3>السلحفاة والبطتان</h3><iframe width="100%" height="210" src="https://www.youtube.com/embed/VTzyAPEfv7A" frameborder="0" allowfullscreen style="border-radius:15px"></iframe></div>
         </div>
 
-        <div id="uploadSec" class="section" style="display:none">
-            <div class="admin-header" style="text-align:center">
-                <select id="cls" onchange="loadStu()" style="width:100%; padding:15px; border-radius:12px; margin-bottom:10px;"><option value="">اختر الفصل</option><option value="7-1">7-1</option><option value="7-2">7-2</option><option value="7-3">7-3</option></select>
-                <select id="stu" style="width:100%; padding:15px; border-radius:12px; margin-bottom:20px;"><option>اختر الاسم</option></select>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                    <button class="menu-btn" style="background:var(--primary)" onclick="doUploadDevice()"><i class="fas fa-file-upload"></i> من الجهاز</button>
-                    <button class="menu-btn" style="background:var(--danger)" onclick="doUploadCamera()"><i class="fas fa-video"></i> الكاميرا</button>
-                </div>
-                <input type="file" id="fIn" style="display:none" onchange="processFile()">
-                <p id="upStatus" style="margin-top:15px; font-weight:bold"></p>
-            </div>
-        </div>
-
         <div id="gallerySec" class="section" style="display:none"><div id="gList"></div></div>
         <div id="honorSec" class="section" style="display:none"><div id="hList" style="display:grid; grid-template-columns:1fr 1fr; gap:10px"></div></div>
     </div>
@@ -174,9 +191,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script>
-        /* تم تنقية الأسماء من الحروف الإنجليزية */
         const studentData = { 
-            "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت فريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعفيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن مسلم نفل ربعات الكثيري", "عامر بن محمد بن مسلم بخيت المسهلي", "عبدالله بن سالم بن سهيل سليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "فريح بن عبدالله بن فريح احمد مسن", "مجتبى عيسى محمد", "مسلم بن محمد بن عوض خادم الوهيبي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن بيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"], 
+            "7-1": ["احمد امجد احمد أحمد نجاد", "أحمد بن سعيد بن صالح أحمد جداد", "العبد بن محمد بن العبد زائد مسن", "النابي بن محمد بن سالم سهيل مسن", "بخيت بن احمد بن بخيت فريح مسن الكثيري", "تميم بن محمد بن سهيل جديد جداد الكثيري", "تميم بن محمد بن مبروك عبدالله المسهلي", "حمد بن محمد بن احمد الهزار الكثيري", "حمد بن محمد بن سعيد مسن", "راشد بن محمد بن أحمد محمد مسن الكثيري", "سالم بن سعد بن صلاح رعفيت", "سعيد بن شهاب بن احمد محمد مسن", "سعيد بن محمد بن صالح جداد", "سعيد بن محمد بن مبارك بخيت جداد", "سلطان بن حمزة بن مسلم نفل ربعات الكثيري", "عامر بن محمد بن مسلم بخيت المسهلي", "عبدالله بن سالم بن سهيل سليم قمصيت", "عمر احمد محمد احمد", "عمر عبدالقوى ابراهيم ابراهيم", "فريح بن عبدالله بن fريح احمد مسن", "مجتبى عيسى محمد", "مسلم بن محمد بن عوض خادم الوهيبي", "نصر بن سالم بن ظويهر سالم جداد", "ياسر بن عادل بن سالم مسن بيت كثير", "يوسف عمر احمد عبد الرحمن حاكم"], 
             "7-2": ["ابراهيم محمد سالم السطري", "العباس بن مبخوت بن سالم مسن بيت كثير", "المنذر بن فواز بن سليمان عبدالله الهاشمي", "امير بن ناصر بن عبدالرحمن عبدالله البلوشي", "حسين سلامه حسين علي شليل", "خالد بن سالم بن علي عبدالله العلوي", "خالد بن محمد بن سهيل مطر جداد", "خالد بن مسلم بن أحمد جداد", "رويزم بن مسلم بن بخيت رويزم صندل المحرمي", "سالم بن مبارك بن سهيل محمد الراشدي", "سعد بن محمد بن سعد حفيظ خوار", "سعود بن عبدالله بن بخيت زايد مسن", "سعيد بن عبدالله بن سالم احمد جداد", "سعيد بن مسلم بن عبدالله سعيد جداد", "سلطان بن مسلم بن سالم صالح جداد", "عبدالله بن عارف بن سالم جداد", "علي بن سعيد بن علي خوار", "عمر فؤاد فهمي محمد فؤاد", "فهد بن غانم بن سالم جداد", "محسن معتصم محمد الامام", "محمد بن سالم بن مبخوت محمد الراشدي", "مسلم بن سالم بن سهيل الراشدي", "مصطفى محمود كريم ابراهيم احمد", "معاذ احمد سميح علي سيد", "منيف بن سعيد بن محمد سالم جداد", "هادف بن سعيد بن هادف حسن شحري خوار", "وائل بن حمود بن سالم سعيد الوائلي"], 
             "7-3": ["أحمد بن نائف بن عبدالله محمد جداد", "الطلح بن سالم بن حسن علي خوار", "بخيت بن مسلم سالم مبخوت الراشدي", "بدر بن عامر بن مسلم الرحابه جداد", "حثيث بن سلطان بن محمد سهيل مسن", "حمد بن محمد بن عبدالله محمد جداد الكثيري", "سالم بن احمد بن سالم جداد", "سعيد بن مبروك بن سالم عامر المسهلي", "سهيل بن عبدالله بن سهيل حافظ خوار", "عبد الله أمير عبدالله نصر", "عبدالله بن محمد بن علي مهوي العامري", "علي بن ثاني بن علي سالم جداد بيت كثير", "فارس زياد محمد ابو رواع", "مبارك بن سعيد بن سالم خويتم مسن", "محسن بن عقيل بن سالم سعد خوار", "محمد بن بخيت بن فرج السنح شهوان المهري", "محمد بن علي بن بخيت محمد الراشدي", "محمد بن غانم بن الرضه سلاوم جداد", "محمد بن مسلم بن محمد مسلم جداد", "محمد بن ناصر بن عبدالله جداد", "محمد بن هيثم بن سالم فائل جداد الكثيري", "مسلم بن حسن بن هادف حسن شحري خوار", "معاذ فؤاد الحنيش الاحمد", "ناصر بن علي بن ناصر سهيل جداد", "نور الدين محسن العلي", "هيثم بن محمد بن سالم فائل جداد"] 
         };
@@ -200,18 +216,59 @@
         function doUploadDevice() { const f = document.getElementById('fIn'); f.removeAttribute('capture'); f.click(); }
         function doUploadCamera() { const f = document.getElementById('fIn'); f.setAttribute('capture', 'user'); f.click(); }
 
-        function processFile() {
-            const file = document.getElementById('fIn').files[0];
+        let selectedFile = null;
+
+        function handleFileSelect() {
+            selectedFile = document.getElementById('fIn').files[0];
+            if(!selectedFile) return;
+            
+            // إظهار المعاينة
+            const preview = document.getElementById('previewBox');
+            preview.src = URL.createObjectURL(selectedFile);
+            preview.style.display = 'block';
+            document.getElementById('finalUploadBtn').style.display = 'block';
+            document.getElementById('upStatus').innerText = "تم اختيار الفيديو، اضغط إرسال نهائي";
+        }
+
+        function sendToFirebase() {
             const name = document.getElementById('stu').value;
             const cls = document.getElementById('cls').value;
-            if(!file || name.includes("اختر")) return alert("أكمل البيانات");
-            document.getElementById('upStatus').innerText = "⏳ جاري الإرسال...";
-            const fd = new FormData(); fd.append('file', file); fd.append('upload_preset', "Ahfaz-W-Aktob");
-            fetch('https://api.cloudinary.com/v1_1/duhzhaxxc/upload', { method:'POST', body:fd })
-            .then(r => r.json()).then(res => {
-                db.ref('submissions/'+cls).push({ student:name, video:res.secure_url, featured:false })
-                .then(() => { alert("✅ تم الاستلام"); location.reload(); });
-            });
+            if(!selectedFile || name.includes("اختر")) return alert("أكمل البيانات");
+
+            document.getElementById('progCont').style.display = 'block';
+            document.getElementById('finalUploadBtn').style.display = 'none';
+            document.getElementById('upStatus').innerText = "⏳ جاري الرفع الآن...";
+
+            const fd = new FormData();
+            fd.append('file', selectedFile);
+            fd.append('upload_preset', "Ahfaz-W-Aktob");
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://api.cloudinary.com/v1_1/duhzhaxxc/upload', true);
+
+            xhr.upload.onprogress = (e) => {
+                if (e.lengthComputable) {
+                    const percent = Math.round((e.loaded / e.total) * 100);
+                    document.getElementById('progressBar').style.width = percent + '%';
+                    document.getElementById('upStatus').innerText = `جاري الرفع: ${percent}%`;
+                }
+            };
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    const res = JSON.parse(xhr.responseText);
+                    db.ref('submissions/'+cls).push({ student:name, video:res.secure_url, featured:false })
+                    .then(() => {
+                        document.getElementById('upStatus').innerHTML = "<span style='color:var(--success)'>✅ تم الإرسال بنجاح! شكراً لك.</span>";
+                        setTimeout(() => location.reload(), 2000);
+                    });
+                } else {
+                    alert("حدث خطأ أثناء الرفع، حاول ثانية");
+                    document.getElementById('finalUploadBtn').style.display = 'block';
+                }
+            };
+
+            xhr.send(fd);
         }
 
         function renderAdmin() {
