@@ -54,7 +54,6 @@
         .main-title { color: #fff; font-size: 2.2rem; font-weight: 900; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .school-info { color: var(--accent); font-weight: 700; font-size: 1.1rem; margin-bottom: 20px; text-align: center; }
 
-        /* زر تثبيت التطبيق */
         #pwaInstallBtn {
             display: none; background: var(--accent); color: var(--primary);
             padding: 12px 20px; border-radius: 30px; border: none;
@@ -121,7 +120,6 @@
         <div class="main-title">مبادرة أحفظ وأكتب</div>
         <div class="school-info">مدرسة يزيد بن الحارث للتعليم الأساسي (5 - 8)</div>
         
-        <!-- زر التثبيت التطبيقي -->
         <button id="pwaInstallBtn" onclick="installPWA()"><i class="fas fa-download"></i> تثبيت التطبيق على الهاتف</button>
 
         <div class="nav-grid">
@@ -218,11 +216,10 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script>
-        /* تسجيل الـ Service Worker لتفعيل التثبيت Katbi PWA */
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js')
             .then(reg => console.log('Service Worker Registered!', reg))
-            .catch(err => console.log('Service Worker Registration Failed!', err));
+            .catch(err => console.log('Service Worker Failed!', err));
         }
 
         const studentData = { 
@@ -318,7 +315,6 @@
             document.getElementById('gList').innerHTML = g || "بانتظار المتميزين";
         }
 
-        /* التحكم في إظهار وتنفيذ أمر التثبيت على الجوال */
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
