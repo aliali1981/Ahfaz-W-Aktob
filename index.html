@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>مبادرة أحفظ وأكتب | مدرسة يزيد بن الحارث</title>
+    
+    <!-- إعدادات تطبيق الويب القابل للتثبيت (PWA) -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#002d38">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="أحفظ وأكتب">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/aliali1981/Ahfaz-W-Aktob/main/logo.png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
@@ -43,7 +52,21 @@
         .logo-circle img { width: 85%; height: 85%; object-fit: contain; }
 
         .main-title { color: #fff; font-size: 2.2rem; font-weight: 900; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        .school-info { color: var(--accent); font-weight: 700; font-size: 1.1rem; margin-bottom: 30px; text-align: center; }
+        .school-info { color: var(--accent); font-weight: 700; font-size: 1.1rem; margin-bottom: 20px; text-align: center; }
+
+        /* زر تثبيت التطبيق */
+        #pwaInstallBtn {
+            display: none; background: var(--accent); color: var(--primary);
+            padding: 12px 20px; border-radius: 30px; border: none;
+            font-weight: 900; font-family: 'Tajawal'; font-size: 0.95rem;
+            margin-bottom: 25px; cursor: pointer; box-shadow: 0 4px 15px rgba(197, 160, 33, 0.4);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
 
         .nav-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 90%; max-width: 500px; padding-bottom: 140px; }
         .menu-btn { background: rgba(255,255,255,0.1); color: #fff; padding: 25px 10px; border-radius: 20px; text-align: center; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
@@ -98,6 +121,9 @@
         <div class="main-title">مبادرة أحفظ وأكتب</div>
         <div class="school-info">مدرسة يزيد بن الحارث للتعليم الأساسي (5 - 8)</div>
         
+        <!-- زر التثبيت الضمني -->
+        <button id="pwaInstallBtn" onclick="installPWA()"><i class="fas fa-download"></i> تثبيت التطبيق على الهاتف</button>
+
         <div class="nav-grid">
             <div class="menu-btn" onclick="openSec('info')"><i class="fas fa-file-alt"></i><span>عن المبادرة</span></div>
             <div class="menu-btn" onclick="openSec('texts')"><i class="fas fa-book-open"></i><span>مكتبة النصوص</span></div>
@@ -213,7 +239,6 @@
         }
 
         function doUploadDevice() { const f = document.getElementById('fIn'); f.removeAttribute('capture'); f.setAttribute('accept', 'video/*'); f.click(); }
-        
         function doUploadCamera() { const f = document.getElementById('fIn'); f.setAttribute('accept', 'video/*'); f.setAttribute('capture', 'camcorder'); f.click(); }
 
         let selectedFile = null;
@@ -284,6 +309,26 @@
             }));
             document.getElementById('hList').innerHTML = h || "لا يوجد مشاركات";
             document.getElementById('gList').innerHTML = g || "بانتظار المتميزين";
+        }
+
+        /* برمجة تثبيت التطبيق على التليفون PWA */
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('pwaInstallBtn').style.display = 'inline-block';
+        });
+
+        function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        document.getElementById('pwaInstallBtn').style.display = 'none';
+                    }
+                    deferredPrompt = null;
+                });
+            }
         }
     </script>
 </body>
