@@ -1,4 +1,5 @@
 {
+  "id": "/ahfaz-w-aktob-v2",
   "short_name": "أحفظ وأكتب",
   "name": "مبادرة أحفظ وأكتب | مدرسة يزيد بن الحارث",
   "icons": [
@@ -13,7 +14,8 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "index.html",
+  "scope": "./",
   "background_color": "#002d38",
   "theme_color": "#002d38",
   "display": "standalone",
