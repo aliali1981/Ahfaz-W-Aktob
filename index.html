@@ -227,6 +227,15 @@
         <div id="honorSec" class="section" style="display:none"><div id="hList" style="display:grid; grid-template-columns:1fr 1fr; gap:10px"></div></div>
     </div>
 
+    <!-- نافذة المشاهدة المباشرة للفيديو -->
+    <div id="videoModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:10000; align-items:center; justify-content:center;">
+        <div style="width:90%; max-width:500px; background:#fff; padding:15px; border-radius:20px; text-align:center; position:relative; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+            <button onclick="closeVideoModal()" style="position:absolute; top:12px; left:12px; background:var(--danger); color:white; border:none; border-radius:50%; width:32px; height:32px; font-weight:bold; cursor:pointer; font-size: 1rem;">✕</button>
+            <h3 style="margin: 5px 0 15px 0; color:var(--primary); font-size:1.1rem;"><i class="fas fa-play-circle" style="color:var(--accent)"></i> مشاهدة فيديو الطالب</h3>
+            <video id="modalPlayer" controls autoplay style="width:100%; border-radius:15px; max-height:70vh; background:#000;"></video>
+        </div>
+    </div>
+
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script>
@@ -283,6 +292,22 @@
             xhr.send(fd);
         }
 
+        /* تشغيل الفيديو المباشر داخل النافذة المنبثقة */
+        function playVideoDirectly(url) {
+            const modal = document.getElementById('videoModal');
+            const player = document.getElementById('modalPlayer');
+            player.src = url;
+            modal.style.display = 'flex';
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const player = document.getElementById('modalPlayer');
+            player.pause();
+            player.src = "";
+            modal.style.display = 'none';
+        }
+
         function renderAdmin() {
             const filter = document.getElementById('admFilter').value;
             const list = document.getElementById('admList'); if(!list) return;
@@ -296,7 +321,7 @@
                     const row = document.createElement('div'); row.className = `student-row ${v?'sent':''}`;
                     row.innerHTML = `<div style="display:flex; justify-content:space-between"><b>${name}</b> <small>${v?'✓ أرسل':'متبقي'}</small></div>
                         ${v?`<div class="action-btns">
-                            <button class="btn-act btn-view" onclick="window.open('${v}')"><i class="fas fa-play"></i> فيديو</button>
+                            <button class="btn-act btn-view" onclick="playVideoDirectly('${v}')"><i class="fas fa-play"></i> فيديو</button>
                             <button class="btn-act btn-star ${isF?'active':''}" onclick="mark('${cls}','${k}','featured',${isF})"><i class="fas fa-star"></i> متميز</button>
                             <button class="btn-act btn-medal ${isM?'active':''}" onclick="mark('${cls}','${k}','medal',${isM})"><i class="fas fa-award"></i> وسام</button>
                             <button class="btn-act btn-cert ${isC?'active':''}" onclick="mark('${cls}','${k}','cert',${isC})"><i class="fas fa-certificate"></i> شهادة</button>
