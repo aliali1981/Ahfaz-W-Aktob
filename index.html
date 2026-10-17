@@ -43,13 +43,27 @@
         .f-item b { display: block; font-size: 0.9rem; margin-top: 3px; }
 
         #mainMenu { width: 100%; min-height: 100vh; background: var(--primary); display: flex; flex-direction: column; align-items: center; padding: 40px 0; position: relative; }
+        
+        /* تعديل الشعار الدائري ليملأ الإطار بالكامل */
         .logo-circle { 
-            width: 140px; height: 140px; background: white; border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; 
-            border: 5px solid var(--accent); box-shadow: 0 0 25px rgba(197, 160, 33, 0.4); 
-            margin-bottom: 20px; position: relative; overflow: hidden;
+            width: 150px; 
+            height: 150px; 
+            background: white; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border: 4px solid var(--accent); 
+            box-shadow: 0 0 25px rgba(197, 160, 33, 0.4); 
+            margin-bottom: 20px; 
+            position: relative; 
+            overflow: hidden; 
         }
-        .logo-circle img { width: 85%; height: 85%; object-fit: contain; }
+        .logo-circle img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+        }
 
         .main-title { color: #fff; font-size: 2.2rem; font-weight: 900; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .school-info { color: var(--accent); font-weight: 700; font-size: 1.1rem; margin-bottom: 20px; text-align: center; }
@@ -216,15 +230,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script>
-        /* تسجيل Service Worker المحدث لمنع مشاكل التثبيت */
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js?v=2')
-                .then(reg => console.log('PWA Ready:', reg.scope))
-                .catch(err => console.error('PWA Error:', err));
-            });
-        }
-
         const studentData = { 
             "6-1": ["أحمد بن سالم بن سعيد حسن خوار", "إلياس بن ابراهيم بن حمد مسعود العامري", "الأمين محمد احمد الطيب", "تركي بن محمد بن سعيد مسلم مسن", "حسين محمد يوسف خضر", "خالد أحمد حسن التابعي", "خالد بن راشد بن سعيد سالم مسن", "خالد بن عمرو بن غفيل سالم خوار", "سالم بن عبد الله بن سالم احمد جداد", "سالم بن محمد بن سالم صالح جداد", "سالم بن مسلم بن سهيل محمد الراشدي", "سعود بن سالم بن ظويهر سالم جداد", "سعود بن شهاب بن نافع مسلم المسهلي", "سعيد بن عبد الله بن بقال خويدع خوار", "سلطان بن محمد بن علي مهوي العامري", "عامر بن سهيل بن عامر سليم قمصيت", "عبد الرحمن احمد فوزي عبد الفتاح", "عبد الله بن محمد بن عيظه سعيد جداد الكثيري", "علي بن سعد بن مسلم سعيد الراشدي", "عوض بن محمد بن عوض خادم الوهيبي", "غانم بن محمد بن سليم مسلم الجنيبي", "غانم بن محمد بن مبارك بخيت جداد", "فهد بن محمد بن سالم مسلم المسهلي", "مازن مصطفى محمد احمد على", "محمد احمد محمود عبد الحميد", "محمد بن حسين بن سالم مبخوت خوار", "محمد بن سعيد بن سالم خويتم مسن", "محمد بن مسلم بن محمد بخيت مسن", "مروان سلامه حسين علي شليل", "مسلم بن سعيد بن سعد سعيد جداد", "مسلم بن محمد بن مسلم احمد جداد"],
             "6-2": ["أمجد بن سعيد بن خميس سعيد الشكيلي", "تميم بن نائف بن محمد سعيد مياح المسهلي", "تيمور بن أحمد بن مبروك أحمد مسن", "خالد بن أحمد بن مسلم محمد مسن", "خالد بن محمد بن مسلم سنكور خوار", "رزين بن مرشد بن خلفان سويد المعولي", "سالم بن حمد بن مبخوت حماده جداد", "سالم بن نايف بن سالم عيضه جداد", "سعيد بن بخيت بن عبدي بخيت خوار", "سعيد بن خالد بن بخيت زايد مسن", "سعيد بن صالح بن سهيل علي بيت جداد", "سلمان بن ناجي بن سالم سعد خوار", "سهيل بن معمر بن سهيل مسلم جداد الكثيري", "صالح يحيى مسلم", "صقر بن محمد بن العبد سهيل جداد", "عبد الرحمن أيمن هشام سقاو نايل", "عبد الرحمن بن علي بن سهيل علي زوله", "عبد الرحمن سامي محمد احمد يوسف المزين", "عمار بن ياسر بن مبروك احمد مسن", "محمد بن بخيت بن احمد محمد مسن", "محمد بن سالم بن سهيل مطر جداد", "محمد بن عامر بن محمد احمد المسهلي", "محمد بن غازي بن كفيش جعيد جداد الكثيري", "محمد بن فهد بن سالم خويتم مسن", "مسلم بن بخيت بن عبدي بخيت خوار", "همدان بن احمد بن عبدالله محمد جداد", "هيثم بن فواز بن سليمان عبد الله الهاشمي", "يوسف بن عبد الله بن علي عبيد الشحي"]
@@ -318,23 +323,36 @@
             document.getElementById('gList').innerHTML = g || "بانتظار المتميزين";
         }
 
-        let deferredPrompt;
+        /* تسجيل Service Worker المحدث */
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js?v=3')
+                .then(reg => console.log('SW Registered:', reg.scope))
+                .catch(err => console.error('SW Fail:', err));
+            });
+        }
+
+        /* إظهار وتفعيل زر التثبيت الـ PWA */
+        let deferredPrompt = null;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            document.getElementById('pwaInstallBtn').style.display = 'inline-block';
+            const btn = document.getElementById('pwaInstallBtn');
+            if (btn) btn.style.display = 'inline-block';
         });
 
-        function installPWA() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        document.getElementById('pwaInstallBtn').style.display = 'none';
-                    }
-                    deferredPrompt = null;
-                });
+        async function installPWA() {
+            if (!deferredPrompt) {
+                alert("التطبيق جاهز للتثبيت من قائمة المتصفح (3 نقاط أعلى اليسار) -> إضافة إلى الشاشة الرئيسية.");
+                return;
             }
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                const btn = document.getElementById('pwaInstallBtn');
+                if (btn) btn.style.display = 'none';
+            }
+            deferredPrompt = null;
         }
     </script>
 </body>
